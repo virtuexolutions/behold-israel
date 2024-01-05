@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ImageBackground,
   View,
@@ -9,16 +9,16 @@ import {
   TouchableOpacity,
   PixelRatio,
 } from 'react-native';
-import {Icon} from 'native-base';
+import { Icon } from 'native-base';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import Color from '../Assets/Utilities/Color';
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ScreenBoiler from '../Components/ScreenBoiler';
-import {windowHeight, windowWidth} from '../Utillity/utils';
-import {moderateScale} from 'react-native-size-matters';
+import { windowHeight, windowWidth } from '../Utillity/utils';
+import { moderateScale } from 'react-native-size-matters';
 import CustomText from '../Components/CustomText';
 import CustomImage from '../Components/CustomImage';
-import {setWalkThrough} from '../Store/slices/auth';
+import { setWalkThrough } from '../Store/slices/auth';
 import LinearGradient from 'react-native-linear-gradient';
 
 const WalkThroughScreen = props => {
@@ -27,21 +27,22 @@ const WalkThroughScreen = props => {
   const slides = [
     {
       key: '1',
-      logo: require('../Assets/Images/walkthrough1.jpg'),
-      title: 'What is business hub ?',
-      text: `Business hub is an opportunity for small business holders, this platform will help them sell their business online in minutes. It will help sellers promote their products and services.\n\n Sellers can easily showcase their products and services & buyers will be able to make convenient purchases through the application. Business Hub aims to make your small business large, because we believe a big business starts small \n\n In summary, Business Hub is an innovative e-commerce application that brings sellers and buyers together, offering a wide range of products for purchase and rent. Its unique rental feature sets it apart from traditional e-commerce platforms. `,
+      image: require('../Assets/Images/Group86.png'),
+      title: 'Lorem Ipsum Dolor',
+      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent. `,
     },
     {
       key: '2',
-      logo: require('../Assets/Images/walkthrough2.jpg'),
-      title: ' why choose us ?',
-      text: `Wide Product Range: Business Hub brings together a diverse range of products from various sellers,  \n\n Trust and Safety: Business Hub prioritizes the safety and trust of its users.   \n\n Seller Opportunities: Sellers benefit from joining Business Hub as it provides them with a ready-made marketplace to showcase their products.  \n\n Customer Support: Your platform offers excellent customer support to assist users with any issues or queries they may have. `,
+      image: require('../Assets/Images/Group87.png'),
+      title: 'Lorem Ipsum Dolor',
+      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`,
     },
     {
       key: '3',
-      logo: require('../Assets/Images/walkthrough3.jpg'),
-      title: 'Opportunity to rent your favourite stuff',
-      text: `The opportunity to rent favorite items presents several benefits and advantages for users, making it an appealing feature of Business Hub. Here are some reasons why users would find this option attractive: \n\n Cost-Effectiveness: Renting favorite items allows users to enjoy them without the high upfront costs of purchasing. Whether it's electronic gadgets, sports equipment, or luxury items, renting offers a more affordable short-term solution.\n\n Space and Clutter Reduction: Owning too many items can lead to clutter and storage issues.`   },
+      image: require('../Assets/Images/Group88.png'),
+      title: 'Lorem Ipsum Dolor',
+      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`
+    },
   ];
   //   const slides = [
   //     {
@@ -58,23 +59,33 @@ const WalkThroughScreen = props => {
   //     },
   //   ];
 
-  const RenderSlider = ({item}) => {
+  const RenderSlider = ({ item }) => {
     return (
       <View style={styles.SliderContainer}>
-        <LinearGradient
-          start={{x: 0.0, y: 0.25}}
-          end={{x: 0.5, y: 1.0}}
-          colors={['white', 'white']}
+        <ImageBackground
           style={{
             width: windowWidth,
+            minHeight: windowHeight,
+            paddingBottom: moderateScale(40, 0.6),
+            justifyContent: 'center',
+            // backgroundColor:'red',
+            // height: windowHeight*0.8,
             alignItems: 'center',
-            //   justifyContent: 'center',
-            height: windowHeight,
-          }}>
+          }}
+          source={item?.image}>
           <Image
-            source={item.logo}
+
+            source={require('../Assets/Images/Path.png')}
             resizeMode={'contain'}
-            style={{height: windowHeight * 0.5}}
+            style={{
+              position: 'absolute',
+              left: item?.key == 2 ? 320 :0,
+              top: 35,
+              height: windowHeight * 0.6,
+              // height:windowHeight*0.3,
+              // width:windowWidth*0.3,
+
+            }}
           />
           <View
             style={{
@@ -82,15 +93,17 @@ const WalkThroughScreen = props => {
               height: windowHeight * 0.38,
               borderRadius: moderateScale(20, 0.6),
               paddingVertical: moderateScale(26, 0.6),
-              backgroundColor: Color.themeColor2,
+              // backgroundColor: Colosr.themeColor2,
               alignItems: 'center',
+              position: 'absolute',
+              bottom: 0,
             }}>
             <CustomText
               style={{
-                color: Color.black,
-                fontSize: moderateScale(20, 0.6),
+                color: Color.white,
+                fontSize: moderateScale(30, 0.6),
                 width: windowWidth * 0.8,
-                textAlign: 'center',
+                // textAlign: 'justify',
                 paddingVertical: moderateScale(5, 0.6),
               }}
               numberOfLines={2}
@@ -99,16 +112,17 @@ const WalkThroughScreen = props => {
             </CustomText>
             <CustomText
               style={{
-                color: Color.black,
-                fontSize: moderateScale(10, 0.6),
-                width: windowWidth * 0.8,
+                color: Color.white,
+                fontSize: moderateScale(11, 0.6),
+                width: windowWidth * 0.9,
+                lineHeight: moderateScale(15, .3),
                 textAlign: 'center',
                 paddingVertical: moderateScale(5, 0.6),
               }}
               numberOfLines={15}>
               {item?.text}
             </CustomText>
-           
+
           </View>
           {/* <View
             style={{
@@ -121,7 +135,7 @@ const WalkThroughScreen = props => {
               {item.text}
             </Text>
           </View> */}
-        </LinearGradient>
+        </ImageBackground>
       </View>
     );
   };
@@ -174,11 +188,11 @@ const WalkThroughScreen = props => {
           data={slides}
           showSkipButton={true}
           showPrevButton={true}
-          activeDotStyle={{backgroundColor: Color.themeColor2}}
+          activeDotStyle={{ backgroundColor: Color.themeColor2 }}
           dotStyle={{
             backgroundColor: 'transparent',
             borderWidth: 1,
-            borderColor: Color.themeColor2,
+            borderColor: Color.white,
           }}
           renderDoneButton={RenderDoneBtn}
           renderNextButton={RenderNextBtn}
@@ -235,16 +249,16 @@ const styles = StyleSheet.create({
     fontSize: moderateScale(15, 0.3),
   },
   btnLeft: {
-    color: Color.themeColor2,
+    color: Color.white,
     paddingLeft: moderateScale(20, 0.3),
   },
   btnRight: {
-    color: Color.themeColor2,
+    color: Color.white,
     paddingRight: moderateScale(20, 0.3),
   },
 });
 
 export default WalkThroughScreen;
 const BoldText = ({ children }) => {
-    return <Text style={{ fontWeight: 'bold' }}>{children}</Text>;
-  };
+  return <Text style={{ fontWeight: 'bold' }}>{children}</Text>;
+};

@@ -71,13 +71,13 @@ const AppNavigator = () => {
       !walkThrough
       ? 'WalkThroughScreen'
       : token == null
-      ? 'GetStarted'
+      ? 'Signup'
       :'MyDrawer';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={'Signup'}
+          initialRouteName={"MyDrawer"}
           screenOptions={{headerShown: false}}>
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
           <RootNav.Screen name="BankDetails" component={BankDetails} />
@@ -130,7 +130,7 @@ export const MyDrawer = () => {
   return (
     <DrawerNavigation.Navigator
       drawerContent={props => <Drawer {...props} />}
-      initialRouteName={firstScreen}
+      initialRouteName={"HomeScreen"}
       screenOptions={{
         headerShown: false,
       }}>
