@@ -222,7 +222,7 @@ const LoginScreen = (props) => {
                 // isGradient
               />
               <CustomButton
-                onPress={() => registerUser()}
+                // onPress={() => registerUser()}
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />
