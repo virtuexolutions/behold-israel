@@ -43,32 +43,32 @@ const HomeScreen = () => {
 
   const dummyArray1 = ['Name', 'Email', 'Status'];
 
-  const getUser = async () => {
-    const url = 'auth/user';
-    setIsLoading(true);
-    const response = await Get(url, token);
-    setIsLoading(false);
-    if (response?.data?.success) {
-      setUsers(response?.data?.data?.users);
+  // const getUser = async () => {
+  //   const url = 'auth/user';
+  //   setIsLoading(true);
+  //   const response = await Get(url, token);
+  //   setIsLoading(false);
+  //   if (response?.data?.success) {
+  //     setUsers(response?.data?.data?.users);
      
-    }
-  };
+  //   }
+  // };
 
-  useEffect(() => {
-    getUser();
+  // useEffect(() => {
+  //   getUser();
 
-  }, []);
+  // }, []);
 
-  useEffect(() => {
-    const backhandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => {
-          BackHandler.exitApp();
-        return true;
-      },
-    );
-    return () => backhandler.remove();
-  }, []);
+  // useEffect(() => {
+  //   const backhandler = BackHandler.addEventListener(
+  //     'hardwareBackPress',
+  //     () => {
+  //         BackHandler.exitApp();
+  //       return true;
+  //     },
+  //   );
+  //   return () => backhandler.remove();
+  // }, []);
 
   return (
     

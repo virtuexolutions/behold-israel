@@ -27,7 +27,7 @@ const WalkThroughScreen = props => {
   const slides = [
     {
       key: '1',
-      logo: require('../Assets/Images/walkthrough1.jpg'),
+      logo: require('../Assets/Images/Group_86.png'),
       title: 'What is business hub ?',
       text: `Business hub is an opportunity for small business holders, this platform will help them sell their business online in minutes. It will help sellers promote their products and services.\n\n Sellers can easily showcase their products and services & buyers will be able to make convenient purchases through the application. Business Hub aims to make your small business large, because we believe a big business starts small \n\n In summary, Business Hub is an innovative e-commerce application that brings sellers and buyers together, offering a wide range of products for purchase and rent. Its unique rental feature sets it apart from traditional e-commerce platforms. `,
     },
@@ -61,10 +61,8 @@ const WalkThroughScreen = props => {
   const RenderSlider = ({item}) => {
     return (
       <View style={styles.SliderContainer}>
-        <LinearGradient
-          start={{x: 0.0, y: 0.25}}
-          end={{x: 0.5, y: 1.0}}
-          colors={['white', 'white']}
+        <ImageBackground
+           source={item.logo}
           style={{
             width: windowWidth,
             alignItems: 'center',
@@ -72,7 +70,7 @@ const WalkThroughScreen = props => {
             height: windowHeight,
           }}>
           <Image
-            source={item.logo}
+           
             resizeMode={'contain'}
             style={{height: windowHeight * 0.5}}
           />
@@ -121,7 +119,7 @@ const WalkThroughScreen = props => {
               {item.text}
             </Text>
           </View> */}
-        </LinearGradient>
+        </ImageBackground>
       </View>
     );
   };
