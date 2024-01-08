@@ -27,37 +27,24 @@ const WalkThroughScreen = props => {
   const slides = [
     {
       key: '1',
-      image: require('../Assets/Images/Group86.png'),
+      image: require('../Assets/Images/walkthrough1.png'),
       title: 'Lorem Ipsum Dolor',
       text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent. `,
     },
     {
       key: '2',
-      image: require('../Assets/Images/Group87.png'),
+      image: require('../Assets/Images/walkthrough2.png'),
       title: 'Lorem Ipsum Dolor',
       text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`,
     },
     {
       key: '3',
-      image: require('../Assets/Images/Group88.png'),
+      image: require('../Assets/Images/walkthrough3.png'),
       title: 'Lorem Ipsum Dolor',
       text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`
     },
   ];
-  //   const slides = [
-  //     {
-  //       key: '1',
-  //       title: 'Buy or Sell Residential',
-  //       text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ',
-  //       logo: require('../Assets/Images/walkthrough1.png'),
-  //     },
-  //     {
-  //       key: '2',
-  //       title: 'Buy or Sell Residential',
-  //       text: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the ',
-  //       logo: require('../Assets/Images/walkthrough2.png'),
-  //     },
-  //   ];
+
 
   const RenderSlider = ({ item }) => {
     return (

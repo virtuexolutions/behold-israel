@@ -37,6 +37,7 @@ import Profile from './Screens/Profile';
 import PersonalInfo from './Screens/PersonalInfo';
 import ChangeEmail from './Screens/ChangeEmail';
 import BankDetails from './Screens/BankDetails';
+import BookDescriprtionScreen from './Screens/BookDescriptionScreen';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -139,6 +140,7 @@ export const MyDrawer = () => {
         component={CustomerDashboard}
       />
       <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} />
+      {/* <DrawerNavigation.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen} /> */}
       <DrawerNavigation.Screen name="Profile" component={Profile} />
       <DrawerNavigation.Screen name="MyAccounts" component={MyAccounts} />
 
@@ -160,3 +162,5 @@ export const MyDrawer = () => {
   );
 };
 export default AppNavigator;
+
+{/* <></>\ */}

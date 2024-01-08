@@ -61,7 +61,7 @@ const SearchbarComponent = ({
           paddingLeft: moderateScale(10, 0.6)},
           SearchStyle
         ]}>
-        <Feather name="search" size={25} color="#000" />
+        <Feather name="search" size={25} color={Color.Grey} />
         <TextInput
           style={{color:'black'}}          
           placeholder={placeholderName ? placeholderName : 'Search item here'}

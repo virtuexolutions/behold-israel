@@ -20,6 +20,12 @@ import {
 import SplashScreen from './SRC/Screens/SplashScreen';
 import GetStarted from './SRC/Screens/GetStarted';
 import AppNavigator from './SRC/appNavigation';
+import TestmentsScreeen from './SRC/Screens/TestmentsScreeen';
+import BookDescriptionScreen from './SRC/Screens/BookDescriptionScreen';
+import RecordedLecture from './SRC/Screens/RecordedLecture';
+import StoreScreen from './SRC/Screens/StoreScreen';
+import KidsLectureScreen from './SRC/Screens/KidsLectureScreen';
+import LiveLecture from './SRC/Screens/LiveLecture';
 // import AppNavigator, {DrawerRoot} from './SRC/appNavigation';
 
 
@@ -69,7 +75,7 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
-  return <AppNavigator />;
+  return <LiveLecture/>;
 };
 
 const useloader = value => {
