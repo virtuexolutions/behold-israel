@@ -18,10 +18,11 @@ import {
   requestWritePermission,
 } from './SRC/Utillity/utils';
 import SplashScreen from './SRC/Screens/SplashScreen';
-
+import Settings from './SRC/Screens/Settings';
 import AppNavigator from './SRC/appNavigation';
 import BibleCategories from './SRC/Screens/BibleCategories';
 import OldTestamentCategories from './SRC/Screens/oldTestamentCategories';
+
 // import AppNavigator, {DrawerRoot} from './SRC/appNavigation';
 
 
@@ -71,6 +72,8 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
+  return <Settings/>
+
 };
 
 const useloader = value => {
