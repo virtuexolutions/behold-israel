@@ -5,7 +5,6 @@ import navigationService from './navigationService';
 import {useSelector} from 'react-redux';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-
 const AppNavigator = () => {
   // const isLogin = false;
   const isGoalCreated = useSelector(state => state.authReducer.isGoalCreated);
@@ -39,7 +38,7 @@ const AppNavigator = () => {
       !walkThrough
       ? 'WalkThroughScreen'
       : token == null
-      ? 'GetStarted'
+      ? 'Signup'
       :'MyDrawer';
 
     return (
@@ -70,7 +69,7 @@ export const MyDrawer = () => {
   return (
     <DrawerNavigation.Navigator
       drawerContent={props => <Drawer {...props} />}
-      initialRouteName={firstScreen}
+      initialRouteName={"HomeScreen"}
       screenOptions={{
         headerShown: false,
       }}>
@@ -79,6 +78,7 @@ export const MyDrawer = () => {
         component={CustomerDashboard}
       />
       <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} />
+      {/* <DrawerNavigation.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen} /> */}
       <DrawerNavigation.Screen name="Profile" component={Profile} />
       <DrawerNavigation.Screen name="MyAccounts" component={MyAccounts} />
 
@@ -100,3 +100,5 @@ export const MyDrawer = () => {
   );
 };
 export default AppNavigator;
+
+{/* <></>\ */}

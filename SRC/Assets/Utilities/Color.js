@@ -24,7 +24,7 @@ export default Color = {
   orange:'#f79c00',
   darkBlue:'#033B55',
   theme2 :'#FF000A',
-
+  
   purple: '#0D668E',
 
   // theme colors

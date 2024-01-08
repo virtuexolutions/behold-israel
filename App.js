@@ -23,6 +23,12 @@ import AppNavigator from './SRC/appNavigation';
 import BibleCategories from './SRC/Screens/BibleCategories';
 import OldTestamentCategories from './SRC/Screens/oldTestamentCategories';
 
+import TestmentsScreeen from './SRC/Screens/TestmentsScreeen';
+import BookDescriptionScreen from './SRC/Screens/BookDescriptionScreen';
+import RecordedLecture from './SRC/Screens/RecordedLecture';
+import StoreScreen from './SRC/Screens/StoreScreen';
+import KidsLectureScreen from './SRC/Screens/KidsLectureScreen';
+import LiveLecture from './SRC/Screens/LiveLecture';
 // import AppNavigator, {DrawerRoot} from './SRC/appNavigation';
 
 

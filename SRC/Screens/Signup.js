@@ -142,7 +142,7 @@ const Signup = () => {
             style={{
               // marginTop: 40,
               // alignItems:'center',
-              backgroundColor: 'red',
+              // backgroundColor: 'red',
               height: windowHeight * 0.13,
               width: windowHeight * 0.13,
               borderRadius: moderateScale((windowHeight * 0.13) / 2),
@@ -366,7 +366,7 @@ const Signup = () => {
                 // isGradient
               />
               <CustomButton
-                onPress={() => registerUser()}
+                onPress={() => navigationService.navigate('LoginScreen')}
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />
