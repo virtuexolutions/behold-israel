@@ -15,8 +15,7 @@ const AuthSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUserToken(state, action) {
-      state.token = action?.payload?.token;
-    
+      state.token = action?.payload?.token;   
     },
     
     SetFCMToken(state, action) {

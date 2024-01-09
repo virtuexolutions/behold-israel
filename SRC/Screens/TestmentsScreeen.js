@@ -4,7 +4,7 @@ import { moderateScale } from 'react-native-size-matters'
 import { windowHeight, windowWidth } from '../Utillity/utils'
 import OldTestment from '../Components/OldTestment'
 import CustomText from '../Components/CustomText'
-import CardContainer from '../Components/CardContainer'
+// import CardContainer from '../Components/CardContainer'
 
 const TestmentsScreeen = () => {
 

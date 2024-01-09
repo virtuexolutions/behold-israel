@@ -32,6 +32,7 @@ export default Color = {
   themeColor2: '#FF1717',
 
   btnColor:['#565657',"#000000"],
+  tabBarGradient : ['#000000','#464646'],
   themePink : '#F84569',
   themeColor1: '#52C4BF',
 

@@ -19,7 +19,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import navigationService from '../navigationService';
 import {useDispatch} from 'react-redux';
-import CardContainer from '../Components/CardContainer';
+// import CardContainer from '../Components/CardContainer';
 import {SetUserRole, setUserToken} from '../Store/slices/auth';
 import {Post} from '../Axios/AxiosInterceptorFunction';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -30,6 +30,7 @@ import {Icon} from 'native-base';
 import ImagePickerModal from '../Components/ImagePickerModal';
 
 const LoginScreen = (props) => {
+  // const navigation =useNavigation()
   const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
@@ -203,7 +204,7 @@ const LoginScreen = (props) => {
                 paddingHorizontal: moderateScale(15, 0.3),
               }}>
               <CustomButton
-                onPress={() => registerUser()}
+                onPress={() => navigationService.navigate('Signup')}
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />
@@ -222,7 +223,7 @@ const LoginScreen = (props) => {
                 // isGradient
               />
               <CustomButton
-                // onPress={() => registerUser()}
+                onPress={() =>  dispatch(setUserToken({token : 'meerab'}))}
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />

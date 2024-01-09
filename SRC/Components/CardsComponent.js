@@ -1,14 +1,20 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { windowWidth, windowHeight } from '../Utillity/utils'
 
 import { moderateScale } from 'react-native-size-matters'
 import CustomText from './CustomText'
+import { useNavigation } from '@react-navigation/native'
+import { useDispatch, useSelector } from 'react-redux'
 
-const CardsComponent = ({ item }) => {
-    console.log("🚀 ~ file: CardsComponent.js:9 ~ CardsComponent ~ item:", item)
+const CardsComponent = ({ item ,setSelectedCategory ,selectedCategory }) => {
+  
+    const navigation =useNavigation()
     return (
-        <View style={{
+        <TouchableOpacity 
+        activeOpacity={0.8}
+        onPress={item?.onPress}
+        style={{
             height: windowHeight * 0.17,
             width: windowWidth * 0.93,
             alignSelf : 'center',
@@ -50,7 +56,7 @@ const CardsComponent = ({ item }) => {
                     </CustomText>
                 </View>
             </ImageBackground>
-        </View>
+        </TouchableOpacity>
     )
 }
 

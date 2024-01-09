@@ -78,7 +78,7 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
-  return <Settings/>
+  return <AppNavigator/>
 
 };
 

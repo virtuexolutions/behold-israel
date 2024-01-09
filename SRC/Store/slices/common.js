@@ -13,6 +13,7 @@ const initialState = {
   sellerProducts: [],
   sellerService: [],
   selectedRole: '',
+  category:[]
 };
 
 const CommonSlice = createSlice({
@@ -227,6 +228,7 @@ export const {
   deleteService,
   deleteProducts,
   Order,
+
 } = CommonSlice.actions;
 
 export default CommonSlice.reducer;

@@ -1,9 +1,39 @@
-import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React, { useEffect, useState } from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import navigationService from './navigationService';
-import {useSelector} from 'react-redux';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { useSelector } from 'react-redux';
+import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Signup from './Screens/Signup';
+import LoginScreen from './Screens/LoginScreen';
+import BibleCategories from './Screens/BibleCategories';
+import TestmentsScreeen from './Screens/TestmentsScreeen';
+import OldTestamentCategories from './Screens/oldTestamentCategories';
+import BookDescriprtionScreen from './Screens/BookDescriptionScreen';
+// import HomeScreen from './Screens/HomeScreen';
+
+import Settings from './Screens/Settings';
+import HomeScreen from './Screens/HomeScreen';
+import StoreScreen from './Screens/StoreScreen';
+import Color from './Assets/Utilities/Color';
+import { moderateScale } from 'react-native-size-matters';
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
+
+import RecordedLecture from './Screens/RecordedLecture';
+import LiveLecture from './Screens/LiveLecture';
+import KidsLectureScreen from './Screens/KidsLectureScreen';
+import { Icon } from 'native-base';
+import Donation from './Screens/Donation';
+import LinearGradient from 'react-native-linear-gradient';
+import { View } from 'react-native';
+import { windowHeight } from './Utillity/utils';
+import Profile from './Screens/Profile';
+import PrivacyPolicy from './Screens/PrivacyPolicy';
+import TermsAndConditions from './Screens/TermsAndConditions';
+import DonationHistory from './Screens/DonationHistory';
+import Account from './Screens/Account';
+import HelpAndSupport from './Screens/HelpAndSupport';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -28,26 +58,46 @@ const AppNavigator = () => {
   const RootNavLogged = createNativeStackNavigator();
 
   const AppNavigatorContainer = () => {
-    const HomeScreen =
-      role == 'admin'
-        ? 'MyDrawer'
-        : role == 'customer'
-        ? 'HomeScreenOther'
-        : 'HomeScreenOther';
-    const firstScreen = 
+    // const HomeScreen =
+    //   role == 'admin'
+    //     ? 'MyDrawer'
+    //     : role == 'customer'
+    //     ? 'HomeScreenOther'
+    //     : 'HomeScreenOther';
+    const firstScreen =
       !walkThrough
-      ? 'WalkThroughScreen'
-      : token == null
-      ? 'Signup'
-      :'MyDrawer';
+        ? 'WalkThroughScreen'
+        : token == null
+          ? 'LoginScreen'
+          : 'TabNavigation';
 
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
-          initialRouteName={"HomeScreen"}
-          screenOptions={{headerShown: false}}>
-          {/* <RootNav.Screen name="LoginScreen" component={LoginScreen} />
-          */}
+          initialRouteName={firstScreen}
+          screenOptions={{ headerShown: false }}>
+          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+          <RootNav.Screen name="BibleCategories" component={BibleCategories} />
+          <RootNav.Screen name="Store" component={StoreScreen} />
+          <RootNav.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
+          <RootNav.Screen name="TermsAndConditions" component={TermsAndConditions} />
+          <RootNav.Screen name="DonationHistory" component={DonationHistory} />
+          <RootNav.Screen name="MyAccounts" component={Account} />
+          <RootNav.Screen name="HelpAndSupport" component={HelpAndSupport} />
+
+
+          <RootNav.Screen name="Profile" component={Profile} />
+          <RootNav.Screen name="Signup" component={Signup} />
+          <RootNav.Screen name="LoginScreen" component={LoginScreen} />
+          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
+          {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
+          <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories} />
+          <RootNav.Screen name="BookDescriptionScreen" component={BookDescriprtionScreen} />
+          <RootNav.Screen name="RecordedLecture" component={RecordedLecture} />
+          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen} />
+          <RootNav.Screen name="LiveLecture" component={LiveLecture} />
+          <RootNav.Screen name="DonationScreen" component={Donation} />
+
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -56,49 +106,123 @@ const AppNavigator = () => {
   return <AppNavigatorContainer />;
 };
 
-export const MyDrawer = () => {
-  const DrawerNavigation = createDrawerNavigator();
-  const role = useSelector(state => state.authReducer.role);
-  const firstScreen =
-    role == 'admin'
-      ? 'HomeScreen'
-      : role == 'vendor'
-      ? 'SellerProduct'
-      : 'CustomerDashboard';
 
+export const TabNavigation = () => {
+  const Tabs = createBottomTabNavigator();
   return (
-    <DrawerNavigation.Navigator
-      drawerContent={props => <Drawer {...props} />}
-      initialRouteName={"HomeScreen"}
-      screenOptions={{
+    <Tabs.Navigator
+    // tabBar={(props) => {
+    //   return (
+    //     <LinearGradient
+    //       colors={['red', 'blue']}
+          
+    //       start={[1, 0]}
+    //       end={[0, 0]}
+    //     >
+    //       <BottomTabBar
+    //         {...props}
+    //         style={{ backgroundColor: 'transparent' }}
+    //       />
+    //     </LinearGradient>
+    //   );
+    // }}
+      screenOptions={({ route }) => ({
         headerShown: false,
-      }}>
-      <DrawerNavigation.Screen
-        name="CustomerDashboard"
-        component={CustomerDashboard}
-      />
-      <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} />
-      {/* <DrawerNavigation.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen} /> */}
-      <DrawerNavigation.Screen name="Profile" component={Profile} />
-      <DrawerNavigation.Screen name="MyAccounts" component={MyAccounts} />
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          // backgroundColor:'pink',
+          // backgroundColor: Color.red,
+          // borderTopLeftRadius:15,
+          // borderTopRightRadius:15,
+          // paddingVertical:5
+        },
+        tabBarIcon: ({ focused }) => {
+          let iconName;
+          let color = Color.theme2;
+          let size = moderateScale(20, 0.3);
+          let type = Ionicons;
 
-      <DrawerNavigation.Screen name="Orders" component={Orders} />
-      {/* <DrawerNavigation.Screen name="Bookings" component={Bookings} /> */}
+          if (
+            route.name === 'HomeScreen'
+          ) {
+            iconName = focused ? 'home' : 'home-outline';
 
-      {/* <DrawerNavigation.Screen
-        name="ChangePassword"
-        component={ChangePassword}
-      /> */}
-      <DrawerNavigation.Screen name="Myorders" component={Myorders} />
+            color = focused ?
+              Color.theme2 : Color.white
+            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          }
 
-      <DrawerNavigation.Screen
-        name="AdminDashboard"
-        component={AdminDashboard}
-      />
-      <DrawerNavigation.Screen name="SellerProduct" component={SellerProduct} />
-    </DrawerNavigation.Navigator>
+          else if (
+            route.name === 'Donation'
+          ) {
+            iconName = focused ? 'donate' : 'donate';
+            type = FontAwesome5
+            color = focused ?
+              Color.theme2 : Color.white
+            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          } else if (route.name === 'StoreScreen') {
+            iconName = focused
+              ? 'cart'
+              : 'cart';
+            color = focused ?
+              Color.theme2 : Color.white
+            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          } else {
+            iconName = focused ? 'settings-sharp' : 'settings-outline';
+            color = focused ?
+              Color.theme2 : Color.white;
+            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          }
+          return route.name == 'CreateNew' ? (
+            <View
+              style={{
+                borderWidth: 5,
+                borderColor: Color.lightGrey,
+                height: moderateScale(60, 0.3),
+                width: moderateScale(60, 0.3),
+                borderRadius: moderateScale(30, 0.3),
+                backgroundColor: Color.themeColor,
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: moderateScale(-30, 0.3),
+              }}>
+              <Icon
+                name={'plus'}
+                as={type}
+                color={Color.white}
+                size={moderateScale(30, 0.3)}
+              />
+            </View>
+          ) : (
+            <Icon name={iconName} as={type} color={color} size={size} />
+          );
+        },
+        tabBarShowLabel: false,
+        tabBarBackground: () => (
+          <View style={{ flex: 1 }}>
+            <LinearGradient
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              colors={Color.tabBarGradient}
+              style={{ height: windowHeight * 0.1 }}
+            />
+          </View>
+        ),
+       
+
+
+      })}
+    >
+      <Tabs.Screen name={'HomeScreen'} component={HomeScreen} />
+      <Tabs.Screen name={'Donation'} component={Donation} />
+
+      {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
+      <Tabs.Screen name={'StoreScreen'} component={StoreScreen} />
+      <Tabs.Screen name={'Settings'} component={Settings} />
+
+    </Tabs.Navigator>
   );
 };
 export default AppNavigator;
 
-{/* <></>\ */}
+{/* <></>\ */ }

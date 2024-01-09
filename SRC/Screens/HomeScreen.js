@@ -1,14 +1,15 @@
 import {
-   StyleSheet,
-   Text, 
-   TouchableOpacity, 
-   View, 
-   BackHandler, 
-   RefreshControl, 
-   ImageBackground, 
-   FlatList } from 'react-native';
-import React, { useState, useEffect } from 'react';
-import { Icon, ScrollView } from 'native-base';
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  BackHandler,
+  RefreshControl,
+  ImageBackground,
+  FlatList,
+} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Icon, ScrollView} from 'native-base';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import Color from '../Assets/Utilities/Color';
 import {
@@ -16,18 +17,19 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
-import Header from '../Components/Header';
+// import Header from '../Components/Header';
 import CustomText from '../Components/CustomText';
-import { windowHeight, windowWidth } from '../Utillity/utils';
+import {windowHeight, windowWidth} from '../Utillity/utils';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import CustomTable from '../Components/CustomTable';
-import moment from 'moment';
-import { Get } from '../Axios/AxiosInterceptorFunction';
-import { useSelector } from 'react-redux';
-import { useIsFocused, useNavigation } from '@react-navigation/native';
+// import CustomTable from '../Components/CustomTable';
+// import moment from 'moment';
+// import { Get } from '../Axios/AxiosInterceptorFunction';
+import {useSelector} from 'react-redux';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import CustomImage from '../Components/CustomImage';
 import CardsComponent from '../Components/CardsComponent';
+import navigationService from '../navigationService';
 // import SearchbarComponent from '../Components/SearchbarComponent';
 
 const HomeScreen = () => {
@@ -37,93 +39,66 @@ const HomeScreen = () => {
   const [users, setUsers] = useState([]);
   const [isrefreshing, setIsRefreshing] = useState(false);
   const navigation = useNavigation();
-
-
+  const [selectedCategory, setSelectedCategory] = useState([]);
 
   const onRefresh = () => {
     setIsRefreshing(true);
     setTimeout(() => {
       setIsRefreshing(false);
     }, 2000);
-
   };
 
   const isFocused = useIsFocused();
-
 
   const dummyArray1 = [
     {
       id: 1,
       image: require('../Assets/Images/image1.png'),
       title: 'BiBle',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+      onPress : ()=> navigationService.navigate('BibleCategories') ,
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },
     {
-      id: 1,
+      id: 2,
       image: require('../Assets/Images/lecture.png'),
       title: 'RECORDED LECTUER',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+      onPress : ()=> navigationService.navigate('RecordedLecture') ,
+
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },
     {
-      id: 1,
+      id: 3,
       image: require('../Assets/Images/store.png'),
+      onPress : ()=> navigationService.navigate('Store') ,
+
       title: 'STORE',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },
     {
-      id: 1,
+      id: 4,
       image: require('../Assets/Images/live.png'),
+      onPress : ()=> navigationService.navigate('LiveLecture') ,
       title: 'LIVE STREMING',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },
     {
-      id: 1,
+      id: 5,
       image: require('../Assets/Images/donation.png'),
+      onPress : ()=> navigationService.navigate('DonationScreen') ,
+
       title: 'Donation',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
-    }
+      description:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+    },
   ];
 
-  // const getUser = async () => {
-  //   const url = 'auth/user';
-  //   setIsLoading(true);
-  //   const response = await Get(url, token);
-  //   setIsLoading(false);
-  //   if (response?.data?.success) {
-  //     setUsers(response?.data?.data?.users);
-
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getUser();
-
-  // }, []);
-
-  // useEffect(() => {
-  //   const backhandler = BackHandler.addEventListener(
-  //     'hardwareBackPress',
-  //     () => {
-  //       BackHandler.exitApp();
-  //       return true;
-  //     },
-  //   );
-  //   return () => backhandler.remove();
-  // }, []);
-
-
-
-
-
   return (
-
     <>
       <CustomStatusBar backgroundColor={'#D2E4E4'} barStyle={'dark-content'} />
-      {/* <Header
-        headerColor={['#D2E4E4', '#D2E4E4']}
-        // showLogout
-        hideUser
-      /> */}
 
       <ScrollView
         refreshControl={
@@ -135,20 +110,20 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         style={{
           minHeight: windowHeight * 0.9,
-          backgroundColor: Color.white
+          backgroundColor: Color.white,
         }}
         contentContainerStyle={{
           paddingBottom: moderateScale(40, 0.6),
         }}>
-        <View style={{
-          width: windowWidth,
-          height: windowHeight * 0.3,
-        }}>
-
+        <View
+          style={{
+            width: windowWidth,
+            height: windowHeight * 0.3,
+          }}>
           <CustomImage
             style={{
               height: '100%',
-              width: '100%'
+              width: '100%',
             }}
             source={require('../Assets/Images/banner.jpg')}
           />
@@ -157,17 +132,20 @@ const HomeScreen = () => {
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled={true}
           scrollEnabled={true}
-          contentContainerStyle={{
-          }}
+          decelerationRate={0.5}
+          contentContainerStyle={{}}
           data={dummyArray1}
           renderItem={({item, index}) => {
             return (
-              <CardsComponent item={item} />
-
+              <CardsComponent
+                item={item}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+                key={item?.id}
+              />
             );
           }}
         />
-
       </ScrollView>
     </>
   );
@@ -175,12 +153,11 @@ const HomeScreen = () => {
 
 export default HomeScreen;
 
-const Chuncks = ({ amount, title, iconName }) => {
+const Chuncks = ({amount, title, iconName}) => {
   return (
-
     <LinearGradient
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+      start={{x: 0, y: 0}}
+      end={{x: 1, y: 1}}
       colors={[Color.themeColor, Color.themeColor]}
       style={styles.container}>
       <View
@@ -231,7 +208,7 @@ const styles = ScaledSheet.create({
     borderRadius: moderateScale(15, 0.6),
     alignItems: 'center',
     marginTop: moderateScale(20, 0.3),
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

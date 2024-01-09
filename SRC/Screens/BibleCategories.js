@@ -1,10 +1,11 @@
-import { ImageBackground, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import {moderateScale, ScaledSheet} from 'react-native-size-matters';
 
 import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
 import CustomText from '../Components/CustomText';
 import CustomImage from '../Components/CustomImage';
+import { useNavigation } from '@react-navigation/native';
 
 let cardContents=[
     {
@@ -23,8 +24,15 @@ let cardContents=[
     },
   ];
 
-function Card({image, heading, description, subtitle}){
+function Card({image, heading, description, subtitle ,onPress}){
+    const navigation = useNavigation();
     return(
+
+        <TouchableOpacity onPress={() => {
+            navigation.navigate('TestmentsScreeen')
+            console.log('helllooooooooooooooooooo========>')
+        }}>
+
         <ImageBackground source={image}
         resizeMode='contain'
         style={{width:'100%', height: 200,
@@ -44,11 +52,13 @@ function Card({image, heading, description, subtitle}){
              </CustomText>
             
          </ImageBackground>
+        </TouchableOpacity>
     );
 }
 
 
 const BibleCategories = () => {
+    const navigation = useNavigation()
   
     return (
         <ScrollView>
