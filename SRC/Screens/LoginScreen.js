@@ -10,7 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import {ActivityIndicator, TouchableOpacity,ImageBackground, Platform, ScrollView, ToastAndroid, View} from 'react-native';
+import {ActivityIndicator, TouchableOpacity,ImageBackground, Platform, ScrollView, ToastAndroid, View, StyleSheet} from 'react-native';
 import CustomText from '../Components/CustomText';
 import CustomButton from '../Components/CustomButton';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
@@ -335,7 +335,7 @@ const LoginScreen = (props) => {
   );
 };
 
-const styles = ScaledSheet.create({
+const styles = StyleSheet.create({
   txt5: {
     color: 'white',
     marginTop: moderateScale(20, 0.3),

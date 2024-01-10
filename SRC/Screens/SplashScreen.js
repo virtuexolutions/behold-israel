@@ -7,15 +7,16 @@ import { moderateScale, ScaledSheet } from "react-native-size-matters";
 import ScreenBoiler from "../Components/ScreenBoiler";
 import LinearGradient from "react-native-linear-gradient";
 import CustomText from "../Components/CustomText";
+import { Image, ImageBackground } from "react-native";
+import { View } from "native-base";
 
 const SplashScreen = () => {
   return (
-    <ScreenBoiler
-     
+    <ScreenBoiler     
       statusBarBackgroundColor={'white'}
       statusBarContentStyle={"dark-content"}
     >
-        <LinearGradient
+        {/* <LinearGradient
         style={{
           width: windowWidth,
           alignItems : 'center',
@@ -26,42 +27,58 @@ const SplashScreen = () => {
         end={{ x: 1, y:1}}
         colors={[Color.themeColor2 , Color.themeColor2]}
         // locations ={[0, 0.5, 0.6]}
-        >
-
- 
-     
+        > */}
+        <ImageBackground
+        style={{
+          width: windowWidth,
+          minHeight: windowHeight,
+          paddingBottom: moderateScale(40, 0.6),
+        }}
+        source={require('../Assets/Images/setting_Bg.png')}>
         <Animatable.View
           animation="zoomIn"
           duration={2500}
           useNativeDriver
           style={{
             // backgroundColor : 'red',
-            alignItems : 'center'
+            alignItems : 'center',
+            justifyContent:"center"
           }}
-          
-          
           >
+ 
+{/*      
           <CustomImage
             source={require('../Assets/Images/logo.png')}
             resizeMode={"stretch"}
             style={[styles.bottomImage]}
-            />
+            /> */}
+            <View style={{
+              height:windowHeight,
+              // backgroundColor:"green",
+              justifyContent:'center',
+              alignItems:"center"
+            }}>
             <CustomText isBold style={{
               textAlign : 'center',
               fontSize : moderateScale(27,0.6),
-              marginTop : moderateScale(10,0.3)
-            }}>Business Hub</CustomText>
+              marginTop : moderateScale(10,0.3),
+              paddingVertical:moderateScale(20,.6),
+              color:Color.white
+            }}>Bible App</CustomText>
              <CustomText  style={{
               textAlign : 'center',
-              fontSize : moderateScale(18,0.6),
-              color : Color.veryLightGray,
+              fontSize : moderateScale(15,0.6),
+              // color : Color.veryLightGray,
+              color:Color.white,
     fontStyle : 'italic'
 
               // marginTop : moderateScale(10,0.3)
-            }}>A big business starts small</CustomText>
+            }}>you can easily read bible when ever you want</CustomText>
+
+            </View>
         </Animatable.View>
-   
-            </LinearGradient>
+   </ImageBackground>
+            {/* </LinearGradient> */}
     </ScreenBoiler>
   );
 };

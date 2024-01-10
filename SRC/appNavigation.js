@@ -34,6 +34,7 @@ import TermsAndConditions from './Screens/TermsAndConditions';
 import DonationHistory from './Screens/DonationHistory';
 import Account from './Screens/Account';
 import HelpAndSupport from './Screens/HelpAndSupport';
+import WalkThroughScreen from './Screens/WalkthroughScreen';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -65,18 +66,20 @@ const AppNavigator = () => {
     //     ? 'HomeScreenOther'
     //     : 'HomeScreenOther';
     const firstScreen =
-      !walkThrough
-        ? 'WalkThroughScreen'
-        : token == null
-          ? 'LoginScreen'
-          : 'TabNavigation';
-
+    !walkThrough
+    ? 'WalkThroughScreen'
+    : token == null
+    ? 'LoginScreen'
+    : 'TabNavigation';
+    
+    console.log("🚀 ~ AppNavigatorContainer ~ firstScreen:", firstScreen)
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
           initialRouteName={firstScreen}
           screenOptions={{ headerShown: false }}>
           <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+          <RootNav.Screen name="WalkThroughScreen" component={WalkThroughScreen} />
           <RootNav.Screen name="BibleCategories" component={BibleCategories} />
           <RootNav.Screen name="Store" component={StoreScreen} />
           <RootNav.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
@@ -84,8 +87,6 @@ const AppNavigator = () => {
           <RootNav.Screen name="DonationHistory" component={DonationHistory} />
           <RootNav.Screen name="MyAccounts" component={Account} />
           <RootNav.Screen name="HelpAndSupport" component={HelpAndSupport} />
-
-
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />

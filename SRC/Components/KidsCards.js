@@ -6,7 +6,7 @@ import { windowHeight, windowWidth } from '../Utillity/utils'
 import { moderateScale } from 'react-native-size-matters'
 
 const KidsCards = ({item}) => {
-  console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
+//   console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
   return (
     <View style={{
         backgroundColor:Color.white,

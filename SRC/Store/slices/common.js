@@ -30,6 +30,7 @@ const CommonSlice = createSlice({
     },
     setUserLogOut(state, action) {
       state.userData = {};
+      // console.log("🚀 ~ setUserLogOut ~ userData:", userData)
     },
     setServiceCategories(state, action) {
       state.categories = action?.payload;

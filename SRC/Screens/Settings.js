@@ -9,9 +9,12 @@ import CustomText from '../Components/CustomText';
 import {Icon} from 'native-base';
 import navigationService from '../navigationService';
 import {setUserLogOut} from '../Store/slices/common';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {SetUserRole, setUserLogoutAuth} from '../Store/slices/auth';
+// import {setUserLogOut} from '../Store/slices/common';
 
 const Settings = () => {
+  const userData = useSelector(state => state.commonReducer.userData);
   const dispatch = useDispatch();
   const options = [
     {
@@ -68,6 +71,11 @@ const Settings = () => {
       next: '>',
       onPress: () => {
         dispatch(setUserLogOut());
+        dispatch(setUserLogoutAuth());
+        // dispatch(setUserLogOut());
+        dispatch(SetUserRole(''));
+        console.log('logout=======>')
+        // navigationService.navigate('LoginScreen')
       },
     },
   ];
