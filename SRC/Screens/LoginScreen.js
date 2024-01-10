@@ -302,7 +302,7 @@ const LoginScreen = (props) => {
           }}>
            <View>
           <CustomText
-            onPress={() => navigationService.navigate('LoginScreen')}
+            onPress={() => navigationService.navigate('PrivacyPolicy')}
             style={styles.txt6}>
             Privacy policy 
           </CustomText>
@@ -316,7 +316,7 @@ const LoginScreen = (props) => {
               </View> 
               <View>
           <CustomText
-            onPress={() => navigationService.navigate('LoginScreen')}
+            onPress={() => navigationService.navigate('TermsAndConditions')}
             style={styles.txt6}>
              use and term
           </CustomText>

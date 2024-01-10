@@ -230,6 +230,7 @@ const Signup = () => {
               color={Color.black}
               placeholderColor={Color.veryLightGray}
               elevation
+              keyboardType={"email-address"}
             />
             <TouchableOpacity
               onPress={() => {
@@ -302,6 +303,27 @@ const Signup = () => {
               /> */}
 
             <TextInputWithTitle
+              iconName={'phone'}
+              iconType={AntDesign}
+              LeftIcon={true}
+              titleText={'Phone'}
+              placeholder={'Phone'}
+              setText={setPhone}
+              value={phone}
+              viewHeight={0.06}
+              viewWidth={0.75}
+              inputWidth={0.55}
+              border={1}
+              borderRadius={moderateScale(30, 0.3)}
+              borderColor={'#000'}
+              backgroundColor={Color.white}
+              marginTop={moderateScale(10, 0.3)}
+              color={Color.black}
+              placeholderColor={Color.veryLightGray}
+              elevation
+              keyboardType={'numeric'}
+            />
+            <TextInputWithTitle
               iconName={'lock1'}
               iconType={AntDesign}
               LeftIcon={true}
@@ -321,6 +343,7 @@ const Signup = () => {
               color={Color.black}
               placeholderColor={Color.veryLightGray}
               elevation
+              keyboardType={"default"}
             />
 
             <TextInputWithTitle

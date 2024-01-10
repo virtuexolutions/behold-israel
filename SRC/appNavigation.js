@@ -35,6 +35,12 @@ import DonationHistory from './Screens/DonationHistory';
 import Account from './Screens/Account';
 import HelpAndSupport from './Screens/HelpAndSupport';
 import WalkThroughScreen from './Screens/WalkthroughScreen';
+import Campaigns from './Screens/Campaigns';
+import DonationDetails from './Screens/DonationDetails';
+
+import Feather from 'react-native-vector-icons/Feather'
+import DonateNow from './Screens/DonateNow';
+
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -98,7 +104,11 @@ const AppNavigator = () => {
           <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen} />
           <RootNav.Screen name="LiveLecture" component={LiveLecture} />
           <RootNav.Screen name="DonationScreen" component={Donation} />
+          <RootNav.Screen name="DonationDetails" component={DonationDetails} />
+          <RootNav.Screen name="DonateNow" component={DonateNow} />
 
+          
+          
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -168,13 +178,17 @@ export const TabNavigation = () => {
             color = focused ?
               Color.theme2 : Color.white
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else {
+          } 
+          else if (route?.name == 'Campaigns'){
+            size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
+          }
+          else {
             iconName = focused ? 'settings-sharp' : 'settings-outline';
             color = focused ?
               Color.theme2 : Color.white;
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
           }
-          return route.name == 'CreateNew' ? (
+          return route.name == 'Campaigns' ? (
             <View
               style={{
                 borderWidth: 5,
@@ -182,16 +196,16 @@ export const TabNavigation = () => {
                 height: moderateScale(60, 0.3),
                 width: moderateScale(60, 0.3),
                 borderRadius: moderateScale(30, 0.3),
-                backgroundColor: Color.themeColor,
+                backgroundColor: Color.theme2,
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: moderateScale(-30, 0.3),
               }}>
               <Icon
-                name={'plus'}
-                as={type}
-                color={Color.white}
-                size={moderateScale(30, 0.3)}
+                name={'search'}
+                as={Feather}
+                  color={Color.white}
+                size={size}
               />
             </View>
           ) : (
@@ -216,6 +230,7 @@ export const TabNavigation = () => {
     >
       <Tabs.Screen name={'HomeScreen'} component={HomeScreen} />
       <Tabs.Screen name={'Donation'} component={Donation} />
+      <Tabs.Screen name={'Campaigns'} component={Campaigns} />
 
       {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
       <Tabs.Screen name={'StoreScreen'} component={StoreScreen} />

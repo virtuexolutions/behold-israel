@@ -111,6 +111,13 @@ dependencies {
     implementation("com.facebook.react:react-android")
     implementation("com.facebook.react:flipper-integration")
 
+    configurations {
+    compileClasspath {
+      resolutionStrategy.force "com.stripe:stripe-android:20.19.1"
+      resolutionStrategy.force "com.stripe:financial-connections:20.19.1"
+    }
+}
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {
