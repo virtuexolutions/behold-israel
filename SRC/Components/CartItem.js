@@ -8,6 +8,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import CustomImage from './CustomImage';
 import {Icon} from 'native-base';
 import {
+  RemoveToCart,
   addQuantity,
   decrementQuantity,
   increamentQuantity,
@@ -20,15 +21,18 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import numeral from 'numeral';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 
 const CartItem = ({item, fromCheckout}) => {
-  console.log("🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:", item)
+  // console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item);
   const cartData = useSelector(state => state.commonReducer.cart);
+  console.log("🚀 ~ CartItem ~ cartData:", cartData)
+
   const dispatch = useDispatch();
+  const  navigation =useNavigation()
 
   return (
     <View style={styles.cardContainer} key={item?.id}>
-      
       <View
         style={{
           flexDirection: 'row',
@@ -42,10 +46,9 @@ const CartItem = ({item, fromCheckout}) => {
             style={{
               marginRight: moderateScale(5, 0.3),
             }}
-          
           />
           <CustomImage
-            source={{uri:item?.images[0]}}
+            source={item?.image}
             style={{
               width: windowWidth * 0.3,
               height: windowHeight * 0.15,
@@ -54,8 +57,32 @@ const CartItem = ({item, fromCheckout}) => {
           />
         </View>
         <View style={styles.other1}>
-          <CustomText style={styles.text1}>{item?.Title}</CustomText>
-          <View
+          <View style={{
+            flexDirection:'row',
+            // position:'absolute'
+          }}>
+            <CustomText style={styles.text1}>{item?.title}</CustomText>
+          <Icon
+          style={{
+            position:'absolute',
+            right:10,
+            top:0
+          }}
+                name={'circle-with-cross'}
+                as={Entypo}s
+                color={Color.white}
+                size={moderateScale(15, 0.3)}
+                onPress={() => {
+               
+               dispatch(RemoveToCart({id: item?.id}))
+               
+                }}
+              />
+          </View>
+          <CustomText style={[styles.text1 ,{
+            fontSize:moderateScale(11,.6)
+          }]}>{item?.discription}</CustomText>
+          {/* <View
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
@@ -65,7 +92,7 @@ const CartItem = ({item, fromCheckout}) => {
             {item?.selectedSize ? (
               <CustomText>Selected Size : {item?.selectedSize}</CustomText>
             ) : (
-             item?.size?.map((item1, index) => {
+              item?.size?.map((item1, index) => {
                 return (
                   <TouchableOpacity
                     activeOpacity={0.9}
@@ -85,21 +112,21 @@ const CartItem = ({item, fromCheckout}) => {
                 );
               })
             )}
-          </View>
-          {item?.selectedColor ? (
-            <View style={{
-              flexDirection : 'row',
-              alignItems : 'center'
-            }}> 
-            <CustomText style={{color: Color.black, textAlign : 'left'}}>
-              Selected Color:{' '}
-            
-            </CustomText>
+          </View> */}
+          {/* {item?.selectedColor ? (
             <View
-                  style={[
-                    styles.colorBox,
-                    {backgroundColor: item?.selectedColor.toLowerCase()},
-                  ]}></View>
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <CustomText style={{color: Color.black, textAlign: 'left'}}>
+                Selected Color:{' '}
+              </CustomText>
+              <View
+                style={[
+                  styles.colorBox,
+                  {backgroundColor: item?.selectedColor.toLowerCase()},
+                ]}></View>
             </View>
           ) : (
             <View
@@ -107,9 +134,9 @@ const CartItem = ({item, fromCheckout}) => {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
                 width: windowWidth * 0.45,
-                marginTop: moderateScale(5, 0.3),
+                // marginTop: moderateScale(5, 0.3),
               }}>
-              {item?.colors.map((item1, index) => {
+              {item?.colors?.map((item1, index) => {
                 return (
                   <TouchableOpacity
                     activeOpacity={0.9}
@@ -137,7 +164,7 @@ const CartItem = ({item, fromCheckout}) => {
                 );
               })}
             </View>
-          )}
+          )} */}
           <View
             style={[
               styles.other1,
@@ -145,13 +172,16 @@ const CartItem = ({item, fromCheckout}) => {
                 flexDirection: 'row',
                 justifyContent: 'space-between',
                 marginTop: moderateScale(10, 0.3),
-                alignItems : 'center'
+                alignItems: 'center',
               },
             ]}>
             <CustomText style={styles.amount}>
-              {(item?.price * item?.qty)} PKR
+
+              {cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.qty }
+            {/* {item?.price * item?.qty}  */}
+              {/* {item?.price * item?.qty} PKR */}
             </CustomText>
-                        
+
             <View
               style={{
                 marginRight: moderateScale(15, 0.3),
@@ -161,15 +191,18 @@ const CartItem = ({item, fromCheckout}) => {
               <Icon
                 name={'add-circle-sharp'}
                 as={Ionicons}
-                color={Color.themeColor}
+                color={Color.white}
                 size={moderateScale(25, 0.3)}
                 onPress={() => {
-                  item?.qty < item?.totalQty &&  dispatch(increamentQuantity({id: item?.id}));
+                  console.log('increment')
+                  item?.qty < item?.totalquantity &&
+                    dispatch(increamentQuantity({id: item?.id}));
                 }}
               />
               <CustomText
                 isBold
                 style={{
+                  color:Color.white,
                   marginHorizontal: moderateScale(5, 0.3),
                   fontSize: moderateScale(12, 0.3),
                 }}>
@@ -178,7 +211,7 @@ const CartItem = ({item, fromCheckout}) => {
               <Icon
                 name={'circle-with-minus'}
                 as={Entypo}
-                color={Color.themeColor}
+                color={Color.white}
                 size={moderateScale(24, 0.3)}
                 onPress={() => {
                   item?.qty > 1 && dispatch(decrementQuantity({id: item?.id}));
@@ -198,18 +231,19 @@ const styles = StyleSheet.create({
   cardContainer: {
     minHeight: windowHeight * 0.2,
     width: windowWidth * 0.9,
-    // backgroundColor: 'red',
     marginBottom: moderateScale(20, 0.3),
-    // flexGrow : 0
-    borderBottomWidth: 1,
+    borderWidth: 1,
+    borderRadius: moderateScale(10, 0.6),
     borderColor: Color.veryLightGray,
-    paddingBottom: moderateScale(10, 0.3),
+    alignItems: 'center',
+    justifyContent: 'center',
+    // backgroundColor:'red'
   },
   name: {
     fontSize: moderateScale(20, 0.3),
     color: Color.black,
     marginLeft: moderateScale(5, 0.3),
-    marginBottom : moderateScale(10,0.3)
+    marginBottom: moderateScale(10, 0.3),
   },
   otherContainer: {
     flexDirection: 'row',
@@ -224,7 +258,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: moderateScale(16, 0.3),
-    color: Color.black,
+    color: Color.white,
     width: windowWidth * 0.45,
   },
   text: {
@@ -251,6 +285,6 @@ const styles = StyleSheet.create({
   },
   amount: {
     fontSize: moderateScale(18, 0.3),
-    color: Color.themeColor,
+    color: Color.white,
   },
 });

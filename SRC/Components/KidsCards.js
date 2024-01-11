@@ -1,14 +1,38 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Alert, Platform, StyleSheet, Text, ToastAndroid, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import CustomText from './CustomText'
 import CustomImage from './CustomImage'
 import { windowHeight, windowWidth } from '../Utillity/utils'
 import { moderateScale } from 'react-native-size-matters'
+import { useDispatch, useSelector } from 'react-redux'
+import { AddToCart } from '../Store/slices/common'
+import { useNavigation } from '@react-navigation/native'
 
 const KidsCards = ({item}) => {
+    const navigation =useNavigation()
+const dispatch =useDispatch()
 //   console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
+const cardData = useSelector(state => state.commonReducer.cart);
+// console.log("🚀 ~ KidsCards ~ cardData:", cardData)
+
+
+
+
   return (
-    <View style={{
+    <TouchableOpacity
+    onPress={() => {
+        if (cardData.find((data, index) => data?.id == item?.id)) {
+            Platform.OS == 'android'
+              ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+              : Alert.alert('item already added');
+          } else {
+              dispatch(AddToCart(item))
+            // dispatch(AddToCart({...item, quantity: 1, size_id: {}}));
+          }
+        console.log('item succsessfully add to cart')
+}}
+    
+    style={{
         backgroundColor:Color.white,
         padding:moderateScale(10,.6),
         // height:windowHeight*0.15,
@@ -24,6 +48,11 @@ const KidsCards = ({item}) => {
 
         }}>
             <CustomImage
+              onPress={() => {
+                navigation.navigate('ProductDetail' ,{item :item})
+                console.log('image')
+            //   dispatch(AddToCart(item))
+            }}
             style={{
                 height:"100%",
                 width:'100%',
@@ -34,15 +63,28 @@ const KidsCards = ({item}) => {
             />
         </View>
         <CustomText 
-            numberOfLines={1}
+            // numberOfLines={2}
             isBold
             style={{
-                fontSize: moderateScale(15, 0.6),
+                fontSize: moderateScale(14, 0.6),
                 color: Color.themeBlack  ,
-                paddingVertical: moderateScale(5,.6),
+                width:windowWidth*0.35,
+                // backgroundColor:'red',
+                // paddingVertical: moderateScale(5,.6),
                 // paddingHorizontal: moderateScale(10, .6)
             }}>
      {item?.title}
+        </CustomText>
+        <CustomText 
+            numberOfLines={2}
+            isBold
+            style={{
+                fontSize: moderateScale(12, 0.6),
+                color: Color.grey,
+                paddingVertical: moderateScale(2,.6),
+                // paddingHorizontal: moderateScale(10, .6)
+            }}>
+     {item?.discription}
         </CustomText>  
         <CustomText 
             numberOfLines={1}
@@ -55,7 +97,7 @@ const KidsCards = ({item}) => {
             }}>
      {item?.price}
         </CustomText> 
-    </View>
+    </TouchableOpacity>
   )
 }
 

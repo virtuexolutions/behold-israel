@@ -40,6 +40,10 @@ import DonationDetails from './Screens/DonationDetails';
 
 import Feather from 'react-native-vector-icons/Feather'
 import DonateNow from './Screens/DonateNow';
+import CheckOutScreen from './Screens/CheckoutScreen';
+import ProductDetails from './Screens/ProductDetails';
+import ProductDetail from './Screens/ProductDetail';
+import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 
 
 const AppNavigator = () => {
@@ -96,16 +100,22 @@ const AppNavigator = () => {
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
-          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
+          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen}/>
           {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
-          <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories} />
-          <RootNav.Screen name="BookDescriptionScreen" component={BookDescriprtionScreen} />
-          <RootNav.Screen name="RecordedLecture" component={RecordedLecture} />
-          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen} />
-          <RootNav.Screen name="LiveLecture" component={LiveLecture} />
-          <RootNav.Screen name="DonationScreen" component={Donation} />
-          <RootNav.Screen name="DonationDetails" component={DonationDetails} />
-          <RootNav.Screen name="DonateNow" component={DonateNow} />
+          <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/>
+          <RootNav.Screen name="BookDescriptionScreen" component={BookDescriprtionScreen}/>
+          <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/>
+          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/>
+          <RootNav.Screen name="LiveLecture" component={LiveLecture}/>
+          <RootNav.Screen name="DonationScreen" component={Donation}/>
+          <RootNav.Screen name="DonationDetails" component={DonationDetails}/>
+          <RootNav.Screen name="DonateNow" component={DonateNow}/>
+          <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/>
+          {/* <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/> */}
+          <RootNav.Screen name="ProductDetail" component={ProductDetail} />
+          <RootNav.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
+
+
 
           
           

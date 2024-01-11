@@ -17,20 +17,16 @@ import {
   moderateScale,
   moderateVerticalScale,
 } from 'react-native-size-matters';
-// import Header from '../Components/Header';
 import CustomText from '../Components/CustomText';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-// import CustomTable from '../Components/CustomTable';
-// import moment from 'moment';
-// import { Get } from '../Axios/AxiosInterceptorFunction';
 import {useSelector} from 'react-redux';
 import {useIsFocused, useNavigation} from '@react-navigation/native';
 import CustomImage from '../Components/CustomImage';
 import CardsComponent from '../Components/CardsComponent';
 import navigationService from '../navigationService';
-// import SearchbarComponent from '../Components/SearchbarComponent';
+import {SliderBox} from 'react-native-image-slider-box';
 
 const HomeScreen = () => {
   const token = useSelector(state => state.authReducer.token);
@@ -96,6 +92,13 @@ const HomeScreen = () => {
     },
   ];
 
+  const images = [
+    require('../Assets/Images/banner.jpg'),
+    require('../Assets/Images/slider1.jpg'),
+    require('../Assets/Images/slider2.jpg'),
+    require('../Assets/Images/slider3.jpg'),
+  ];
+
   return (
     <>
       <CustomStatusBar backgroundColor={'#D2E4E4'} barStyle={'dark-content'} />
@@ -113,27 +116,54 @@ const HomeScreen = () => {
           backgroundColor: Color.white,
         }}
         contentContainerStyle={{
-          paddingBottom: moderateScale(40, 0.6),
+          // paddingBottom: moderateScale(40, 0.6),
         }}>
+          <LinearGradient
+            style={{
+              width: windowWidth,
+              minHeight: windowHeight,
+              alignItems: 'center',
+            paddingBottom: moderateScale(20, 0.6),
+
+            }}
+           start={{ x: 1, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            colors={Color.tabBarGradient}
+           
+           > 
+    
         <View
           style={{
             width: windowWidth,
             height: windowHeight * 0.3,
           }}>
-          <CustomImage
+              <SliderBox
+            images={images}
+            autoplay  
+            circleLoop
+            sliderBoxHeight={250}
+            onCurrentImagePressed={index =>
+              console.warn(`image ${index} pressed`)
+            }
+            dotColor={Color.theme2}
+            inactiveDotColor="#90A4AE"
+          />
+          {/* <CustomImage
             style={{
               height: '100%',
               width: '100%',
             }}
             source={require('../Assets/Images/banner.jpg')}
-          />
+          /> */}
         </View>
         <FlatList
           showsVerticalScrollIndicator={false}
           nestedScrollEnabled={true}
           scrollEnabled={true}
           decelerationRate={0.5}
-          contentContainerStyle={{}}
+          contentContainerStyle={{
+            paddingTop:moderateScale(10,.6)
+          }}
           data={dummyArray1}
           renderItem={({item, index}) => {
             return (
@@ -146,6 +176,7 @@ const HomeScreen = () => {
             );
           }}
         />
+      </LinearGradient>
       </ScrollView>
     </>
   );

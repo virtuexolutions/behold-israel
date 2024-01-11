@@ -22,7 +22,7 @@ import CustomStatusBar from '../Components/CustomStatusBar';
 import Header from '../Components/Header';
 import {useIsFocused} from '@react-navigation/native';
 import Color from '../Assets/Utilities/Color';
-import CommentsSection from '../Components/CommentsSection';
+// import CommentsSection from '../Components/CommentsSection';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import moment from 'moment';
 
@@ -242,30 +242,6 @@ const ProductDetails = props => {
               numberOfLines={1}>
               {finalItem?.subTitle}
             </CustomText>
-
-            {/* <TouchableOpacity
-              activeOpacity={0.6}
-              style={{paddingRight: 10}}
-              onPress={() => {
-                setLike(!like);
-                dispatch(setLiked({id: item?.id, liked: !like}));
-              }}>
-              {like ? (
-                <Icon
-                  name={'heart'}
-                  as={Entypo}
-                  size={moderateScale(25, 0.3)}
-                  color={'#E50808'}
-                />
-              ) : (
-                <Icon
-                  name={'heart-outlined'}  
-                  as={Entypo}
-                  size={moderateScale(25, 0.3)}
-                  color={'black'}
-                />
-              )}
-            </TouchableOpacity> */}
           </View>
 
           <View
