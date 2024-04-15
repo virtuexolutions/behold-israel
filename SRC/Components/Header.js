@@ -30,6 +30,7 @@ const Header = props => {
   const notification = useSelector(state => state.commonReducer.notification);
   const cartData = useSelector(state => state.commonReducer.cart);
   const navigationN = useNavigation();
+  console.log("🚀 ~ Header ~ navigation:", navigationN)
   const [isModalVisible, setModalVisible] = useState(false);
   const {
     title,
@@ -38,6 +39,7 @@ const Header = props => {
     headerColor,
     titleColor,
     close,
+    onPress,
     navigateTO,
     headerType,
     cart,
@@ -74,11 +76,12 @@ const Header = props => {
   };
 
   return (
-    <LinearGradient
+    <View
       style={styles.header2}
-      start={{x: 0, y: 0}}
-      end={{x: 1, y: 1}}
-      colors={headerColor ? headerColor : Color.themeBgColor}>
+      // start={{x: 0, y: 0}}
+      // end={{x: 1, y: 1}}
+      // colors={headerColor ? headerColor : Color.themeBgColor}
+      >
       
 
       <View
@@ -102,12 +105,23 @@ const Header = props => {
           />
         ) : (
           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+            // marginTop :moderateScale
+          }}
             name={'menu'}
             as={Feather}
             size={moderateScale(25, 0.3)}
             color={Color.black}
             onPress={() => {
               navigationN.toggleDrawer();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
             }}
           />
         )}
@@ -116,7 +130,7 @@ const Header = props => {
         <CustomText
           style={{
             fontSize: moderateScale(18, 0.6),
-            color: Color.black,
+            color: Color.white,
           }}isBold>
           {title}
         </CustomText>
@@ -168,13 +182,13 @@ const Header = props => {
             name={'shopping-cart'}
             as={Feather}
             size={moderateScale(25, 0.3)}
-            color={Color.black}
+            color={Color.white}
             onPress={() => {
               if (token == null) {
                 Confirm();
                 // navigationService.navigate('LoginScreen')
               } else if (cartData?.length > 0) {
-                navigationService.navigate('CartScreen');
+                navigationService.navigate('CheckoutScreen');
               } else {
                 return Platform.OS == 'android'
                   ? ToastAndroid.show('No Item in cart', ToastAndroid.SHORT)
@@ -189,7 +203,7 @@ const Header = props => {
             width: moderateScale(40, 0.3),
           }}></View>
       )}
-    </LinearGradient>
+    </View>
   );
 };
 const styles = ScaledSheet.create({
@@ -231,12 +245,12 @@ const styles = ScaledSheet.create({
   header2: {
     width: windowWidth,
     // height: windowHeight * 0.13,
-    backgroundColor: Color.themeColor,
+    backgroundColor:'transparent',
     // justifyContent: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingHorizontal: moderateScale(20, 0.3),
-    paddingVertical: moderateScale(15, 0.3),
+    paddingVertical: moderateScale(35, 0.3),
     alignItems: 'center',
     // backgroundColor: 'red',
   },

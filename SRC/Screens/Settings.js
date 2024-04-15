@@ -1,4 +1,11 @@
-import {View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React from 'react';
 import CustomImage from '../Components/CustomImage';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -42,6 +49,46 @@ const Settings = () => {
       },
     },
     {
+      id: 3,
+      name: 'membership form',
+      next: '>',
+      onPress: () => {
+        navigationService.navigate('CalendarScreen');
+      },
+    },
+    // {
+    //   id: 3,
+    //   name: 'form',
+    //   next: '>',
+    //   onPress: () => {
+    //     navigationService.navigate('Form');
+    //   },
+    // },
+    // {
+    //   id: 3,
+    //   name: 'good things',
+    //   next: '>',
+    //   onPress: () => {
+    //     navigationService.navigate('GoodThings');
+    //   },
+    // },
+    // {
+    //   id: 4,
+    //   name: 'Scan',
+    //   // next: '>',
+    //   onPress: () => {
+    //     navigationService.navigate('ScanScreen');
+    //   },
+    // },
+    // {
+    //   id: 4,
+    //   name: ' Qr Scan',
+    //   // next: '>',
+    //   onPress: () => {
+    //     navigationService.navigate('QrScanScreen');
+    //   },
+    // },
+    {
       id: 4,
       name: 'Terms & Condition',
       next: '>',
@@ -82,7 +129,7 @@ const Settings = () => {
         dispatch(setUserLogoutAuth());
         // dispatch(setUserLogOut());
         dispatch(SetUserRole(''));
-        console.log('logout=======>')
+        console.log('logout=======>');
         // navigationService.navigate('LoginScreen')
       },
     },
@@ -116,7 +163,7 @@ const Settings = () => {
       <View style={styles.optionsContainer}>
         {options.map((item, index) => (
           <TouchableOpacity
-          onPress={item?.onPress}
+            onPress={item?.onPress}
             key={index}
             style={[styles.option, item.name === 'Logout' && styles.logout]}>
             <CustomText style={{color: '#FFFF'}}>{item.name}</CustomText>

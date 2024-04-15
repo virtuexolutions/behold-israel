@@ -12,6 +12,8 @@ import {Icon} from 'native-base';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import Header from '../Components/Header';
+import Feather from 'react-native-vector-icons/Feather'
 
 const StoreScreen = () => {
   const navigation = useNavigation();
@@ -26,8 +28,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       price: '$74.00',
-      qty:1,
-      totalquantity :10
+      qty: 1,
+      totalquantity: 10,
     },
     {
       id: 2,
@@ -36,8 +38,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       price: '$74.00',
-      qty:1,
-      totalquantity :23
+      qty: 1,
+      totalquantity: 23,
     },
     {
       id: 3,
@@ -46,8 +48,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       price: '$74.00',
-      qty:1,
-      totalquantity :16
+      qty: 1,
+      totalquantity: 16,
     },
     {
       id: 4,
@@ -56,8 +58,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       price: '$74.00',
-      qty:1,
-      totalquantity :14
+      qty: 1,
+      totalquantity: 14,
     },
     {
       id: 5,
@@ -66,8 +68,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
       price: '$74.00',
-      qty:1,
-      totalquantity :20
+      qty: 1,
+      totalquantity: 20,
     },
     {
       id: 6,
@@ -76,8 +78,8 @@ const StoreScreen = () => {
       discription:
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
       price: '$74.00',
-      qty:1,
-      totalquantity :15
+      qty: 1,
+      totalquantity: 15,
     },
   ];
 
@@ -89,7 +91,14 @@ const StoreScreen = () => {
         paddingBottom: moderateScale(40, 0.6),
       }}
       source={require('../Assets/Images/recorded.png')}>
-      <View
+        {/* <Icon onPress={() => navigation.navigate('MyDrawer')} name={'menu'} as={Feather} color={Color.white} size={ moderateScale(18,.6)} /> */}
+      <Header title={'store'} cart={true} 
+      onPress={() =>{
+        navigation.toggleDrawer();
+      }}
+      
+      />
+      {/* <View
         style={[
           styles.rowContainner,
           {
@@ -149,7 +158,7 @@ const StoreScreen = () => {
             </View>
           )}
         </View>
-      </View>
+      </View> */}
       <View style={styles.rowContainner}>
         <SearchbarComponent
           placeHolderColor={Color.veryLightGray}
