@@ -27,6 +27,8 @@ import CustomImage from '../Components/CustomImage';
 import CardsComponent from '../Components/CardsComponent';
 import navigationService from '../navigationService';
 import {SliderBox} from 'react-native-image-slider-box';
+import Header from '../Components/Header';
+import Feather from 'react-native-vector-icons/Feather';
 
 const HomeScreen = () => {
   const token = useSelector(state => state.authReducer.token);
@@ -51,7 +53,7 @@ const HomeScreen = () => {
       id: 1,
       image: require('../Assets/Images/image1.png'),
       title: 'BiBle',
-      onPress : ()=> navigationService.navigate('BibleCategories') ,
+      onPress: () => navigationService.navigate('BibleCategories'),
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },
@@ -59,7 +61,7 @@ const HomeScreen = () => {
       id: 2,
       image: require('../Assets/Images/lecture.png'),
       title: 'RECORDED LECTUER',
-      onPress : ()=> navigationService.navigate('RecordedLecture') ,
+      onPress: () => navigationService.navigate('RecordedLecture'),
 
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
@@ -67,7 +69,7 @@ const HomeScreen = () => {
     {
       id: 3,
       image: require('../Assets/Images/store.png'),
-      onPress : ()=> navigationService.navigate('Store') ,
+      onPress: () => navigationService.navigate('Store'),
 
       title: 'STORE',
       description:
@@ -76,7 +78,7 @@ const HomeScreen = () => {
     {
       id: 4,
       image: require('../Assets/Images/live.png'),
-      onPress : ()=> navigationService.navigate('LiveLecture') ,
+      onPress: () => navigationService.navigate('LiveLecture'),
       title: 'LIVE STREMING',
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
@@ -84,7 +86,7 @@ const HomeScreen = () => {
     {
       id: 5,
       image: require('../Assets/Images/donation.png'),
-      onPress : ()=> navigationService.navigate('DonationScreen') ,
+      onPress: () => navigationService.navigate('DonationScreen'),
 
       title: 'Donation',
       description:
@@ -114,69 +116,64 @@ const HomeScreen = () => {
         style={{
           minHeight: windowHeight * 0.9,
           backgroundColor: Color.white,
-        }}
-        contentContainerStyle={{
-          // paddingBottom: moderateScale(40, 0.6),
         }}>
-          <LinearGradient
-            style={{
-              width: windowWidth,
-              minHeight: windowHeight,
-              alignItems: 'center',
-            paddingBottom: moderateScale(20, 0.6),
-
-            }}
-           start={{ x: 1, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            colors={Color.tabBarGradient}
-           
-           > 
-    
-        <View
+        <LinearGradient
           style={{
             width: windowWidth,
-            height: windowHeight * 0.3,
-          }}>
-              <SliderBox
-            images={images}
-            autoplay  
-            circleLoop
-            sliderBoxHeight={250}
-            onCurrentImagePressed={index =>
-              console.warn(`image ${index} pressed`)
-            }
-            dotColor={Color.theme2}
-            inactiveDotColor="#90A4AE"
-          />
-          {/* <CustomImage
+            minHeight: windowHeight,
+            alignItems: 'center',
+            paddingBottom: moderateScale(20, 0.6),
+          }}
+          start={{x: 1, y: 0}}
+          end={{x: 0, y: 1}}
+          colors={Color.tabBarGradient}>
+     
+          <View
+            style={{
+              width: windowWidth,
+              height: windowHeight * 0.3,
+            }}>
+            <SliderBox
+              images={images}
+              autoplay
+              circleLoop
+              sliderBoxHeight={250}
+              onCurrentImagePressed={index =>
+                console.warn(`image ${index} pressed`)
+              }
+              dotColor={Color.theme2}
+              inactiveDotColor="#90A4AE"
+            />
+
+            {/* <CustomImage
             style={{
               height: '100%',
               width: '100%',
             }}
             source={require('../Assets/Images/banner.jpg')}
           /> */}
-        </View>
-        <FlatList
-          showsVerticalScrollIndicator={false}
-          nestedScrollEnabled={true}
-          scrollEnabled={true}
-          decelerationRate={0.5}
-          contentContainerStyle={{
-            paddingTop:moderateScale(10,.6)
-          }}
-          data={dummyArray1}
-          renderItem={({item, index}) => {
-            return (
-              <CardsComponent
-                item={item}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-                key={item?.id}
-              />
-            );
-          }}
-        />
-      </LinearGradient>
+          </View>
+          <FlatList
+            showsVerticalScrollIndicator={false}
+            nestedScrollEnabled={true}
+            scrollEnabled={true}
+            decelerationRate={0.5}
+            contentContainerStyle={{
+              paddingTop: moderateScale(10, 0.6),
+            }}
+            data={dummyArray1}
+            renderItem={({item, index}) => {
+              return (
+                <CardsComponent
+                  item={item}
+                  selectedCategory={selectedCategory}
+                  setSelectedCategory={setSelectedCategory}
+                  key={item?.id}
+                />
+              );
+            }}
+          />
+        </LinearGradient>
       </ScrollView>
     </>
   );

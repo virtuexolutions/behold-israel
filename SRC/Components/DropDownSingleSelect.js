@@ -131,6 +131,8 @@ const DropDownSingleSelect = ({
           }),
         }}
         dropdownStyle={{
+          // backgroundColor :'red',
+          height :height*0.19,
           width: width,
           borderRadius: moderateScale(10, 0.3),
           marginTop: -height * 0.06,

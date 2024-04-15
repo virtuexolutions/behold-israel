@@ -8,6 +8,7 @@ const initialState = {
   userWalkThrough: false,
   isGoalCreated : false ,
   role : '',
+  category: []
 };
 
 const AuthSlice = createSlice({
@@ -36,6 +37,10 @@ const AuthSlice = createSlice({
       state.userWalkThrough = action.payload;
       // console.log("🚀 ~ setWalkThrough ~ action.payload:", action.payload)
     },
+    // setTestmentCategory(state,action){
+    //   state.category =action.payload;
+    //   console.log("🚀 ~ setTestmentCategory ~ action.payload:", action.payload)
+    // }
   },
 });
 
@@ -46,7 +51,8 @@ export const {
   setUserToken,
   SetFCMToken,
   setWalkThrough,
-  SetUserRole
+  SetUserRole,
+  setTestmentCategory
   
   
 } = AuthSlice.actions;
