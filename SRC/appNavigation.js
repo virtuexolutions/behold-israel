@@ -55,6 +55,8 @@ import ScanScreen from './Screens/ScanScreen';
 import QrScanScreen from './Screens/QrScanScreen';
 import CalendarScreen from './Screens/CalendarScreen';
 
+import ChangePassword from './Screens/ChangePassword';
+
 const AppNavigator = () => {
   // const isLogin = false;
   const isGoalCreated = useSelector(state => state.authReducer.isGoalCreated);
@@ -115,10 +117,8 @@ const AppNavigator = () => {
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
-          <RootNav.Screen
-            name="TestmentsScreeen"
-            component={TestmentsScreeen}
-          />
+          <RootNav.Screen name="ChangePasswordScreen" component={ChangePassword} />
+          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
           {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
           <RootNav.Screen
             name="OldTestamentCategories"

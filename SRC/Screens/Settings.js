@@ -114,6 +114,14 @@ const Settings = () => {
     },
     {
       id: 9,
+      name: 'Change Password',
+      next: '>',
+      onPress: () => {
+        navigationService.navigate('ChangePasswordScreen');
+      },
+    },
+    {
+      id: 10,
       name: 'Logout',
       next: '>',
       onPress: () => {
