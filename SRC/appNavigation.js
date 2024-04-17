@@ -264,9 +264,16 @@ export const MyDrawer = () => {
     <DrawerNavigation.Navigator
       drawerContent={props => <Drawer {...props} />}
       initialRouteName={'TabNavigation'}
+      
       screenOptions={{
         headerShown: false,
-      }}>
+        drawerStyle:{
+          borderTopRightRadius: moderateScale(35, 0.6),
+          borderBottomRightRadius: moderateScale(35, 0.6),
+        }   
+      }}
+
+      >
       {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
       {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
       <DrawerNavigation.Screen

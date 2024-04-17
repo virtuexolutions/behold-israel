@@ -117,6 +117,41 @@ const HomeScreen = () => {
           minHeight: windowHeight * 0.9,
           backgroundColor: Color.white,
         }}>
+           <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={'menu'}
+            as={Feather}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
+            onPress={() => {
+              navigation.toggleDrawer();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View>
+
         <LinearGradient
           style={{
             width: windowWidth,

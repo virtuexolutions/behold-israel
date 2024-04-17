@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 import React from 'react';
 import CustomImage from '../Components/CustomImage';
@@ -135,6 +136,7 @@ const Settings = () => {
     },
   ];
   return (
+    
     <ImageBackground
       resizeMode="cover"
       style={styles.mainScreen}
@@ -181,6 +183,7 @@ const Settings = () => {
         ))}
       </View>
     </ImageBackground>
+
   );
 };
 
