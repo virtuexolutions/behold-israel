@@ -54,7 +54,6 @@ import GoodThings from './Screens/GoodThings';
 import ScanScreen from './Screens/ScanScreen';
 import QrScanScreen from './Screens/QrScanScreen';
 import CalendarScreen from './Screens/CalendarScreen';
-
 import ChangePassword from './Screens/ChangePassword';
 
 const AppNavigator = () => {
@@ -117,8 +116,10 @@ const AppNavigator = () => {
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
-          <RootNav.Screen name="ChangePasswordScreen" component={ChangePassword} />
-          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
+          <RootNav.Screen
+            name="TestmentsScreeen"
+            component={TestmentsScreeen}
+          />
           {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
           <RootNav.Screen
             name="OldTestamentCategories"
@@ -263,9 +264,16 @@ export const MyDrawer = () => {
     <DrawerNavigation.Navigator
       drawerContent={props => <Drawer {...props} />}
       initialRouteName={'TabNavigation'}
+      
       screenOptions={{
         headerShown: false,
-      }}>
+        drawerStyle:{
+          borderTopRightRadius: moderateScale(35, 0.6),
+          borderBottomRightRadius: moderateScale(35, 0.6),
+        }   
+      }}
+
+      >
       {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
       {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
       <DrawerNavigation.Screen

@@ -12,7 +12,7 @@ import CustomText from '../Components/CustomText';
 import {ScaledSheet, moderateScale} from 'react-native-size-matters';
 import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'native-base';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Feather from 'react-native-vector-icons/Feather';
 import Color from '../Assets/Utilities/Color';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import DropDownSingleSelect from '../Components/DropDownSingleSelect';
@@ -43,23 +43,41 @@ const MemberShipForm = () => {
         paddingBottom: moderateScale(40, 0.6),
       }}
       source={require('../Assets/Images/setting_Bg.png')}>
-      <TouchableOpacity
-        activeOpacity={0.8}
-        onPress={() => {
-          navigation.goBack();
-        }}
-        style={styles.back}>
-        <Icon
-          name="arrowleft"
-          as={AntDesign}
-          style={styles.icon2}
-          color={Color.white}
-          size={moderateScale(20, 0.3)}
-          onPress={() => {
-            navigation.goBack();
+            <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
           }}
-        />
-      </TouchableOpacity>
+            name={'menu'}
+            as={Feather}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
+            onPress={() => {
+              navigation.toggleDrawer();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View>
+
       <ScrollView
         showsVerticalScrollIndicator={false}
         style={{

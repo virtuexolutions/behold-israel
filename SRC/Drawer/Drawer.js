@@ -5,6 +5,8 @@ import {
   TouchableOpacity,
   PlatformColor,
   ToastAndroid,
+  LayoutAnimation,
+  ScrollView,
 } from 'react-native';
 import React, {useState, useRef} from 'react';
 import Color from '../Assets/Utilities/Color';
@@ -33,7 +35,9 @@ const Drawer = () => {
   const userData = useSelector(state => state.commonReducer.userData);
   const token = useSelector(state => state.authReducer.token);
   const role = useSelector(state => state.authReducer.role);
-
+  const [menuIndex, setMenuIndex] = useState(-1);
+  const [nestedMenuIndex, setNestedMenuIndex] = useState(-1);
+  // const [menuName, setMenuName] = useState('');
   const data = [
     {
       name: 'Home',
@@ -45,50 +49,90 @@ const Drawer = () => {
     },
     {
       name: 'About us',
-      iconName: 'chevron-down',
+      // iconName: menuName == 'About us' ?'chevron-up' : 'chevron-down',
+      iconName: menuIndex == 1 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {
-        Platform.OS == 'android'
-          ? ToastAndroid.show(`Action require`, ToastAndroid.SHORT)
-          : alert(`Action require`);
-        // navigation.navigate('Orders');
+      menuItems: [
+        {Id: '1', name: 'Our Mission', onPress: () => {}},
+        {Id: '2', name: 'Our Team', onPress: () => {}},
+        {Id: '3', name: 'History', onPress: () => {}},
+      ],
+      onPress: index => {
+        LayoutAnimation.configureNext(
+          LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
+        );
+        setMenuIndex(menuIndex === index ? -1 : index);
+        // setMenuName(data[index].name);
       },
     },
     {
       name: 'Sharing with other',
-      iconName: 'chevron-down',
+      iconName: menuIndex == 2 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {
-        navigation.navigate('Donation');
+      menuItems: [
+        {Id: '1', name: 'Donation', onPress: () => {}},
+        {Id: '2', name: 'Support for life', onPress: () => {}},
+        {Id: '3', name: 'Giving', onPress: () => {}},
+      ],
+      onPress: index => {
+        LayoutAnimation.configureNext(
+          LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
+        );
+        setMenuIndex(menuIndex === index ? -1 : index);
+       
       },
     },
 
     {
       name: 'campaigns',
-      iconName: 'chevron-down',
+      iconName: menuIndex == 3 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {
-        navigation.navigate('Campaigns');
+      menuItems: [
+        {Id: '1', name: 'Events & Community', onPress: () => {}},
+        {Id: '2', name: 'Out-Reach & Missions', onPress: () => {}},
+        // {Id: '3', name: 'Who are we?', onPress: () => {}},
+      ],
+      onPress: index => {
+        LayoutAnimation.configureNext(
+          LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
+        );
+        setMenuIndex(menuIndex === index ? -1 : index);
+        // Platform.OS == 'android'
+        //   ? ToastAndroid.show(`Action require`, ToastAndroid.SHORT)
+        //   : alert(`Action require`);
+        // navigation.navigate('Orders');
       },
     },
     {
       name: 'resources',
-      iconName: 'chevron-down',
+      iconName: menuIndex == 4 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {
-        Platform.OS == 'android'
-          ? ToastAndroid.show(`Action require`, ToastAndroid.SHORT)
-          : alert(`Action require`);
-     
-        // navigation.navigate('ChangePassword');
+      menuItems: [
+        {Id: '1', name: 'Educational Materials', onPress: () => {}},
+        {Id: '2', name: 'Historical Documents', onPress: () => {}},
+        {Id: '3', name: 'Documentary Films', onPress: () => {}},
+      ],
+      onPress: index => {
+        LayoutAnimation.configureNext(
+          LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
+        );
+        setMenuIndex(menuIndex === index ? -1 : index);
       },
     },
     {
       name: 'shop',
-      iconName: 'chevron-down',
+      iconName: menuIndex == 5 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {
-        navigation.navigate('StoreScreen');
+      menuItems: [
+        {Id: '1', name: 'Middle Eastern Goods', onPress: () => {}},
+        {Id: '2', name: 'Religious Items', onPress: () => {}},
+        {Id: '3', name: 'Bible Study Materials', onPress: () => {}},
+      ],
+      onPress: index => {
+        LayoutAnimation.configureNext(
+          LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
+        );
+        setMenuIndex(menuIndex === index ? -1 : index);
       },
     },
     {
@@ -143,8 +187,11 @@ const Drawer = () => {
 
   return (
     <ScreenBoiler
-      statusBarBackgroundColor={'white'}
-      statusBarContentStyle={'dark-content'}>
+    statusBarBackgroundColor={'white'}
+    statusBarContentStyle={'dark-content'}>
+      <ScrollView
+      style={{height: windowHeight}}
+      >
       <View
         style={{
           overflow: 'hidden',
@@ -154,6 +201,7 @@ const Drawer = () => {
           borderTopRightRadius: moderateScale(35, 0.6),
           borderBottomRightRadius: moderateScale(35, 0.6),
         }}>
+
         <View
           style={{
             // backgroundColor :'red',
@@ -190,15 +238,24 @@ const Drawer = () => {
             </CustomText>
           </View>
         </View>
+
         <View
           style={{
             marginLeft: moderateScale(20, 0.3),
             marginTop: moderateScale(25, 0.3),
           }}>
           {data.map((item, index) => (
-            <>
+            <View
+              style={{
+                borderColor: Color.veryLightGray,
+                width: windowWidth * 0.6,
+
+                borderBottomWidth: moderateScale(1, 0.6),
+              }}>
               <TouchableOpacity
-                onPress={item?.onPress}
+                onPress={
+                  item?.menuItems ? () => item?.onPress(index) : item?.onPress
+                }
                 style={{
                   // width :'100%',
                   width: windowWidth * 0.6,
@@ -207,8 +264,7 @@ const Drawer = () => {
                   borderColor: Color.black,
                   marginVertical: moderateScale(10, 0.3),
                   flexDirection: 'row',
-                  borderColor: Color.veryLightGray,
-                  borderBottomWidth: moderateScale(1, 0.6),
+
                   // alignItems: 'center',
                 }}>
                 <CustomText
@@ -233,17 +289,31 @@ const Drawer = () => {
                   />
                 )}
               </TouchableOpacity>
-            </>
+              {item?.menuItems && menuIndex === index && (
+                <View style={{paddingLeft: moderateScale(7,0.4)}}>
+                  {item.menuItems.map((subMenu, index) => (
+                    <TouchableOpacity key={index} onPress={subMenu?.onPress}>
+                      <View style={styles.subMenu}>
+                        <CustomText style={{color: Color.themeDarkGray}}>{subMenu.name}</CustomText>
+                      </View>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              )}
+              {/* <View style={{borderwidth: 1, }}></View> */}
+            </View>
           ))}
         </View>
         {/* )} */}
       </View>
+
       <View
         style={{
-          marginLeft: moderateScale(10, 0.3),
+        // marginLeft: moderateScale(5, 0.3),
           marginTop: moderateScale(40, 0.3),
           position: 'absolute',
-          bottom: 40,
+          bottom: menuIndex > -1 ? -10 : 50,
+          left:-15,
         }}>
         <TouchableOpacity
           onPress={() => {
@@ -274,6 +344,7 @@ const Drawer = () => {
           />
         </TouchableOpacity>
       </View>
+      </ScrollView>
     </ScreenBoiler>
   );
 };
@@ -288,5 +359,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Color.white,
     overflow: 'hidden',
+  },
+  subMenu: {
+    marginVertical: moderateScale(4, 0.3),
   },
 });
