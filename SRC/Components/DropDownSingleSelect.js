@@ -184,7 +184,7 @@ const DropDownSingleSelect = ({
 const styles = ScaledSheet.create({
   dropDownBtn: {
     backgroundColor: Color.white,
-    height: height * 0.07,
+    height: height * 0.06,
     borderRadius: moderateScale(25, 0.3),
   },
   main: {

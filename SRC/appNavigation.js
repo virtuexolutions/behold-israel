@@ -53,8 +53,16 @@ import Drawer from './Drawer/Drawer';
 import GoodThings from './Screens/GoodThings';
 import ScanScreen from './Screens/ScanScreen';
 import QrScanScreen from './Screens/QrScanScreen';
-import CalendarScreen from './Screens/CalendarScreen';
+// import CalendarScreen from './Screens/CalendarScreen';
 import ChangePassword from './Screens/ChangePassword';
+import PrayerRequestForm from './Screens/PrayerRequestForm';
+import EventAndComunity from './Screens/EventAndComunity';
+import OutReachMissions from './Screens/OutReachMissions';
+import AboutUs from './Screens/AboutUs';
+import RecommandedBooks from './Screens/RecommandedBooks';
+import AboutBooks from './Screens/AboutBooks';
+import GalleryFror from './Screens/GalleryFror';
+import Team from './Screens/Team';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -139,8 +147,17 @@ const AppNavigator = () => {
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
-          {/* <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/> */}
+          {/* <RootNav.Screen
+            name="RecommandedBooks"
+            component={RecommandedBooks}
+          /> */}   
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
+          {/* <RootNav.Screen
+            name="OutReachMissions"
+            component={OutReachMissions}
+          /> */}
+          {/* <RootNav.Screen name="AboutBooks" component={AboutBooks} /> */}
+          {/* <RootNav.Screen name="GalleryFror" component={GalleryFror} /> */}
 
           <RootNav.Screen
             name="PlaceOrderScreen"
@@ -258,22 +275,20 @@ export const TabNavigation = () => {
 };
 export const MyDrawer = () => {
   const DrawerNavigation = createDrawerNavigator();
-  console.log("🚀 ~ MyDrawer ~ DrawerNavigation:", DrawerNavigation)
+  console.log('🚀 ~ MyDrawer ~ DrawerNavigation:', DrawerNavigation);
   const firstScreen = 'HomeScreen';
   return (
     <DrawerNavigation.Navigator
       drawerContent={props => <Drawer {...props} />}
       initialRouteName={'TabNavigation'}
-      
       screenOptions={{
         headerShown: false,
-        drawerStyle:{
+        drawerStyle: {
           borderTopRightRadius: moderateScale(35, 0.6),
           borderBottomRightRadius: moderateScale(35, 0.6),
-        }   
-      }}
-
-      >
+          backgroundColor: '#D3D3D3',
+        },
+      }}>
       {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
       {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
       <DrawerNavigation.Screen
@@ -281,13 +296,29 @@ export const MyDrawer = () => {
         component={MemberShipForm}
       />
       <DrawerNavigation.Screen
-        name="CalendarScreen"
-        component={CalendarScreen}
-      /> 
+        name="PrayerRequestForm"
+        component={PrayerRequestForm}
+      />
+      <DrawerNavigation.Screen
+        name="EventAndComunity"
+        component={EventAndComunity}
+      />
       <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
+      <DrawerNavigation.Screen
+        name="OutReachMissions"
+        component={OutReachMissions}
+      />
+      <DrawerNavigation.Screen name="AboutUs" component={AboutUs} />
+      <DrawerNavigation.Screen name="GalleryFror" component={GalleryFror} />
 
       <DrawerNavigation.Screen name="GoodThings" component={GoodThings} />
       <DrawerNavigation.Screen name="QrScanScreen" component={QrScanScreen} />
+      <DrawerNavigation.Screen
+        name="RecommandedBooks"
+        component={RecommandedBooks}
+      />
+      <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
+      <DrawerNavigation.Screen name="Contact" component={Team} />
     </DrawerNavigation.Navigator>
   );
 };

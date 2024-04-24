@@ -51,10 +51,10 @@ const Settings = () => {
     },
     {
       id: 3,
-      name: 'membership form',
+      name: 'events and community ',
       next: '>',
       onPress: () => {
-        navigationService.navigate('CalendarScreen');
+        navigationService.navigate('EventAndComunity');
       },
     },
     // {

@@ -21,9 +21,10 @@ import moment from 'moment';
 import Header from '../Components/Header';
 import Feather from 'react-native-vector-icons/Feather';
 import Color from '../Assets/Utilities/Color';
+import {SliderBox} from 'react-native-image-slider-box';
 // import { SafeAreaView } from 'react-native-safe-area-context'
 
-const CalendarScreen = () => {
+const EventAndComunity = () => {
   const meetup = [
     {
       id: '1',
@@ -44,6 +45,12 @@ const CalendarScreen = () => {
       name: 'C',
     },
   ];
+  const images = [
+    require('../Assets/Images/s4.jpg'),
+    require('../Assets/Images/s2.jpg'),
+    require('../Assets/Images/s3.jpg'),
+    require('../Assets/Images/s2.jpg'),
+  ];
 
   return (
     <SafeAreaView>
@@ -52,7 +59,13 @@ const CalendarScreen = () => {
         width={windowWidth}
         minHeight={windowHeight}
         source={require('../Assets/Images/setting_Bg.png')}>
-        <ScrollView>
+        <ScrollView
+        style={{
+          paddingBottom :moderateScale(50,.6)
+        }}
+          contentContainerStyle={{
+            paddingBottom: moderateScale(50, 0.6),
+          }}>
           <Header
             // headerColor={'transparent'}
             showLeft={true}
@@ -61,6 +74,32 @@ const CalendarScreen = () => {
             title={'Donation'}
             // title={}
           />
+          <View
+            style={{
+              width: windowWidth,
+              height: windowHeight * 0.35,
+            }}>
+            <SliderBox
+            resizeMode={'cover'}
+              images={images}
+              autoplay
+              circleLoop
+              sliderBoxHeight={350}
+              // onCurrentImagePressed={index =>
+              //   // console.warn(`image ${index} pressed`)
+              // }
+              dotColor={Color.theme2}
+              inactiveDotColor="#90A4AE"
+            />
+
+            {/* <CustomImage
+            style={{
+              height: '100%',
+              width: '100%',
+            }}
+            source={require('../Assets/Images/banner.jpg')}
+          /> */}
+          </View>
           <CustomText numberOfLines={2} style={styles.descriptionText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec
             pellentesque nulla.pellentesque nulla.
@@ -88,7 +127,7 @@ const CalendarScreen = () => {
                 textDayFontSize: moderateScale(16, 0.3),
                 textMonthFontSize: moderateScale(16, 0.3),
                 textDayHeaderFontSize: moderateScale(16, 0.3),
-                monthTextColor :Color.white,
+                monthTextColor: Color.white,
               }}
               //   Specify the current date
               current={'2024-04-11'}
@@ -222,7 +261,7 @@ const CalendarScreen = () => {
   );
 };
 
-export default CalendarScreen;
+export default EventAndComunity;
 
 const styles = StyleSheet.create({
   eventDate: {

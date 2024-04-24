@@ -30,11 +30,12 @@ const Header = props => {
   const notification = useSelector(state => state.commonReducer.notification);
   const cartData = useSelector(state => state.commonReducer.cart);
   const navigationN = useNavigation();
-  console.log("🚀 ~ Header ~ navigation:", navigationN)
+  // console.log("🚀 ~ Header ~ navigation:", navigationN)
   const [isModalVisible, setModalVisible] = useState(false);
   const {
     title,
     showBack,
+    color,
     showList,
     headerColor,
     titleColor,
@@ -77,7 +78,10 @@ const Header = props => {
 
   return (
     <View
-      style={styles.header2}
+      style={[styles.header2,{
+    backgroundColor:headerColor ? headerColor :'transparent',
+
+      }]}
       // start={{x: 0, y: 0}}
       // end={{x: 1, y: 1}}
       // colors={headerColor ? headerColor : Color.themeBgColor}
@@ -86,7 +90,7 @@ const Header = props => {
 
       <View
         style={{
-          height: moderateScale(30, 0.3),
+          height: moderateScale(20, 0.3),
           width: moderateScale(30, 0.3),
           borderRadius: moderateScale(5, 0.3),
           justifyContent: 'center',
@@ -130,7 +134,7 @@ const Header = props => {
         <CustomText
           style={{
             fontSize: moderateScale(18, 0.6),
-            color: Color.white,
+            color: color ? Color.black : Color.white ,
           }}isBold>
           {title}
         </CustomText>

@@ -44,7 +44,32 @@ const Drawer = () => {
   const [menuIndex, setMenuIndex] = useState(-1);
   const [nestedMenuIndex, setNestedMenuIndex] = useState(-1);
   const [innerMostMenuIndex, setInnerMostMenuIndex] = useState(-1);
-  // const [menuName, setMenuName] = useState('');
+  const [selectedItem, setSelectedItem] = useState('');
+
+  const SharingWithOthersArrays = {
+    donationArray: ['Widow', 'Poor', 'Handicaps', 'Orphans', 'HealthCare'],
+    supportForLifeArray: [
+      'Pregnant Woman',
+      'Pregnanat Teenager',
+      'Up Keep of the ARK',
+      'Utilities',
+      'Seminary',
+      'Support for the priest',
+      'Support for the religious',
+      'Long Term Project with your name on the plaque on the wall',
+      'Project: One room for retreat N6M ( $6000)',
+      'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
+    ],
+    givingArray: [
+      'Weekly Giving',
+      'Monthly',
+      'Quarterly',
+      'Termly',
+      'Annually',
+      'Support for the Ministry',
+      'Second Collection',
+    ],
+  };
   const data = [
     {
       name: 'Home',
@@ -56,7 +81,9 @@ const Drawer = () => {
     },
     {
       name: 'About us',
-      onPress: () => {},
+      onPress: () => {{
+        navigation.navigate('AboutUs')
+      }},
     },
     {
       name: 'Sharing with other',
@@ -71,14 +98,81 @@ const Drawer = () => {
               id: 'd1',
               itemName: 'Widow',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Widow');
+                  navigation.navigate('Donation', {
+                    categoryName: 'Donation',
+                    value: 'Widow',
+                    valueArray: SharingWithOthersArrays?.donationArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
-            {id: 'd2', itemName: 'Poor', expandable: false, onPress: () => {}},
+            {
+              id: 'd2',
+              itemName: 'Poor',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem('Poor');
+                  navigation.navigate('Donation', {
+                    categoryName: 'Donation',
+                    value: 'Poor',
+                    valueArray: SharingWithOthersArrays?.donationArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
             {
               id: 'd3',
               itemName: 'Handicaps',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Handicaps');
+                  navigation.navigate('Donation', {
+                    categoryName: 'Donation',
+                    value: 'Handicaps',
+                    valueArray: SharingWithOthersArrays?.donationArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
+            {
+              id: 'd4',
+              itemName: 'Orphans',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem('Orphans');
+                  navigation.navigate('Donation', {
+                    categoryName: 'Donation',
+                    value: 'Orphans',
+                    valueArray: SharingWithOthersArrays?.donationArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
+            {
+              id: 'd5',
+              itemName: 'HealthCare',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem('HealthCare');
+                  navigation.navigate('Donation', {
+                    categoryName: 'Donation',
+                    value: 'HealthCare',
+                    valueArray: SharingWithOthersArrays?.donationArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
           ],
           expandable: true,
@@ -98,49 +192,177 @@ const Drawer = () => {
               id: 'sl1',
               itemName: 'Pregnant Woman',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Pregnant Woman');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Pregnant Woman',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'sl2',
               itemName: 'Pregnanat Teenager',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  {
+                    setSelectedItem('Pregnanat Teenager');
+                    navigation.navigate('Donation', {
+                      categoryName: 'supportForLife',
+                      value: 'Pregnanat Teenager',
+                      valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                      fromDrawer: true,
+                    });
+                  }
+                }
+              },
             },
             {
               id: 'sl3',
               itemName: 'Up Keep of the ARK',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Up Keep of the ARK');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Up Keep of the ARK',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'sl4',
               itemName: 'Utilities',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Utilities');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Utilities',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'sl5',
               itemName: 'Seminary',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Seminary');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Seminary',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
-            {
-              id: 'sl6',
-              itemName: 'Up Keep of the ARK',
-              expandable: false,
-              onPress: () => {},
-            },
+            // {
+            //   id: 'sl6',
+            //   itemName: 'Up Keep of the ARK',
+            //   expandable: false,
+            //   onPress: () => {},
+            // },
             {
               id: 'sl7',
               itemName: 'Support for the priest',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Support for the priest');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Support for the priest',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'sl8',
               itemName: 'Support for the religious',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  setSelectedItem('Support for the religious');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Support for the religious',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
+            {
+              id: 'sl9',
+              itemName:
+                'Long Term Project with your name on the plaque on the wall',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem(
+                    'Long Term Project with your name on the plaque on the wall',
+                  );
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value:
+                      'Long Term Project with your name on the plaque on the wall',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
+            {
+              id: 'sl10',
+              itemName: 'Project: One room for retreat N6M ( $6000)',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem('Project: One room for retreat N6M ( $6000)');
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value: 'Project: One room for retreat N6M ( $6000)',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
+            },
+            {
+              id: 'sl11',
+              itemName:
+                'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
+              expandable: false,
+              onPress: () => {
+                {
+                  setSelectedItem(
+                    'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
+                  );
+                  navigation.navigate('Donation', {
+                    categoryName: 'supportForLife',
+                    value:
+                      'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
+                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             // {id: 'ns9', itemName: 'Long Term Project with your name on the plaque on the wall', onPress: () => {}},
             // {id: 'ns10', itemName: 'Project: One room for retreat N6M ( $6000)', onPress: () => {}},
@@ -162,43 +384,106 @@ const Drawer = () => {
               id: 'ns1',
               itemName: 'Weekly Giving',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Weekly Giving',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns2',
               itemName: 'Monthly',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Monthly',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns3',
               itemName: 'Quarterly',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Quarterly',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns4',
               itemName: 'Termly',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Termly',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns5',
               itemName: 'Annually',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Annually',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns6',
               itemName: 'Support for the Ministry',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Support for the Ministry',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
             {
               id: 'ns7',
               itemName: 'Second Collection',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                {
+                  navigation.navigate('Donation', {
+                    categoryName: 'Giving',
+                    value: 'Second Collection',
+                    valueArray: SharingWithOthersArrays?.givingArray,
+                    fromDrawer: true,
+                  });
+                }
+              },
             },
           ],
           expandable: true,
@@ -229,13 +514,17 @@ const Drawer = () => {
           Id: '1',
           name: 'Events & Community',
           expandable: false,
-          onPress: () => {},
+          onPress: () => {{
+            navigation.navigate('EventAndComunity')
+          }},
         },
         {
           Id: '2',
           name: 'Out-Reach & Missions',
           expandable: false,
-          onPress: () => {},
+          onPress: () => {{
+            navigation.navigate('OutReachMissions')
+          }},
         },
         // {Id: '3', name: 'Who are we?', onPress: () => {}},
       ],
@@ -280,7 +569,7 @@ const Drawer = () => {
               id: 's2',
               itemName: 'Resources for Growth',
               innerMostMenuItems: [
-                {id: 'rg1', itemName: 'Recommended Books', onPress: () => {}},
+                {id: 'rg1', itemName: 'Recommended Books', onPress: () => {navigation.navigate('RecommandedBooks')}},
                 {id: 'rg2', itemName: 'Podcast', onPress: () => {}},
                 {id: 'rg2', itemName: 'Online Courses', onPress: () => {}},
               ],
@@ -292,7 +581,6 @@ const Drawer = () => {
                 setInnerMostMenuIndex(
                   innerMostMenuIndex === index ? -1 : index,
                 );
-                
               },
             },
           ],
@@ -309,7 +597,9 @@ const Drawer = () => {
           name: 'Gallery',
           // expandable:true,
           nestedMenuItems: [
-            {id: 'g1', itemName: 'FROR', expandable: false, onPress: () => {}},
+            {id: 'g1', itemName: 'FROR', expandable: false, onPress: () => {
+              navigation.navigate('GalleryFror')
+            }},
             {
               id: 'g2',
               itemName: 'Testimonials',
@@ -318,7 +608,7 @@ const Drawer = () => {
                 {id: 'test2', itemName: 'Audio', onPress: () => {}},
               ],
               expandable: true,
-              onPress: (index) => {
+              onPress: index => {
                 LayoutAnimation.configureNext(
                   LayoutAnimation.create(200, 'easeInEaseOut', 'opacity'),
                 );
@@ -326,7 +616,7 @@ const Drawer = () => {
                 setInnerMostMenuIndex(
                   innerMostMenuIndex === index ? -1 : index,
                 );
-                
+
                 // console.log("🚀 ~ Drawer ~ innerMostMenuIndex:", index)
               },
             },
@@ -402,14 +692,14 @@ const Drawer = () => {
     //     navigation.navigate('MemberShipForm');
     //   },
     // },
-    {
-      name: 'Calender',
-      // iconName: 'chevron-down',
-      // iconType: EvilIcons,
-      onPress: () => {
-        navigation.navigate('CalendarScreen');
-      },
-    },
+    // {
+    //   name: 'Calender',
+    //   // iconName: 'chevron-down',
+    //   // iconType: EvilIcons,
+    //   onPress: () => {
+    //     navigation.navigate('CalendarScreen');
+    //   },
+    // },
     {
       name: 'Qr Scan',
       // iconName: 'chevron-down',
@@ -446,8 +736,12 @@ const Drawer = () => {
             navigation.navigate('MemberShipForm');
           },
         },
-        {Id: '2', name: 'Prayer Request', onPress: () => {}},
-        {Id: '3', name: 'Contact US', onPress: () => {}},
+        {Id: '2', name: 'Prayer Request', onPress: () => {{
+          navigation.navigate('PrayerRequestForm')
+        }}},
+        {Id: '3', name: 'Contact US', onPress: () => {
+          navigation.navigate("Contact")
+        }},
       ],
       onPress: index => {
         LayoutAnimation.configureNext(
@@ -470,13 +764,13 @@ const Drawer = () => {
     <ScreenBoiler
       statusBarBackgroundColor={'white'}
       statusBarContentStyle={'dark-content'}>
-      <ScrollView style={{height: windowHeight}}>
+      <ScrollView style={{height: windowHeight * 0.85}}>
         <View
           style={{
             overflow: 'hidden',
             width: windowWidth * 0.71,
             backgroundColor: '#D3D3D3',
-            height: windowHeight,
+            height: windowHeight * 0.85,
             borderTopRightRadius: moderateScale(35, 0.6),
             borderBottomRightRadius: moderateScale(35, 0.6),
           }}>
@@ -516,6 +810,10 @@ const Drawer = () => {
               </CustomText>
             </View>
           </View>
+          {/* <ScrollView style={{
+            // backgroundColor :'red',
+            height:windowHeight*0.2
+          }}> */}
 
           <View
             style={{
@@ -569,117 +867,20 @@ const Drawer = () => {
                 </TouchableOpacity>
 
                 {item?.menuItems && menuIndex === index && (
-                 <DrawerDropDown item={item} 
-                  innerMostMenuIndex={innerMostMenuIndex}
-                  nestedMenuIndex={nestedMenuIndex}
-                 />
-                 // <View style={{paddingLeft: moderateScale(7, 0.4)}}>
-                  //   {item.menuItems.map((subMenu, index) => (
-                  //     <View>
-                  //       <TouchableOpacity
-                  //         key={index}
-                  //         onPress={
-                  //           subMenu?.nestedMenuItems
-                  //             ? () => subMenu?.onPress(index)
-                  //             : subMenu?.onPress
-                  //         }>
-                  //         <View style={styles.subMenu}>
-                  //           <CustomText style={{color: Color.themeBlack}}>
-                  //             {subMenu.name}
-                  //           </CustomText>
-
-                  //           {subMenu?.expandable && (
-                  //             <Icon
-                  //               as={AntDesign}
-                  //               name={
-                  //                 nestedMenuIndex == index
-                  //                   ? 'caretup'
-                  //                   : 'caretdown'
-                  //               }
-                  //               size={moderateScale(7, 0.4)}
-                  //             />
-                  //           )}
-                  //         </View>
-                  //       </TouchableOpacity>
-                  //       {subMenu.nestedMenuItems &&
-                  //         nestedMenuIndex === index && (
-                  //           <View
-                  //             style={{
-                  //               paddingLeft: moderateScale(7, 0.4),
-                  //             }}>
-                  //             {/* {subMenu?.nestedMenuItems} */}
-                  //             {subMenu.nestedMenuItems.map(
-                  //               (menuItem, nestedIndex) => (
-                  //                 <>
-                  //                   <TouchableOpacity
-                  //                     key={nestedIndex}
-                  //                     onPress={menuItem?.innerMostMenuItems ? 
-                  //                       () => {
-                  //                         menuItem?.onPress(nestedIndex)}
-                  //                         : menuItem?.onPress
-                  //                       }>
-                  //                     <View style={styles.subMenu}>
-                  //                       <CustomText
-                  //                         style={{color: Color.themeDarkGray}}>
-                  //                         {menuItem?.itemName}
-                  //                       </CustomText>
-                  //                       {menuItem?.expandable && (
-                  //                         <Icon
-                  //                           as={AntDesign}
-                  //                           name={
-                  //                             nestedIndex == index
-                  //                               ? 'caretup'
-                  //                               : 'caretdown'
-                  //                           }
-                  //                           size={moderateScale(7, 0.4)}
-                  //                         />
-                  //                       )}
-                  //                     </View>
-                  //                   </TouchableOpacity>
-                  //                   {menuItem?.innerMostMenuItems &&
-                  //                   innerMostMenuIndex === nestedIndex &&
-                  //                      (
-                  //                       <View
-                  //                         style={{
-                  //                           paddingLeft: moderateScale(7, 0.4),
-                  //                         }}>
-                  //                         {menuItem?.innerMostMenuItems.map(
-                  //                           (innerMenuItem, innerMostIndex) => (
-                                          
-                  //                             <TouchableOpacity
-                  //                               key={nestedIndex}
-                  //                               onPress={
-                  //                                 innerMenuItem?.onPress
-                  //                               }>
-                  //                               <View style={styles.subMenu}>
-                  //                                 <CustomText
-                  //                                   style={{
-                  //                                     color:
-                  //                                       Color.themeDarkGray,
-                  //                                   }}>
-                  //                                   {innerMenuItem?.itemName}
-                  //                                 </CustomText>
-                  //                               </View>
-                  //                             </TouchableOpacity>
-                  //                           ),
-                  //                         )}
-                  //                       </View>
-                  //                     )}
-                  //                 </>
-                  //               ),
-                  //             )}
-                  //           </View>
-                  //         )}
-                  //     </View>
-                  //   ))}
-                  // </View>
+                  <DrawerDropDown
+                    item={item}
+                    innerMostMenuIndex={innerMostMenuIndex}
+                    nestedMenuIndex={nestedMenuIndex}
+                  />
                 )}
-                {/* <View style={{borderwidth: 1, }}></View> */}
               </View>
             ))}
           </View>
+          {/* </ScrollView> */}
+
           {/* )} */}
         </View>
+        </ScrollView>
 
         <View
           style={{
@@ -718,7 +919,6 @@ const Drawer = () => {
             />
           </TouchableOpacity>
         </View>
-      </ScrollView>
     </ScreenBoiler>
   );
 };
