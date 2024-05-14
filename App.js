@@ -29,6 +29,8 @@ import RecordedLecture from './SRC/Screens/RecordedLecture';
 import StoreScreen from './SRC/Screens/StoreScreen';
 import KidsLectureScreen from './SRC/Screens/KidsLectureScreen';
 import LiveLecture from './SRC/Screens/LiveLecture';
+import VerifyNumber from './SRC/Screens/VerifyNumber';
+import ResetPassword from './SRC/Screens/ResetPassword';
 // import AppNavigator, {DrawerRoot} from './SRC/appNavigation';
 
 
@@ -79,6 +81,8 @@ const MainContainer = () => {
     return <SplashScreen />;
   }
   return <AppNavigator/>
+  // return <VerifyNumber/>
+  // return <ResetPassword/>
 
 };
 

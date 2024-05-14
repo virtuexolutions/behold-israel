@@ -71,7 +71,7 @@ const LoginScreen = (props) => {
     const response = await Post(url, body, apiHeader());
     setIsLoading(false);
 
-    // console.log('LoginResponse============>>>>>>>', response?.data);
+   console.log('LoginResponse============>>>>>>>', response);
     if (response?.data?.success) {
       console.log("Login Testing =============>>>>>>",response?.data?.user_info)
       dispatch(setUserData(response?.data?.user_info));
@@ -105,7 +105,7 @@ const LoginScreen = (props) => {
   }}
   source={require('../Assets/Images/bgc.png')}
   >
-<View
+{/* <View
             style={{
               marginTop: 40,
               // alignItems:'center',
@@ -144,7 +144,7 @@ const LoginScreen = (props) => {
                 }}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View
             style={{
               // paddingVertical: moderateScale(30, 0.3),
@@ -156,10 +156,10 @@ const LoginScreen = (props) => {
               iconName={'user-circle-o'}
               iconType={FontAwesome}
               LeftIcon={true}
-              titleText={'Username'}
-              placeholder={'Username'}
-              setText={setUserName}
-              value={username}
+              titleText={'Email'}
+              placeholder={'Email'}
+              setText={setEmail}
+              value={email}
               viewHeight={0.06}
               viewWidth={0.75}
               inputWidth={0.55}
@@ -195,6 +195,15 @@ const LoginScreen = (props) => {
               elevation
             />
 
+            <CustomText isBold 
+            onPress={()=>{
+              navigation.navigate('EnterEmail',
+            {
+              fromfromForgot: true
+            })
+            }}
+            style={{color: Color.white, textAlign: 'left', width: windowWidth * 0.65, marginTop: moderateScale(12,0.2)}}>Forgot Your Password?</CustomText>
+
 <View
               style={{
                 width: windowWidth * 0.75,
@@ -223,7 +232,10 @@ const LoginScreen = (props) => {
                 // isGradient
               />
               <CustomButton
-                onPress={() =>  dispatch(setUserToken({token : 'meerab'}))}
+                onPress={() =>  
+                  // dispatch(setUserToken({token : 'meerab'}))
+                  LoginUser()
+                }
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />
