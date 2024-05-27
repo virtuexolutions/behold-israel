@@ -1,4 +1,4 @@
-import {View, Text} from 'react-native';
+import {View, Text, Platform, ToastAndroid, Alert} from 'react-native';
 import React from 'react';
 import CustomImage from './CustomImage';
 import Color from '../Assets/Utilities/Color';
@@ -7,9 +7,19 @@ import {ScaledSheet, moderateScale} from 'react-native-size-matters';
 import CustomText from './CustomText';
 import {Icon} from 'native-base';
 import {Rating} from 'react-native-ratings';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  setDeleteFavouriteBook,
+  setSaveFavouriteBook,
+} from '../Store/slices/common';
 
 const NewestBookComponent = ({item, setSaveBooks, saveBooks}) => {
-  // console.log('🚀 ~ NewestBookComponent ~ item:', item);
+  const dispatch = useDispatch();
+  const FavouriteBook = useSelector(state => state.commonReducer.favouriteBook);
+  console.log(
+    '🚀 ~ NewestBookComponent ~ FavouriteBook============> here from component:',
+    FavouriteBook,
+  );
   return (
     <View style={styles.newestbooks}>
       <View style={styles.img}>
@@ -50,9 +60,6 @@ const NewestBookComponent = ({item, setSaveBooks, saveBooks}) => {
         <Rating
           type="custom"
           readonly
-          //   ratingBackgroundColor={'transparent'}
-          //   tintColor={'transparent'}
-          //   ratingColor={'#F5C443'}
           startingValue={2}
           ratingCount={5}
           imageSize={moderateScale(13, 0.3)}
@@ -74,13 +81,15 @@ const NewestBookComponent = ({item, setSaveBooks, saveBooks}) => {
         }}>
         <CustomImage
           onPress={() => {
-            // if(saveBooks?.some((item1 ,index) => item1?.id == item?.id)){
-            //     const temp = item?.filter((item2 ,index)=> item?.id != item2?.id)
-            //     setSaveBooks(temp)
-            // }else{
-            //     setSaveBooks([...item,item])
-
-            // }
+            if (FavouriteBook.find((data, index) => data?.id == item?.id)) {
+              dispatch(setDeleteFavouriteBook(item));
+              // Platform.OS == 'android'
+              //   ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+              //   : Alert.alert('item already added');
+            } else {
+              dispatch(setSaveFavouriteBook(item));
+            }
+            console.log('item succsessfully add to cart');
 
             console.log('pressed');
           }}
@@ -88,7 +97,11 @@ const NewestBookComponent = ({item, setSaveBooks, saveBooks}) => {
             height: '100%',
             width: '100%',
           }}
-          source={require('../Assets/Images/save1.png')}
+          source={
+            FavouriteBook.some((data, index) => data?.id == item?.id)
+              ? require('../Assets/Images/save2.png')
+              : require('../Assets/Images/save1.png')
+          }
         />
       </View>
     </View>

@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import moment from 'moment';
+import {FavouriteIcon} from 'native-base';
 
 const initialState = {
   userData: {},
@@ -13,7 +14,8 @@ const initialState = {
   sellerProducts: [],
   sellerService: [],
   selectedRole: '',
-  category:[]
+  category: [],
+  favouriteBook: [],
 };
 
 const CommonSlice = createSlice({
@@ -47,7 +49,7 @@ const CommonSlice = createSlice({
 
     AddToCart(state, action) {
       const itemId = action.payload.id;
-      console.log("🚀 ~ AddToCart ~ action.payload:", action.payload)
+      console.log('🚀 ~ AddToCart ~ action.payload:', action.payload);
 
       state.cart.push({date: moment(), ...action.payload});
     },
@@ -153,7 +155,6 @@ const CommonSlice = createSlice({
     },
 
     deleteProducts(state, action) {
-
       console.log(
         '🚀 ~ file: common.js:147 ~ deleteProducts ~ action:',
         action.payload,
@@ -204,6 +205,20 @@ const CommonSlice = createSlice({
         item => item.serviceOwner.id != action.payload.serviceOwner.id,
       );
     },
+    setSaveFavouriteBook(state, action) {
+      console.log(
+        '🚀 ~ setSaveFavouriteBook ~==================> action.payload:',
+        action.payload,
+      );
+      if (!state.favouriteBook) {
+        state.favouriteBook = []; // Initialize favouriteBook if it's undefined
+      }
+      state.favouriteBook.push(action.payload);
+    },
+    setDeleteFavouriteBook(state,action){
+      const itemId =action.payload?.id
+      state.favouriteBook =  state.favouriteBook.filter((item1,index) => item1?.id != itemId)
+    }
   },
 });
 
@@ -230,7 +245,8 @@ export const {
   deleteService,
   deleteProducts,
   Order,
-
+  setSaveFavouriteBook,
+  setDeleteFavouriteBook
 } = CommonSlice.actions;
 
 export default CommonSlice.reducer;

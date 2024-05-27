@@ -1,4 +1,12 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Alert,
+  Platform,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import Color from '../Assets/Utilities/Color';
 import {moderateScale} from 'react-native-size-matters';
@@ -6,14 +14,28 @@ import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomImage from './CustomImage';
 import CustomText from './CustomText';
 import navigationService from '../navigationService';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {setSaveFavouriteBook} from '../Store/slices/common';
 
 const PopularBooks = ({item}) => {
+  const navigation = useNavigation()
   console.log('🚀 ~ RecommandedBooksComponent ~ item:', item);
-  const navigation =useNavigation()
+  const dispatch = useDispatch();
+  const FavouriteBook = useSelector(state => state.commonReducer.favouriteBook);
+
   return (
     <TouchableOpacity
-    onPress={() => navigation.navigate('AboutBooks' ,{item :item})}
+      onLongPress={() => {
+        if (FavouriteBook.find((item1, index) => item1?.id == item?.d)) {
+          Platform.OS == 'android'
+            ? ToastAndroid.show('Already Added', ToastAndroid.SHORT)
+            : Alert.alert('Already Added');
+        } else {
+          dispatch(setSaveFavouriteBook(item));
+        }
+      }}
+      onPress={() => navigation.navigate('AboutBooks', {item: item})}
       style={{
         borderWidth: moderateScale(1, 0.6),
         borderColor: Color.white,

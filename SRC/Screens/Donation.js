@@ -29,21 +29,13 @@ const Donations = props => {
   const categoryName = props?.route?.params?.categoryName;
   console.log('🚀 ~ Donations ~ categoryName:', categoryName);
   const value = props?.route?.params?.value;
-  // console.log('🚀 ~ Donations ~ value:', value);
   const valueArray = props?.route?.params?.valueArray;
-  // console.log('🚀 ~ Donations ~ valueArray:', valueArray);
   const fromDrawer = props?.route?.params?.fromDrawer;
 
-  // console.log('🚀 ~ Donations ~ for =================>:', data);
-
   const [donationCount, setDonationCount] = useState(10);
-  console.log('🚀 ~ Donations ~ donationCount:', donationCount);
   const [selectedItem, setSelectedItem] = useState('');
-  // console.log('🚀 ~ Donations ~ selectedItem:', selectedItem);
   const [selectedCategory, setSelectedCategory] = useState('');
-  console.log('🚀 ~ Donations ~ selectedCategory:', selectedCategory);
-  console.log();
-  // const data = [
+
   //   {
   //     id: 1,
   //     image: require('../Assets/Images/donationn.jpg'),

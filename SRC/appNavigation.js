@@ -105,8 +105,8 @@ const AppNavigator = () => {
         <RootNav.Navigator
           initialRouteName={firstScreen}
           screenOptions={{headerShown: false}}>
-          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
+          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
           <RootNav.Screen
             name="WalkThroughScreen"
             component={WalkThroughScreen}
@@ -147,17 +147,8 @@ const AppNavigator = () => {
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
-          {/* <RootNav.Screen
-            name="RecommandedBooks"
-            component={RecommandedBooks}
-          /> */}   
+
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
-          {/* <RootNav.Screen
-            name="OutReachMissions"
-            component={OutReachMissions}
-          /> */}
-          {/* <RootNav.Screen name="AboutBooks" component={AboutBooks} /> */}
-          {/* <RootNav.Screen name="GalleryFror" component={GalleryFror} /> */}
 
           <RootNav.Screen
             name="PlaceOrderScreen"
@@ -275,7 +266,7 @@ export const TabNavigation = () => {
 };
 export const MyDrawer = () => {
   const DrawerNavigation = createDrawerNavigator();
-  console.log('🚀 ~ MyDrawer ~ DrawerNavigation:', DrawerNavigation);
+  // console.log('🚀 ~ MyDrawer ~ DrawerNavigation:', DrawerNavigation);
   const firstScreen = 'HomeScreen';
   return (
     <DrawerNavigation.Navigator
@@ -309,14 +300,19 @@ export const MyDrawer = () => {
         component={OutReachMissions}
       />
       <DrawerNavigation.Screen name="AboutUs" component={AboutUs} />
+      {/* <DrawerNavigation.Screen name="Donation" component={Donation} /> */}
+
       <DrawerNavigation.Screen name="GalleryFror" component={GalleryFror} />
 
       <DrawerNavigation.Screen name="GoodThings" component={GoodThings} />
+      {/* <DrawerNavigation.Screen name="StoreScreen" component={StoreScreen} /> */}
+
       <DrawerNavigation.Screen name="QrScanScreen" component={QrScanScreen} />
       <DrawerNavigation.Screen
         name="RecommandedBooks"
         component={RecommandedBooks}
       />
+      
       <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
       <DrawerNavigation.Screen name="Contact" component={Team} />
     </DrawerNavigation.Navigator>

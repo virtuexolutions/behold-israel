@@ -59,56 +59,13 @@ const PrayerRequestForm = () => {
         paddingBottom: moderateScale(40, 0.6),
       }}
       source={require('../Assets/Images/setting_Bg.png')}>
-      {/* <View
-        style={{
-          height: moderateScale(30, 0.3),
-          width: moderateScale(30, 0.3),
-          borderRadius: moderateScale(5, 0.3),
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          zIndex: 1,
-          top: 35,
-          left: 20,
-        }}>
-        <Icon
-          style={{
-            textAlign: 'center',
-            height: windowHeight * 0.05,
-            width: windowHeight * 0.05,
-            borderRadius: (windowHeight * 0.05) / 2,
-            backgroundColor: Color.white,
-            paddingTop: moderateScale(6.6),
-
-            // marginTop :moderateScale
-          }}
-          name={'menu'}
-          as={Feather}
-          size={moderateScale(25, 0.3)}
-          color={Color.black}
-          onPress={() => {
-            navigation.toggleDrawer();
-            // navigationN.dispatch(DrawerActions.toggleDrawer())
-          }}
-        />
-      </View> */}
         <Header
           showLeft={true}
           leftName={'menu'}
           leftType={Feather}
           title={'Prayers'}
         />
-      {/* <CustomText
-        isBold
-        style={{
-          color: 'white',
-          width: windowWidth,
-          textAlign: 'center',
-          fontSize: moderateScale(25, 0.6),
-          paddingVertical: moderateScale(10, 0.6),
-        }}>
-        Prayers
-      </CustomText> */}
+      
       <LinearGradient
         start={{x: 0, y: 1}}
         end={{x: 1, y: 0}}
@@ -117,6 +74,7 @@ const PrayerRequestForm = () => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{
+            // zIndex :2,
             paddingTop: moderateScale(10, 0.6),
           }}
           contentContainerStyle={{
@@ -389,111 +347,7 @@ const PrayerRequestForm = () => {
           </View>
         </ScrollView>
       </LinearGradient>
-      {/* <View
-          style={{
-            marginVertical: moderateScale(15, 0.6),
-            height: windowHeight * 0.4,
-            alignItems: 'center',
-            marginHorizontal: moderateScale(10, 0.6),
-            backgroundColor: Color.veryLightGray,
-            width: windowWidth * 0.95,
-            borderRadius: moderateScale(15, 0.6),
-            // justifyContent:"space-around",
-          }}>
-          <CustomText
-            isBold
-            style={{
-              color: Color.white,
-              width: windowWidth,
-              textAlign: 'center',
-              fontSize: moderateScale(25, 0.6),
-              paddingVertical: moderateScale(10, 0.6),
-            }}>
-            address
-          </CustomText>
-
-          <TextInputWithTitle
-            titleText={'address'}
-            placeholder={'address'}
-            setText={setAddress}
-            value={address}
-            viewHeight={0.06}
-            viewWidth={0.8}
-            inputWidth={0.7}
-            border={1}
-            borderColor={'#0F02022E'}
-            backgroundColor={'white'}
-            marginBottom={moderateScale(20, 0.3)}
-            color={'#ABB1C0'}
-            placeholderColor={'#ABB1C0'}
-            borderRadius={moderateScale(20, 0.6)}
-          />
-
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '90%',
-            }}>
-            <DropDownSingleSelect
-              array={['male', 'female', 'other']}
-              item={country}
-              dropdownStyle={{
-                borderBottomWidth: 0,
-              }}
-              setItem={setCountry}
-              placeholder={'country'}
-              width={windowWidth * 0.4}
-            />
-
-            <DropDownSingleSelect
-              array={['male', 'female', 'other']}
-              item={state}
-              setItem={setState}
-              placeholder={'state'}
-              width={windowWidth * 0.4}
-              dropdownStyle={{
-                borderBottomWidth: 0,
-                position: 'absolute',
-                right: -35,
-                marginRight: moderateScale(-120, 0.3),
-                // color: Color.black,
-                // height: windowHeight * 0.02,
-              }}
-            />
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              width: '90%',
-            }}>
-            <DropDownSingleSelect
-              array={['male', 'female', 'other']}
-              item={city}
-              setItem={setCity}
-              dropdownStyle={{
-                // position: 'absolute',
-                borderBottomWidth: 0,
-              }}
-              placeholder={'city'}
-              width={windowWidth * 0.4}
-            />
-
-            <DropDownSingleSelect
-              array={['male', 'female', 'other']}
-              item={zip}
-              setItem={setZip}
-              placeholder={'zip'}
-              width={windowWidth * 0.4}
-              dropdownStyle={{
-                borderBottomWidth: 0,
-                position: 'absolute',
-                right: -35,
-                marginRight: moderateScale(-120, 0.3),
-              }}
-            />
-          </View>
-        </View>
-       */}
+   
     </ImageBackground>
   );
 };
@@ -524,11 +378,9 @@ const styles = ScaledSheet.create({
     // justifyContent:"space-around",
   },
   container: {
-    // marginVertical: moderateScale(15, 0.3),
     height: windowHeight * 0.8,
     marginHorizontal: moderateScale(10, 0.3),
     width: windowWidth * 0.93,
     borderRadius: moderateScale(25, 0.6),
-    // paddingHorizontal :moderateScale(10,.6)
-  },
+   },
 });

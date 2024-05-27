@@ -89,7 +89,7 @@ const MemberShipForm = () => {
               style={{
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                width: '90%',
+                width: '93%',
               }}>
               <TextInputWithTitle
                 titleText={'first name'}
@@ -97,7 +97,7 @@ const MemberShipForm = () => {
                 setText={setName}
                 value={name}
                 viewHeight={0.06}
-                viewWidth={0.4}
+                viewWidth={0.42}
                 inputWidth={0.35}
                 border={1}
                 borderColor={'#0F02022E'}
@@ -113,7 +113,7 @@ const MemberShipForm = () => {
                 setText={setLastName}
                 value={lastName}
                 viewHeight={0.06}
-                viewWidth={0.42}
+                viewWidth={0.4}
                 inputWidth={0.35}
                 border={1}
                 borderColor={'#0F02022E'}
@@ -497,6 +497,18 @@ const MemberShipForm = () => {
                 </View>
               </>
             )}
+            <CustomButton
+              isBold
+              height={windowHeight * 0.06}
+              width={windowWidth * 0.8}
+              text={'submit'}
+              onPress={() => {}}
+              marginBottom={moderateScale(20,.3)}
+              marginTop={moderateScale(10, 0.3)}
+              bgColor={'#FFC928'}
+              borderRadius={moderateScale(25, 0.6)}
+              textColor={'black'}
+            />
           </ScrollView>
         </View>
       </LinearGradient>
@@ -506,23 +518,12 @@ const MemberShipForm = () => {
 
 export default MemberShipForm;
 const styles = ScaledSheet.create({
-  back: {
-    width: moderateScale(35, 0.6),
-    height: moderateScale(35, 0.6),
-    borderRadius: moderateScale(5, 0.6),
-    borderWidth: 0.5,
-    borderColor: '#FFFFFF',
-    position: 'absolute',
-    left: moderateScale(10, 0.6),
-    top: moderateScale(10, 0.6),
-    zIndex: 1,
-    margin: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   mainContainer: {
+    zIndex: 2,
+    // backgroundColor :'red',
     marginHorizontal: moderateScale(10, 0.6),
-    width: windowWidth * 0.93,
+    width: windowWidth * 0.9,
+    // alignItems:'center',
     borderRadius: moderateScale(15, 0.6),
   },
   container: {

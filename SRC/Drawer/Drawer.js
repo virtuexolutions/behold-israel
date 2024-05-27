@@ -81,9 +81,11 @@ const Drawer = () => {
     },
     {
       name: 'About us',
-      onPress: () => {{
-        navigation.navigate('AboutUs')
-      }},
+      onPress: () => {
+        {
+          navigation.navigate('AboutUs');
+        }
+      },
     },
     {
       name: 'Sharing with other',
@@ -514,17 +516,21 @@ const Drawer = () => {
           Id: '1',
           name: 'Events & Community',
           expandable: false,
-          onPress: () => {{
-            navigation.navigate('EventAndComunity')
-          }},
+          onPress: () => {
+            {
+              navigation.navigate('EventAndComunity');
+            }
+          },
         },
         {
           Id: '2',
           name: 'Out-Reach & Missions',
           expandable: false,
-          onPress: () => {{
-            navigation.navigate('OutReachMissions')
-          }},
+          onPress: () => {
+            {
+              navigation.navigate('OutReachMissions');
+            }
+          },
         },
         // {Id: '3', name: 'Who are we?', onPress: () => {}},
       ],
@@ -569,7 +575,13 @@ const Drawer = () => {
               id: 's2',
               itemName: 'Resources for Growth',
               innerMostMenuItems: [
-                {id: 'rg1', itemName: 'Recommended Books', onPress: () => {navigation.navigate('RecommandedBooks')}},
+                {
+                  id: 'rg1',
+                  itemName: 'Recommended Books',
+                  onPress: () => {
+                    navigation.navigate('RecommandedBooks');
+                  },
+                },
                 {id: 'rg2', itemName: 'Podcast', onPress: () => {}},
                 {id: 'rg2', itemName: 'Online Courses', onPress: () => {}},
               ],
@@ -597,9 +609,14 @@ const Drawer = () => {
           name: 'Gallery',
           // expandable:true,
           nestedMenuItems: [
-            {id: 'g1', itemName: 'FROR', expandable: false, onPress: () => {
-              navigation.navigate('GalleryFror')
-            }},
+            {
+              id: 'g1',
+              itemName: 'FROR',
+              expandable: false,
+              onPress: () => {
+                navigation.navigate('GalleryFror');
+              },
+            },
             {
               id: 'g2',
               itemName: 'Testimonials',
@@ -684,34 +701,15 @@ const Drawer = () => {
       iconType: EvilIcons,
       onPress: () => {},
     },
-    // {
-    //   name: 'MemberShip',
-    //   // iconName: 'chevron-down',
-    //   // iconType: EvilIcons,
-    //   onPress: () => {
-    //     navigation.navigate('MemberShipForm');
-    //   },
-    // },
-    // {
-    //   name: 'Calender',
-    //   // iconName: 'chevron-down',
-    //   // iconType: EvilIcons,
-    //   onPress: () => {
-    //     navigation.navigate('CalendarScreen');
-    //   },
-    // },
+
     {
       name: 'Qr Scan',
-      // iconName: 'chevron-down',
-      // iconType: EvilIcons,
       onPress: () => {
         navigation.navigate('QrScanScreen');
       },
     },
     {
       name: 'GoodThings',
-      // iconName: 'chevron-down',
-      // iconType: EvilIcons,
       onPress: () => {
         navigation.navigate('GoodThings');
       },
@@ -736,12 +734,22 @@ const Drawer = () => {
             navigation.navigate('MemberShipForm');
           },
         },
-        {Id: '2', name: 'Prayer Request', onPress: () => {{
-          navigation.navigate('PrayerRequestForm')
-        }}},
-        {Id: '3', name: 'Contact US', onPress: () => {
-          navigation.navigate("Contact")
-        }},
+        {
+          Id: '2',
+          name: 'Prayer Request',
+          onPress: () => {
+            {
+              navigation.navigate('PrayerRequestForm');
+            }
+          },
+        },
+        {
+          Id: '3',
+          name: 'Contact US',
+          onPress: () => {
+            navigation.navigate('Contact');
+          },
+        },
       ],
       onPress: index => {
         LayoutAnimation.configureNext(
@@ -880,45 +888,45 @@ const Drawer = () => {
 
           {/* )} */}
         </View>
-        </ScrollView>
+      </ScrollView>
 
-        <View
+      <View
+        style={{
+          // marginLeft: moderateScale(5, 0.3),
+          marginTop: moderateScale(40, 0.3),
+          position: 'absolute',
+          bottom: menuIndex > -1 ? -10 : 50,
+          left: -15,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(setUserLogoutAuth());
+            dispatch(setUserLogOut());
+          }}
           style={{
-            // marginLeft: moderateScale(5, 0.3),
-            marginTop: moderateScale(40, 0.3),
-            position: 'absolute',
-            bottom: menuIndex > -1 ? -10 : 50,
-            left: -15,
+            width: windowWidth * 0.45,
+            margin: moderateScale(15, 0.3),
+            flexDirection: 'row',
+            alignItems: 'center',
           }}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(setUserLogoutAuth());
-              dispatch(setUserLogOut());
-            }}
+          <CustomText
             style={{
-              width: windowWidth * 0.45,
-              margin: moderateScale(15, 0.3),
-              flexDirection: 'row',
-              alignItems: 'center',
+              paddingHorizontal: moderateScale(10, 0.3),
+              fontSize: moderateScale(14, 0.6),
+              color: Color.black,
+              marginLeft: moderateScale(10, 0.3),
             }}>
-            <CustomText
-              style={{
-                paddingHorizontal: moderateScale(10, 0.3),
-                fontSize: moderateScale(14, 0.6),
-                color: Color.black,
-                marginLeft: moderateScale(10, 0.3),
-              }}>
-              sign out
-            </CustomText>
-            <Icon
-              name={'logout'}
-              as={AntDesign}
-              // style={styles.icon2}
-              color={Color.black}
-              size={moderateScale(16, 0.3)}
-            />
-          </TouchableOpacity>
-        </View>
+            sign out
+          </CustomText>
+          <Icon
+            name={'logout'}
+            as={AntDesign}
+            // style={styles.icon2}
+            color={Color.black}
+            size={moderateScale(16, 0.3)}
+          />
+        </TouchableOpacity>
+      </View>
     </ScreenBoiler>
   );
 };

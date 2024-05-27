@@ -34,6 +34,7 @@ const LoginScreen = (props) => {
   const [username, setUserName] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
+  console.log("🚀 ~ LoginScreen ~ email==========>:", email)
   const [password, setPassword] = useState('');
   const [imagePicker, setImagePicker] = useState(false);
   const [image, setImage] = useState({});
@@ -68,18 +69,20 @@ const LoginScreen = (props) => {
     const url = 'login';
     const body = {email: email.trim(), password: password};
     setIsLoading(true);
+    // return console.log("🚀 ~ LoginUser ~ body:", body)
     const response = await Post(url, body, apiHeader());
+    console.log("🚀 ~ LoginUserresponse:===================>", response?.data)
     setIsLoading(false);
 
-    // console.log('LoginResponse============>>>>>>>', response?.data);
-    if (response?.data?.success) {
-      console.log("Login Testing =============>>>>>>",response?.data?.user_info)
-      dispatch(setUserData(response?.data?.user_info));
-      dispatch(SetUserRole(response?.data?.user_info?.role))
-      dispatch(setUserToken({token: response?.data?.token}));
+    // return console.log('LoginResponse============>>>>>>>', response?.data);
+    // if (response?.data?.success) {
+    //   console.log("Login Testing =============>>>>>>",response?.data?.user_info)
+    //   dispatch(setUserData(response?.data?.user_info));
+    //   dispatch(SetUserRole(response?.data?.user_info?.role))
+    //   dispatch(setUserToken({token: response?.data?.token}));
       
 
-    }
+    // }
     // dispatch(setUserData(response?.data?.user_info));
       // dispatch(setUserToken({token: 'dfhksdjlsk'}));
       // dispatch(SetUserRole('customer'))
@@ -105,7 +108,7 @@ const LoginScreen = (props) => {
   }}
   source={require('../Assets/Images/bgc.png')}
   >
-<View
+{/* <View
             style={{
               marginTop: 40,
               // alignItems:'center',
@@ -144,13 +147,13 @@ const LoginScreen = (props) => {
                 }}
               />
             </TouchableOpacity>
-          </View>
+          </View> */}
           <View
             style={{
               // paddingVertical: moderateScale(30, 0.3),
               alignItems: 'center',
-              // justifyContent: 'center',
-              marginTop: moderateScale(20, 0.3),
+              justifyContent: 'center',
+              // marginTop: moderateScale(50, 0.3),
             }}>
             <TextInputWithTitle
               iconName={'user-circle-o'}
@@ -158,8 +161,8 @@ const LoginScreen = (props) => {
               LeftIcon={true}
               titleText={'Username'}
               placeholder={'Username'}
-              setText={setUserName}
-              value={username}
+              setText={setEmail}
+              value={email}
               viewHeight={0.06}
               viewWidth={0.75}
               inputWidth={0.55}
@@ -222,8 +225,11 @@ const LoginScreen = (props) => {
                 isBold
                 // isGradient
               />
-              <CustomButton
-                onPress={() =>  dispatch(setUserToken({token : 'meerab'}))}
+              <CustomButton 
+                onPress={() =>{
+                  LoginUser()
+                    // dispatch(setUserToken({token : 'meerab'}))
+                  }}
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />

@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AddToCart } from '../Store/slices/common'
 import { useNavigation } from '@react-navigation/native'
 
-const KidsCards = ({item}) => {
+const ProductCard = ({item}) => {
     const navigation =useNavigation()
 const dispatch =useDispatch()
 //   console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
@@ -101,6 +101,6 @@ const cardData = useSelector(state => state.commonReducer.cart);
   )
 }
 
-export default KidsCards
+export default ProductCard
 
 const styles = StyleSheet.create({})

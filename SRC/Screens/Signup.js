@@ -37,10 +37,10 @@ import {Platform} from 'react-native';
 import {validateEmail} from '../Config';
 import {Icon} from 'native-base';
 import ImagePickerModal from '../Components/ImagePickerModal';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Signup = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(false);
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -80,16 +80,29 @@ const Signup = () => {
   };
 
   // const registerUser = async () => {
+
+  // const formData = new FormData();
   //   const body = {
   //     name: username,
   //     email: email,
   //     phone: phone,
-  //     // countryCode: country,
+  //    country_Code: country,
   //     address: 'askdhaksd',
   //     password: password,
   //     c_password: confirmPass,
-  //     role: userRole == 'seller' ? 'vendor' : 'customer',
+  // //role: userRole == 'seller' ? 'vendor' : 'customer',
   //   };
+  // for(let key in body){
+  //   if(body[key] == ''){
+  //     Platform.OS == 'android' ?
+  //     ToastAndroid.show(' all fields are required', ToastAndroid.SHORT) :
+  //     Alert.alert(' all fields are required')
+  //   }
+  // }
+  // for (let key in body) {
+  //   formData.append(key, body[key]);
+  // }
+  // if (Object.keys(image) > 0) formData.append(image, 'photo');
   //   if (!validateEmail(email)) {
   //     return Platform.OS == 'android'
   //       ? ToastAndroid.show('Email is invalid', ToastAndroid.SHORT)
@@ -145,22 +158,15 @@ const Signup = () => {
           source={require('../Assets/Images/bgc.png')}>
           <View
             style={{
-              // marginTop: 40,
-              // alignItems:'center',
-              // backgroundColor: 'red',
               height: windowHeight * 0.13,
               width: windowHeight * 0.13,
               borderRadius: moderateScale((windowHeight * 0.13) / 2),
-              // overflow : 'hidden'
             }}>
             <CustomImage
-              resizeMode="contain"
-              source={require('../Assets/Images/dummyUser1.png')}
+              source={image}
               style={{
                 width: '100%',
                 height: '100%',
-                backgroundColor: 'blue',
-
                 borderRadius: moderateScale((windowHeight * 0.13) / 2),
               }}
             />
@@ -185,9 +191,7 @@ const Signup = () => {
           </View>
           <View
             style={{
-              // paddingVertical: moderateScale(30, 0.3),
               alignItems: 'center',
-              // justifyContent: 'center',
               marginTop: moderateScale(20, 0.3),
             }}>
             <TextInputWithTitle
@@ -230,7 +234,7 @@ const Signup = () => {
               color={Color.black}
               placeholderColor={Color.veryLightGray}
               elevation
-              keyboardType={"email-address"}
+              keyboardType={'email-address'}
             />
             <TouchableOpacity
               onPress={() => {
@@ -282,26 +286,6 @@ const Signup = () => {
               />
             </TouchableOpacity>
 
-            {/* <TextInputWithTitle
-                iconName={'cellphone-sound'}
-                iconType={MaterialCommunityIcons}
-                LeftIcon={true}
-                titleText={'Contact'}
-                placeholder={'Contact'}
-                setText={setPhone}
-                value={phone}
-                viewHeight={0.07}
-              viewWidth={0.75}
-              inputWidth={0.55}
-                border={1}
-                borderColor={Color.black}
-                backgroundColor={Color.white}
-                marginTop={moderateScale(10, 0.3)}
-                color={Color.black}
-                placeholderColor={Color.veryLightGray}
-                elevation
-              /> */}
-
             <TextInputWithTitle
               iconName={'phone'}
               iconType={AntDesign}
@@ -343,7 +327,7 @@ const Signup = () => {
               color={Color.black}
               placeholderColor={Color.veryLightGray}
               elevation
-              keyboardType={"default"}
+              keyboardType={'default'}
             />
 
             <TextInputWithTitle
@@ -416,9 +400,9 @@ const Signup = () => {
             <CustomText style={styles.txt5}>
               Already Have an account ?{' '}
               <CustomText
-              onPress={()=>{
-                navigation.goBack()
-              }}
+                onPress={() => {
+                  navigation.goBack();
+                }}
                 isBold
                 style={{
                   color: Color.theme2,

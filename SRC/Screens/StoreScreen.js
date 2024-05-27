@@ -5,15 +5,11 @@ import {moderateScale} from 'react-native-size-matters';
 import CustomText from '../Components/CustomText';
 import SearchbarComponent from '../Components/SearchbarComponent';
 import CustomButton from '../Components/CustomButton';
-import CustomImage from '../Components/CustomImage';
 import Color from '../Assets/Utilities/Color';
-import KidsCards from '../Components/KidsCards';
-import {Icon} from 'native-base';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../Components/Header';
-import Feather from 'react-native-vector-icons/Feather'
+import ProductCard from '../Components/ProductCard';
 
 const StoreScreen = () => {
   const navigation = useNavigation();
@@ -91,12 +87,13 @@ const StoreScreen = () => {
         paddingBottom: moderateScale(40, 0.6),
       }}
       source={require('../Assets/Images/recorded.png')}>
-        {/* <Icon onPress={() => navigation.navigate('MyDrawer')} name={'menu'} as={Feather} color={Color.white} size={ moderateScale(18,.6)} /> */}
-      <Header title={'store'} cart={true} 
-      onPress={() =>{
-        navigation.toggleDrawer();
-      }}
-      
+      {/* <Icon onPress={() => navigation.navigate('MyDrawer')} name={'menu'} as={Feather} color={Color.white} size={ moderateScale(18,.6)} /> */}
+      <Header
+        title={'store'}
+        cart={true}
+        onPress={() => {
+          navigation.toggleDrawer();
+        }}
       />
       {/* <View
         style={[
@@ -208,7 +205,7 @@ const StoreScreen = () => {
         }}
         data={cardsArray}
         renderItem={({item, index}) => {
-          return <KidsCards item={item} />;
+          return <ProductCard item={item} />;
         }}
       />
     </ImageBackground>
