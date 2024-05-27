@@ -7,9 +7,10 @@ import {
   ToastAndroid,
   TouchableOpacity,
   View,
+  Alert,
 } from 'react-native';
 import {ScaledSheet, moderateScale} from 'react-native-size-matters';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -25,24 +26,47 @@ import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
 import CustomButton from '../Components/CustomButton';
 import {ActivityIndicator} from 'react-native';
 import {Post} from '../Axios/AxiosInterceptorFunction';
-import CardContainer from '../Components/CardContainer';
+import CardContainer from '../Components/CardsComponent';
 // import CustomHeader from '../Components/CustomHeader';
-import { Icon } from 'native-base';
-import { useNavigation } from '@react-navigation/native';
-import { setUserToken } from '../Store/slices/auth';
+import {Icon} from 'native-base';
+import {useNavigation} from '@react-navigation/native';
+import {setUserToken} from '../Store/slices/auth';
 import LinearGradient from 'react-native-linear-gradient';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 
 const ResetPassword = props => {
-
   const dispatch = useDispatch();
-  const navigationN = useNavigation();
-  const phoneNumber = props?.route?.params?.phone;
-const [password, setPassword] = useState('')
-const [ConfirmPass, setConfirmPass] = useState('')
+  const navigation = useNavigation();
+  const email = props?.route?.params?.email;
+  const [password, setPassword] = useState('');
+  const [ConfirmPass, setConfirmPass] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const resetPassword = async () => {
+    const url = 'password/reset';
+    const body = {
+      email: email,
+      password: password,
+      confirm_password: ConfirmPass,
+    };
+    if (['', null, undefined].includes(email)) {
+      return Platform.OS == 'android'
+        ? ToastAndroid.show('Email is required', ToastAndroid.SHORT)
+        : Alert.alert('email is required');
+    }
+    setIsLoading(true);
+    const response = await Post(url, body, apiHeader());
+    setIsLoading(false);
+    if(response != undefined){
+      console.log("REsponse from Reset Password " , response?.data);
+      Platform.OS == 'android' 
+      ? ToastAndroid.show("Password reset Successfully", ToastAndroid.SHORT) 
+      : Alert.alert('Password reset Successfully');
+      navigation.navigate('LoginScreen');
+    }
+  };
 
   // const sendOTP = async () => {
   //   const url = 'password/email';
@@ -73,46 +97,51 @@ const [ConfirmPass, setConfirmPass] = useState('')
   return (
     <>
       <CustomStatusBar
-       backgroundColor={
-        Color.white
-      }
+        backgroundColor={Color.white}
         barStyle={'dark-content'}
       />
-         <LinearGradient
+      <ImageBackground
         style={{
           width: windowWidth,
           height: windowHeight,
         }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y:1}}
-         colors={[Color.themeColor2,Color.themeColor2]}
+        source={require('../Assets/Images/bgc.png')}
         // locations ={[0, 0.5, 0.6]}
-        >
-            <TouchableOpacity
-            activeOpacity={0.8}
+      >
+        <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
           style={{
-            position : 'absolute',
-            top : moderateScale(20,0.3),
-            left : moderateScale(20,0.3),
-            height: moderateScale(30, 0.3),
-            width: moderateScale(30, 0.3),
-            borderRadius: moderateScale(5, 0.3),
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor:'white',
-            zIndex : 1
-          }}>
-         
-            <Icon
-              name={'arrowleft'}
-              as={AntDesign}
-              size={moderateScale(22, 0.3)}
-              color={Color.yellow}
-              onPress={()=>{
-                navigationN.goBack()
-              }}
-            />
-            </TouchableOpacity>
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={'arrow-back'}
+            as={Ionicons}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
+            onPress={() => {
+              navigation.goBack();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View>
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -122,7 +151,7 @@ const [ConfirmPass, setConfirmPass] = useState('')
             width: '100%',
             height: windowHeight,
           }}>
-          <CardContainer
+          <View
             style={{
               paddingVertical: moderateScale(30, 0.3),
               alignItems: 'center',
@@ -130,11 +159,11 @@ const [ConfirmPass, setConfirmPass] = useState('')
             <CustomText isBold style={styles.txt2}>
               Forget Password
             </CustomText>
-            <CustomText style={styles.txt3}>
+            {/* <CustomText style={styles.txt3} numberOfLines={2}>
               Forgot your password ? don't worry, jsut take a simple step and
               create your new password!
-            </CustomText>
-
+            </CustomText> */}
+{/* 
             <TextInputWithTitle
               titleText={'Enter New Password'}
               secureText={false}
@@ -152,10 +181,29 @@ const [ConfirmPass, setConfirmPass] = useState('')
               placeholderColor={Color.themeLightGray}
               // borderRadius={moderateScale(25, 0.3)}
               elevation
+            /> */}
+
+            <TextInputWithTitle
+              titleText={'Enter New Password'}
+              secureText={true}
+              placeholder={'Enter New Password'}
+              setText={setPassword}
+              value={password}
+              viewHeight={0.07}
+              viewWidth={0.75}
+              inputWidth={0.7}
+              // border={1}
+              borderColor={'#ffffff'}
+              backgroundColor={'#FFFFFF'}
+              marginTop={moderateScale(35, 0.3)}
+              color={Color.yellow}
+              placeholderColor={Color.themeLightGray}
+              borderRadius={moderateScale(25, 0.3)}
+              elevation
             />
             <TextInputWithTitle
               titleText={'Confirm your new password'}
-              secureText={false}
+              secureText={true}
               placeholder={'Confirm your new password'}
               setText={setConfirmPass}
               value={ConfirmPass}
@@ -163,9 +211,11 @@ const [ConfirmPass, setConfirmPass] = useState('')
               viewWidth={0.75}
               inputWidth={0.7}
               // border={1}
+              borderRadius={moderateScale(23, 0.3)}
+
               borderColor={'#ffffff'}
               backgroundColor={'#FFFFFF'}
-              marginTop={moderateScale(10, 0.3)}
+              marginTop={moderateScale(15, 0.3)}
               color={Color.yellow}
               placeholderColor={Color.themeLightGray}
               // borderRadius={moderateScale(25, 0.3)}
@@ -180,32 +230,29 @@ const [ConfirmPass, setConfirmPass] = useState('')
                 )
               }
               textColor={Color.white}
-              width={windowWidth * 0.4}
-              height={windowHeight * 0.06}
+              borderRadius={moderateScale(30, 0.3)}
+              width={windowWidth * 0.3}
+              height={windowHeight * 0.05}
               marginTop={moderateScale(20, 0.3)}
               onPress={() => {
-              // dispatch(setUserToken({token : 'sadasdawdadas'}))
+                resetPassword()
+                // dispatch(setUserToken({token : 'sadasdawdadas'}))
               }}
-              bgColor={Color.yellow
-            }
+              bgColor={Color.red}
               // borderColor={Color.white}
               // borderWidth={2}
               // borderRadius={moderateScale(30, 0.3)}
             />
-
-           
-             
-            
-          </CardContainer>
+          </View>
         </KeyboardAwareScrollView>
-      </LinearGradient>
+      </ImageBackground>
     </>
   );
 };
 
 const styles = ScaledSheet.create({
   txt2: {
-    color: Color.black,
+    color: Color.themeLightGray,
     fontSize: moderateScale(25, 0.6),
   },
   txt3: {

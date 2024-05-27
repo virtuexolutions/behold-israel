@@ -55,6 +55,7 @@ const Signup = () => {
   const [imagePicker, setImagePicker] = useState(false);
   console.log('🚀 ~ file: Signup.js:50 ~ Signup ~ imagePicker:', imagePicker);
   const [image, setImage] = useState({});
+  console.log("🚀 ~ Signup ~ image:", image)
 
   const [country, setCountry] = useState({
     callingCode: ['1'],
@@ -79,60 +80,63 @@ const Signup = () => {
     setCountry(country);
   };
 
-  // const registerUser = async () => {
+  const registerUser = async () => {
+    const body = {
+      name: username,
+      email: email,
+      phone: phone,
+      country_code: countryCode,
+      password: password,
+      confirm_password: confirmPass,
+    };
+    const formData = new FormData();
+   
+    
+    for (let key in body) {
+      if (body[key] == '') {
+        return Platform.OS == 'android'
+          ? ToastAndroid.show(`${key} cannot be empty`, ToastAndroid.SHORT)
+          : Alert.alert(`${key} cannot be empty`);
+      }
+      formData.append(key, body[key]);
+    }
+    if (Object.keys(image).length > 0) {
+      formData.append('photo', image);
+    } else {
+      return Platform.OS == 'android'
+        ? ToastAndroid.show(`Uplaod profile photo`, ToastAndroid.SHORT)
+        : Alert.alert(`Uplaod profile photo`);
+    }
+    if (!validateEmail(email)) {
+      return Platform.OS == 'android'
+        ? ToastAndroid.show('Email is invalid', ToastAndroid.SHORT)
+        : Alert.alert('Email is invalid');
+    } else if (phone.length != 10) {
+      return Platform.OS == 'android'
+        ? ToastAndroid.show(
+            'Please Enter a valid phone number',
+            ToastAndroid.SHORT,
+          )
+        : Alert.alert('Please Enter a valid phone number');
+    } else if (password != confirmPass) {
+      return Platform.OS == 'android'
+        ? ToastAndroid.show('passwords donot match', ToastAndroid.SHORT)
+        : alert('passwords donot match');
+    }
+    
+   const url = 'register';
+   console.log("🚀 ~ registerUser ~ body:", JSON.stringify(formData , null ,2));
+   setIsLoading(true);
+    const response = await Post(url, formData, apiHeader());
+    setIsLoading(false);
 
-  // const formData = new FormData();
-  //   const body = {
-  //     name: username,
-  //     email: email,
-  //     phone: phone,
-  //    country_Code: country,
-  //     address: 'askdhaksd',
-  //     password: password,
-  //     c_password: confirmPass,
-  // //role: userRole == 'seller' ? 'vendor' : 'customer',
-  //   };
-  // for(let key in body){
-  //   if(body[key] == ''){
-  //     Platform.OS == 'android' ?
-  //     ToastAndroid.show(' all fields are required', ToastAndroid.SHORT) :
-  //     Alert.alert(' all fields are required')
-  //   }
-  // }
-  // for (let key in body) {
-  //   formData.append(key, body[key]);
-  // }
-  // if (Object.keys(image) > 0) formData.append(image, 'photo');
-  //   if (!validateEmail(email)) {
-  //     return Platform.OS == 'android'
-  //       ? ToastAndroid.show('Email is invalid', ToastAndroid.SHORT)
-  //       : Alert.alert('Email is invalid');
-  //   } else if (phone.length != 10) {
-  //     return Platform.OS == 'android'
-  //       ? ToastAndroid.show(
-  //           'Please Enter a valid phone number',
-  //           ToastAndroid.SHORT,
-  //         )
-  //       : Alert.alert('Please Enter a valid phone number');
-  //   } else if (password != confirmPass) {
-  //     return Platform.OS == 'android'
-  //       ? ToastAndroid.show('passwords donot match', ToastAndroid.SHORT)
-  //       : alert('passwords donot match');
-  //   }
-  //   const url = 'register';
-
-  //   setIsLoading(true);
-  //   const response = await Post(url, body, apiHeader());
-  //   console.log('🚀 ~ file: Signup.js:93 ~ registerUser ~ response:', response);
-  //   setIsLoading(false);
-
-  //   if (response != undefined) {
-  //     // console.log('response data==========>>>>>>>>', response?.data);
-  //     dispatch(setUserData(response?.data?.user_info));
-  //     dispatch(setUserToken({token: response?.data?.token}));
-  //     dispatch(SetUserRole(response?.data?.user_info?.role));
-  //   }
-  // };
+    if (response != undefined) {
+      console.log('response data==========>>>>>>>>', JSON.stringify(response?.data, null, 2));
+      dispatch(setUserData(response?.data?.user_info));
+      dispatch(setUserToken({token: response?.data?.token}));
+    
+    }
+  };
 
   return (
     <ScreenBoiler
@@ -161,16 +165,23 @@ const Signup = () => {
               height: windowHeight * 0.13,
               width: windowHeight * 0.13,
               borderRadius: moderateScale((windowHeight * 0.13) / 2),
+              overflow : 'hidden'
             }}>
             <CustomImage
-              source={image}
+              resizeMode="cover"
+              source={
+                Object.keys(image).length > 0 ? {uri : image?.uri} :
+                require('../Assets/Images/dummyUser1.png')}
               style={{
                 width: '100%',
                 height: '100%',
+                // backgroundColor: 'blue',
+
                 borderRadius: moderateScale((windowHeight * 0.13) / 2),
               }}
             />
 
+          </View>
             <TouchableOpacity
               activeOpacity={0.6}
               style={styles.edit}
@@ -188,7 +199,6 @@ const Signup = () => {
                 }}
               />
             </TouchableOpacity>
-          </View>
           <View
             style={{
               alignItems: 'center',
@@ -358,11 +368,11 @@ const Signup = () => {
                 alignItems: 'center',
                 paddingHorizontal: moderateScale(15, 0.3),
               }}>
-              {/* <CustomButton
+              <CustomButton
                 onPress={() => registerUser()}
                 text={
                   isLoading ? (
-                    <ActivityIndicator color={Color.white} size={'small'} />
+                    <ActivityIndicator color={Color.black} size={'small'} />
                   ) : (
                     'SIGN UP'
                   )
@@ -376,8 +386,8 @@ const Signup = () => {
                 bgColor={Color.white}
                 isBold
                 // isGradient
-              /> */}
-              <CustomButton
+              />
+              {/* <CustomButton
                 onPress={() => navigationService.navigate('LoginScreen')}
                 text={
                   isLoading ? (
@@ -395,7 +405,7 @@ const Signup = () => {
                 bgColor={Color.themeColor2}
                 isBold
                 // isGradient
-              />
+              /> */}
             </View>
             <CustomText style={styles.txt5}>
               Already Have an account ?{' '}
@@ -537,9 +547,11 @@ const styles = ScaledSheet.create({
     width: moderateScale(20, 0.3),
     height: moderateScale(20, 0.3),
     position: 'absolute',
-    // top: 110,
-    bottom: -2,
-    right: 5,
+    top: 140,
+    // bottom: 29,
+    // right: 5,
+    right: 155,
+    // bottom: 20,
     borderRadius: moderateScale(10, 0.3),
     elevation: 8,
     justifyContent: 'center',

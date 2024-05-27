@@ -74,15 +74,15 @@ const LoginScreen = (props) => {
     console.log("🚀 ~ LoginUserresponse:===================>", response?.data)
     setIsLoading(false);
 
-    // return console.log('LoginResponse============>>>>>>>', response?.data);
-    // if (response?.data?.success) {
-    //   console.log("Login Testing =============>>>>>>",response?.data?.user_info)
-    //   dispatch(setUserData(response?.data?.user_info));
-    //   dispatch(SetUserRole(response?.data?.user_info?.role))
-    //   dispatch(setUserToken({token: response?.data?.token}));
+   console.log('LoginResponse============>>>>>>>', response);
+    if (response?.data?.success) {
+      console.log("Login Testing =============>>>>>>",response?.data?.user_info)
+      dispatch(setUserData(response?.data?.user_info));
+      dispatch(SetUserRole(response?.data?.user_info?.role))
+      dispatch(setUserToken({token: response?.data?.token}));
       
 
-    // }
+    }
     // dispatch(setUserData(response?.data?.user_info));
       // dispatch(setUserToken({token: 'dfhksdjlsk'}));
       // dispatch(SetUserRole('customer'))
@@ -159,8 +159,8 @@ const LoginScreen = (props) => {
               iconName={'user-circle-o'}
               iconType={FontAwesome}
               LeftIcon={true}
-              titleText={'Username'}
-              placeholder={'Username'}
+              titleText={'Email'}
+              placeholder={'Email'}
               setText={setEmail}
               value={email}
               viewHeight={0.06}
@@ -198,6 +198,15 @@ const LoginScreen = (props) => {
               elevation
             />
 
+            <CustomText isBold 
+            onPress={()=>{
+              navigation.navigate('EnterEmail',
+            {
+              fromfromForgot: true
+            })
+            }}
+            style={{color: Color.white, textAlign: 'left', width: windowWidth * 0.65, marginTop: moderateScale(12,0.2)}}>Forgot Your Password?</CustomText>
+
 <View
               style={{
                 width: windowWidth * 0.75,
@@ -225,11 +234,11 @@ const LoginScreen = (props) => {
                 isBold
                 // isGradient
               />
-              <CustomButton 
-                onPress={() =>{
+              <CustomButton
+                onPress={() =>  
+                  // dispatch(setUserToken({token : 'meerab'}))
                   LoginUser()
-                    // dispatch(setUserToken({token : 'meerab'}))
-                  }}
+                }
                 text={
                   isLoading ? (
                     <ActivityIndicator color={Color.white} size={'small'} />

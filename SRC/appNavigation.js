@@ -63,6 +63,9 @@ import RecommandedBooks from './Screens/RecommandedBooks';
 import AboutBooks from './Screens/AboutBooks';
 import GalleryFror from './Screens/GalleryFror';
 import Team from './Screens/Team';
+import ResetPassword from './Screens/ResetPassword';
+import EnterEmail from './Screens/EnterEmail';
+import VerifyNumber from './Screens/VerifyNumber';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -124,6 +127,7 @@ const AppNavigator = () => {
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
+          <RootNav.Screen name="ChangePasswordScreen" component={ResetPassword} />
           <RootNav.Screen
             name="TestmentsScreeen"
             component={TestmentsScreeen}
@@ -147,7 +151,12 @@ const AppNavigator = () => {
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
-
+          <RootNav.Screen name="EnterEmail" component={EnterEmail} />
+          <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
+          {/* <RootNav.Screen
+            name="RecommandedBooks"
+            component={RecommandedBooks}
+          /> */}   
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
 
           <RootNav.Screen

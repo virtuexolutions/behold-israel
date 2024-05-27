@@ -24,10 +24,11 @@ import {
   useClearByFocusCell,
 } from 'react-native-confirmation-code-field';
 import {useEffect} from 'react';
-import CardContainer from '../Components/CardContainer';
+// import CardContainer from '../Components/CardContainer';
 import CustomStatusBar from '../Components/CustomStatusBar';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {Icon} from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -35,11 +36,12 @@ const VerifyNumber = props => {
   const SelecteduserRole = useSelector(
     state => state.commonReducer.selectedRole,
   );
-  const navigationN = useNavigation();
+  // const navigationN = useNavigation();
 
   //params
   const fromForgot = props?.route?.params?.fromForgot;
-  const phoneNumber = props?.route?.params?.phoneNumber;
+  const email = props?.route?.params?.email;
+  const Code= props?.route?.params?.code;
 
   //states
   const [code, setCode] = useState('');
@@ -62,17 +64,17 @@ const VerifyNumber = props => {
     time == 0 && (settimerLabel('Resend Code '), settime(''));
   };
 
-  const sendOTP = async () => {
-    const url = 'password/email';
-    setIsLoading(true);
-    const response = await Post(url, {email: phoneNumber}, apiHeader());
-    setIsLoading(false);
-    if (response != undefined) {
-      Platform.OS == 'android'
-        ? ToastAndroid.show(`OTP sent to ${phoneNumber}`, ToastAndroid.SHORT)
-        : alert(`OTP sent to ${phoneNumber}`);
-    }
-  };
+  // const sendOTP = async () => {
+  //   const url = 'password/email';
+  //   setIsLoading(true);
+  //   const response = await Post(url, {email: email}, apiHeader());
+  //   setIsLoading(false);
+  //   if (response != undefined) {
+  //     Platform.OS == 'android'
+  //       ? ToastAndroid.show(`OTP sent to ${email}`, ToastAndroid.SHORT)
+  //       : alert(`OTP sent to ${email}`);
+  //   }
+  // };
 
   const VerifyOTP = async () => {
     const url = 'password/code/check';
@@ -85,7 +87,7 @@ const VerifyNumber = props => {
         ? ToastAndroid.show(`otp verified`, ToastAndroid.SHORT)
         : alert(`otp verified`);
 
-      navigationService.navigate('ResetPassword', {phoneNumber: phoneNumber});
+      navigationService.navigate('ChangePasswordScreen', {email: email});
     }
   };
 
@@ -106,40 +108,48 @@ const VerifyNumber = props => {
       }
         barStyle={'dark-content'}
       />
-      <LinearGradient
+      <ImageBackground
+      source={require('../Assets/Images/bgc.png')}
         style={{
           width: windowWidth,
           height: windowHeight,
         }}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y:1}}
-         colors={[Color.themeColor2,Color.themeColor2]}
         // locations ={[0, 0.5, 0.6]}
         >
-        <TouchableOpacity
-          activeOpacity={0.8}
+           <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
           style={{
-            position: 'absolute',
-            top: moderateScale(20, 0.3),
-            left: moderateScale(20, 0.3),
-            height: moderateScale(30, 0.3),
-            width: moderateScale(30, 0.3),
-            borderRadius: moderateScale(5, 0.3),
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'white',
-            zIndex: 1,
-          }}>
-          <Icon
-            name={'arrowleft'}
-            as={AntDesign}
-            size={moderateScale(22, 0.3)}
-            color={Color.yellow}
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={'arrow-back'}
+            as={Ionicons}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
             onPress={() => {
-              navigationN.goBack();
+              // navigation.goBack();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
             }}
           />
-        </TouchableOpacity>
+        </View>
 
         <KeyboardAwareScrollView
           showsVerticalScrollIndicator={false}
@@ -150,7 +160,7 @@ const VerifyNumber = props => {
             width: '100%',
             height: windowHeight,
           }}>
-          <CardContainer
+          <View
             style={{
               paddingVertical: moderateScale(30, 0.3),
               alignItems: 'center',
@@ -159,16 +169,17 @@ const VerifyNumber = props => {
               Enter OTP
             </CustomText>
             <CustomText style={styles.txt3}>
-              Enter the email address and we'll send and email with instructions
-              to reset your password{' '}
-              {
-                <CustomText style={{color: Color.black}}>
-                  {phoneNumber}
+            Enter the Code that has been sent to your email address :  {' '} 
+              
+                <CustomText style={{color: Color.white, textTransform:"none",}}>
+                  user3@gmail.com
+                  {/* {email} */}
                 </CustomText>
-              }
+              
             </CustomText>
             <CodeField
               placeholder={'0'}
+              placeholderTextColor={Color.white}
               ref={ref}
               value={code}
               onChangeText={setCode}
@@ -216,29 +227,28 @@ const VerifyNumber = props => {
                 )
               }
               isBold
-              textColor={Color.white}
-              width={windowWidth * 0.4}
-              height={windowHeight * 0.06}
+              textColor={Color.white} 
+              borderRadius={moderateScale(30, 0.3)}
+              width={windowWidth * 0.35}
+              height={windowHeight * 0.05}
               marginTop={moderateScale(20, 0.3)}
               onPress={() => {
-                navigationService.navigate('ResetPassword', {
-                  phone: phoneNumber,
-                });
+               VerifyOTP()
               }}
-              bgColor={Color.yellow
+              bgColor={Color.red
               }
               // borderRadius={moderateScale(30, 0.3)}
             />
-          </CardContainer>
+          </View>
         </KeyboardAwareScrollView>
-      </LinearGradient>
+      </ImageBackground>
     </>
   );
 };
 
 const styles = ScaledSheet.create({
   txt2: {
-    color: Color.black,
+    color: Color.themeLightGray,
     fontSize: moderateScale(25, 0.6),
     textTransform: 'uppercase',
   },
@@ -246,7 +256,7 @@ const styles = ScaledSheet.create({
     color: Color.themeLightGray,
     fontSize: moderateScale(11, 0.6),
     textAlign: 'center',
-    width: '95%',
+    width: windowWidth * 0.75,
     marginTop: moderateScale(10, 0.3),
     lineHeight: moderateScale(20, 0.3),
   },
