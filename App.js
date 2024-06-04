@@ -20,7 +20,6 @@ import {
 import SplashScreen from './SRC/Screens/SplashScreen';
 import Settings from './SRC/Screens/Settings';
 import AppNavigator from './SRC/appNavigation';
-import BibleCategories from './SRC/Screens/BibleCategories';
 import OldTestamentCategories from './SRC/Screens/oldTestamentCategories';
 
 import TestmentsScreeen from './SRC/Screens/TestmentsScreeen';
@@ -31,6 +30,7 @@ import KidsLectureScreen from './SRC/Screens/KidsLectureScreen';
 import LiveLecture from './SRC/Screens/LiveLecture';
 import VerifyNumber from './SRC/Screens/VerifyNumber';
 import ResetPassword from './SRC/Screens/ResetPassword';
+import { StripeProvider } from '@stripe/stripe-react-native';
 // import AppNavigator, {DrawerRoot} from './SRC/appNavigation';
 
 
@@ -47,11 +47,11 @@ const App = () => {
 
   console.reportErrorsAsExceptions = false;
   return (
-  //   <StripeProvider 
-  //   publishableKey={"pk_test_51NjQZRBqyObuQCkVVZujGGQ9w7PjZegPiZvL9MEH12KsxQmTsLpBxsXdeyN8Tu3mYkN8YZt8WutsTCEexDwIOxaB00a6zjjE12"}
-  //   // merchantIdentifier="merchant.identifier" // required for Apple Pay
-  //   // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
-  // >
+    <StripeProvider 
+     publishableKey={"pk_test_51NjQZRBqyObuQCkVVZujGGQ9w7PjZegPiZvL9MEH12KsxQmTsLpBxsXdeyN8Tu3mYkN8YZt8WutsTCEexDwIOxaB00a6zjjE12"}
+    // merchantIdentifier="merchant.identifier" // required for Apple Pay
+    // urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+  >
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <NativeBaseProvider>
@@ -59,7 +59,8 @@ const App = () => {
         </NativeBaseProvider>
       </PersistGate>
     </Provider>
-    // </StripeProvider>
+   
+    </StripeProvider>
   );
 };
 

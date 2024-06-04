@@ -53,7 +53,7 @@ const HomeScreen = () => {
       id: 1,
       image: require('../Assets/Images/image1.png'),
       title: 'BiBle',
-      onPress: () => navigationService.navigate('BibleCategories'),
+      onPress: () => navigationService.navigate('TestmentCategory'),
       description:
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
     },

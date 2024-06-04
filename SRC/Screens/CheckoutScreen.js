@@ -27,7 +27,7 @@ const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
   //   const cartitem =useSelector(state => state.commonReducer.cart)
   // console.log("🚀 ~ CheckoutScreen ~ cartitem:", cartitem)
-  const selectedProductSize = useSelector(state => state.commonReducer.item);
+  const selectedProductSize = useSelector(state => state.commonReducer.cart);
   const cardData = useSelector(state => state.commonReducer.cart);
   const token = useSelector(state => state.authReducer.token);
   console.log(
@@ -38,11 +38,11 @@ const CheckoutScreen = ({route}) => {
   const [productsForCard, setProdctsForCart] = useState([]);
   const subTotal = route?.params?.subTotal;
 
-  // useEffect(() => {
-  //   if (cardData.length == 0) {
-  //     navigationService.navigate('HomeScreen');
-  //   }
-  // }, [cardData]);
+  useEffect(() => {
+    if (cardData.length == 0) {
+      navigationService.navigate('HomeScreen');
+    }
+  }, [cardData]);
 
   return (
     <>

@@ -7,6 +7,7 @@ import {
     ToastAndroid,
     ScrollView,
     ImageBackground,
+    Alert,
   } from 'react-native';
   import React, {useState} from 'react';
   import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
@@ -15,9 +16,11 @@ import {
   import {moderateScale} from 'react-native-size-matters';
   import CustomImage from '../Components/CustomImage';
   import Header from '../Components/Header';
+import Modal from 'react-native-modal';
+
   import Feather from 'react-native-vector-icons/Feather';
   import Color from '../Assets/Utilities/Color';
-  // import PaymentModal from '../Components/PaymentModal';
+  import PaymentModal from '../Components/PaymentModal';
   import {Post} from '../Axios/AxiosInterceptorFunction';
   import {useDispatch, useSelector} from 'react-redux';
   import {AddToCart, EmptyCart} from '../Store/slices/common';
@@ -27,11 +30,12 @@ import {
 import { color } from 'native-base/lib/typescript/theme/styled-system';
 import { Icon } from 'native-base';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { CardField } from '@stripe/stripe-react-native';
   
   const PlaceOrderScreen = () => {
     const navigation = useNavigation();
     const token = useSelector(state => state.authReducer.token);
-    const cartData = useSelector(state => state.commonReducer.item);
+    const cartData = useSelector(state => state.commonReducer.cart);
     const userdata = useSelector(state => state.commonReducer.userData);
     console.log('🚀 ~ file: FormScreen.js:35 ~ FormScreen ~ userdata:', userdata);
   
@@ -39,53 +43,142 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
     const [totalPrice, setTotalPrice] = useState(0);
     const [afterDiscount, setAfterDiscount] = useState(0);
   
-    // const calcTotal = (totalQ, total, discount) => {
-    //   cartData?.map(item => {
-    //     totalQ += item?.quantity;
+    const calcTotal = (totalQ, total, discount) => {
+      cartData?.map(item => {
+        totalQ += item?.quantity;
   
-    //     total +=
-    //       (item?.size ? item?.size_id?.price : item?.wholsale_price) *
-    //       item?.quantity;
+        total +=
+          (item?.size ? item?.size_id?.price : item?.wholsale_price) *
+          item?.quantity;
   
-    //     discount +=
-    //       (item?.size
-    //         ? item?.size_id?.discount_price
-    //           ? item?.size_id?.discount_price
-    //           : item?.size_id?.price
-    //         : item?.discount_price
-    //         ? item?.discount_price
-    //         : item?.wholsale_price) * item?.quantity;
-    //   });
-    //   // setTotalQuantity(total_quantity);
-    //   // setTotalPrice(total_price);
-    //   // setAfterDiscount(afterDiscount);
-    //   console.log(
-    //     'final calculations======',
-    //     totalQ,
-    //     total,
-    //     discount,
-    //   );
-    //   return {totalQ, total, discount}
-    // };
+        discount +=
+          (item?.size
+            ? item?.size_id?.discount_price
+              ? item?.size_id?.discount_price
+              : item?.size_id?.price
+            : item?.discount_price
+            ? item?.discount_price
+            : item?.wholsale_price) * item?.quantity;
+      });
+      // setTotalQuantity(total_quantity);
+      // setTotalPrice(total_price);
+      // setAfterDiscount(afterDiscount);
+      console.log(
+        'final calculations======',
+        totalQ,
+        total,
+        discount,
+      );
+      return {totalQ, total, discount}
+    };
   
     const [name, setName] = useState(userdata?.name);
     const [lastName, setLastName] = useState(userdata?.name);
     const [email, setEmail] = useState(userdata?.email);
-    const [phone, setPhone] = useState(userdata?.contact);
+    const [phone, setPhone] = useState(userdata?.phone);
     console.log("🚀 ~ file: FormScreen.js:57 ~ FormScreen ~ phone:", phone)
-    const [country, setCountry] = useState(userdata?.country);
+    const [country, setCountry] = useState(userdata?.country_code);
     const [address, setAddress] = useState(userdata?.address);
     const [postcode, setPostCode] = useState(userdata?.postal_code);
-    const [stripeToken, setStripeToken] = useState('');
-    const [isChecked, setIsChecked] = useState('');
-    const [isModal, setIsModal] = useState(false);
+ 
+  const [stripeToken, setStripeToken] = useState('');
+  console.log("🚀 ~ PlaceOrderScreen ~ stripeToken:", stripeToken)
+  const [isChecked, setIsChecked] = useState('');
+  const [isModal, setIsModal] = useState(false);
     const [newData, setnewData] = useState([]);
     const array = [1, 2, 3, 4];
+    console.log("🚀 ~ PlaceOrder ~ cartData:", cartData)
   
     const [isLoading, setIsLoading] = useState(false);
     const dispatch = useDispatch();
   
+    const PlaceOrder = async () => {
+      let totalQ = 0;
+      let total = 0;
+      let discount = 0;
+      const result = calcTotal(totalQ, total, discount);
+      const url = 'auth/order';
+      const body = {
+        name: name,
+        // last_name: lastName,
+        email: email,
+        phone: phone,
+        country: country,
+        address: address,
+        // address2: address,
+        // post_code: postcode,
+        payment_method:
+          isChecked == 'Cash on delivery'
+            ? 'cod'
+            : isChecked == 'pay through stripe'
+            ? 'stripe'
+            : '',
+        total_quantity: result?.totalQ,
+        amount: result?.discount,
+        products: cartData?.map(item => {
+          return {
+            id: item?.id,
+            price: item?.size
+              ? item?.size_id?.discount_price
+                ? item?.size_id?.discount_price
+                : item?.size_id?.price
+              : item?.discount_price
+              ? item?.discount_price
+              : item?.wholsale_price,
+            quantity: item?.quantity,
+            size_id: item?.size ? item?.size_id?.id : item?.id,
+          };
+        }),
+      };
+
+      if(isChecked == 'pay through stripe'  ){
+        if(stripeToken == '') {
+          Alert.alert('Please enter your card details');
+        }
+        else{
   
+          body.stripeToken = stripeToken
+        }
+      }
+      for (let key in body) {
+        if (body[key] == '') {
+          return Platform.OS == 'android'
+            ? ToastAndroid.show(`${key} is empty`, ToastAndroid.SHORT)
+            : Alert.alert(`requried field is empty`);
+        }
+      }
+  
+      if (isNaN(postcode)) {
+        return Platform.OS == 'android'
+          ? ToastAndroid.show(
+              `Please insert a correct post code`,
+              ToastAndroid.SHORT,
+            )
+          : Alert.alert(`Please insert a correct post code`);
+      }
+  
+      if (isNaN(phone)) {
+        return Platform.OS == 'android'
+          ? ToastAndroid.show(
+              `Please insert a correct phone number`,
+              ToastAndroid.SHORT,
+            )
+          : Alert.alert(`Please insert a correct phone number`);
+      }
+  
+      if (isChecked == '') {
+        return Platform.OS == 'android'
+          ? ToastAndroid.show(`Payment method not selected`, ToastAndroid.SHORT)
+          : Alert.alert(`Payment method not selected`);
+      }
+      setIsLoading(true);
+      const response = await Post(url, body, apiHeader(token));
+      setIsLoading(false);
+      if (response != undefined) {
+        navigationService.navigate('PaymentInvoice',{body:response?.data?.order_info})
+        // dispatch(EmptyCart());
+      }
+    };
     return (
       <ImageBackground
       style={{
@@ -121,7 +214,6 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
             alignItems: 'center',
             minHeight: windowHeight,
           }}>
-          <CustomText />
           <TextInputWithTitle
             titleText={'Your name'}
             placeholder={'Your name'}
@@ -219,7 +311,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
             placeholderColor={'#ABB1C0'}
             borderRadius={moderateScale(20, 0.6)}
           />
-          <TextInputWithTitle
+          {/* <TextInputWithTitle
             keyboardType={'numeric'}
             titleText={'Post code'}
             placeholder={'Post code'}
@@ -235,7 +327,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
             color={'#ABB1C0'}
             placeholderColor={'#ABB1C0'}
             borderRadius={moderateScale(20, 0.6)}
-          />
+          /> */}
+   
           <View
             style={{
               flexDirection: 'row',
@@ -252,6 +345,8 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
               }}>
               <TouchableOpacity
                 onPress={() => {
+                 
+
                   setIsChecked('Cash on delivery');
                 }}
                 style={{
@@ -267,6 +362,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
                 }}></TouchableOpacity>
               <CustomText
                 onPress={() => {
+                  setIsModal(true);
                 
                   setIsChecked('Cash on delivery');
                 }}
@@ -283,7 +379,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setIsModal(true);
+                  setIsModal(true); 
                   setIsChecked('pay through stripe');
                 }}
                 style={{
@@ -300,6 +396,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
               <CustomText
                 onPress={() => {
                   setIsModal(true);
+                  
                   setIsChecked('pay through stripe');
                 }}
                 style={{
@@ -308,6 +405,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
                 pay through stripe
               </CustomText>
             </View>
+
           </View>
           <CustomButton
             text={
@@ -330,12 +428,14 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
             }}
           
           />
-          {/* <PaymentModal
-            isModal={isModal}
-            setIsModal={setIsModal}
-            setToken={setStripeToken}
-          /> */}
         </ScrollView>
+          <PaymentModal
+          isModal={isModal}
+          setIsModal={setIsModal}
+          setToken={setStripeToken}
+        />
+      
+
       </ImageBackground>
     );
   };

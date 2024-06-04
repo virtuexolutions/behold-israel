@@ -9,7 +9,7 @@ import {
 } from '@react-navigation/bottom-tabs';
 import Signup from './Screens/Signup';
 import LoginScreen from './Screens/LoginScreen';
-import BibleCategories from './Screens/BibleCategories';
+import TestmentCategory from './Screens/TestmentCategory';
 import TestmentsScreeen from './Screens/TestmentsScreeen';
 import OldTestamentCategories from './Screens/oldTestamentCategories';
 import BookDescriprtionScreen from './Screens/BookDescriptionScreen';
@@ -114,7 +114,7 @@ const AppNavigator = () => {
             name="WalkThroughScreen"
             component={WalkThroughScreen}
           />
-          <RootNav.Screen name="BibleCategories" component={BibleCategories} />
+          <RootNav.Screen name="TestmentCategory" component={TestmentCategory} />
           <RootNav.Screen name="Store" component={StoreScreen} />
           <RootNav.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
           <RootNav.Screen
@@ -127,12 +127,14 @@ const AppNavigator = () => {
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
-          <RootNav.Screen name="ChangePasswordScreen" component={ResetPassword} />
+          <RootNav.Screen
+            name="ChangePasswordScreen"
+            component={ResetPassword}
+          />
           <RootNav.Screen
             name="TestmentsScreeen"
             component={TestmentsScreeen}
           />
-          {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
           <RootNav.Screen
             name="OldTestamentCategories"
             component={OldTestamentCategories}
@@ -156,7 +158,7 @@ const AppNavigator = () => {
           {/* <RootNav.Screen
             name="RecommandedBooks"
             component={RecommandedBooks}
-          /> */}   
+          /> */}
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
 
           <RootNav.Screen
@@ -267,7 +269,6 @@ export const TabNavigation = () => {
       <Tabs.Screen name={'Donation'} component={Donation} />
       <Tabs.Screen name={'Campaigns'} component={Campaigns} />
 
-      {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
       <Tabs.Screen name={'StoreScreen'} component={StoreScreen} />
       <Tabs.Screen name={'Settings'} component={Settings} />
     </Tabs.Navigator>
@@ -289,8 +290,7 @@ export const MyDrawer = () => {
           backgroundColor: '#D3D3D3',
         },
       }}>
-      {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
-      {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
+      <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
       <DrawerNavigation.Screen
         name="MemberShipForm"
         component={MemberShipForm}
@@ -303,7 +303,6 @@ export const MyDrawer = () => {
         name="EventAndComunity"
         component={EventAndComunity}
       />
-      <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
       <DrawerNavigation.Screen
         name="OutReachMissions"
         component={OutReachMissions}
@@ -321,7 +320,7 @@ export const MyDrawer = () => {
         name="RecommandedBooks"
         component={RecommandedBooks}
       />
-      
+
       <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
       <DrawerNavigation.Screen name="Contact" component={Team} />
     </DrawerNavigation.Navigator>
