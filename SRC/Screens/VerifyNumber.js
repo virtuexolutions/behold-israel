@@ -36,12 +36,13 @@ const VerifyNumber = props => {
   const SelecteduserRole = useSelector(
     state => state.commonReducer.selectedRole,
   );
-  // const navigationN = useNavigation();
+  const navigation = useNavigation();
 
   //params
   const fromForgot = props?.route?.params?.fromForgot;
   const email = props?.route?.params?.email;
   const Code= props?.route?.params?.code;
+  console.log("🚀 ~ VerifyNumber ~ Code:", Code)
 
   //states
   const [code, setCode] = useState('');
@@ -144,7 +145,7 @@ const VerifyNumber = props => {
             size={moderateScale(25, 0.3)}
             color={Color.black}
             onPress={() => {
-              // navigation.goBack();
+              navigation.goBack();
               // navigationN.dispatch(DrawerActions.toggleDrawer())
               
             }}
@@ -168,12 +169,15 @@ const VerifyNumber = props => {
             <CustomText isBold style={styles.txt2}>
               Enter OTP
             </CustomText>
+            <CustomText style={styles.txt2}>
+              Your OTP : {Code}
+            </CustomText>
             <CustomText style={styles.txt3}>
             Enter the Code that has been sent to your email address :  {' '} 
               
                 <CustomText style={{color: Color.white, textTransform:"none",}}>
-                  user3@gmail.com
-                  {/* {email} */}
+                  {/* user3@gmail.com */}
+                  {email}
                 </CustomText>
               
             </CustomText>

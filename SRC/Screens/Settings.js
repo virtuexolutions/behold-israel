@@ -19,6 +19,7 @@ import navigationService from '../navigationService';
 import {setUserLogOut} from '../Store/slices/common';
 import {useDispatch, useSelector} from 'react-redux';
 import {SetUserRole, setUserLogoutAuth} from '../Store/slices/auth';
+import { baseUrl } from '../Config';
 // import {setUserLogOut} from '../Store/slices/common';
 
 const Settings = () => {
@@ -99,6 +100,14 @@ const Settings = () => {
     },
     {
       id: 7,
+      name: 'Your Orders',
+      next: '>',
+      onPress: () => {
+        navigationService.navigate('YourOrders');
+      },
+    },
+    {
+      id: 8,
       name: 'Account',
       next: '>',
       onPress: () => {
@@ -106,7 +115,7 @@ const Settings = () => {
       },
     },
     {
-      id: 8,
+      id: 9,
       name: 'Help & support',
       next: '>',
       onPress: () => {
@@ -114,7 +123,7 @@ const Settings = () => {
       },
     },
     {
-      id: 9,
+      id: 10,
       name: 'Change Password',
       next: '>',
       onPress: () => {
@@ -122,7 +131,7 @@ const Settings = () => {
       },
     },
     {
-      id: 10,
+      id: 11,
       name: 'Logout',
       next: '>',
       onPress: () => {
@@ -144,17 +153,19 @@ const Settings = () => {
       <View style={styles.header}>
         <View style={styles.imageContainer}>
           <CustomImage
-            resizeMode="contain"
-            source={require('../Assets/Images/dummyUser1.png')}
+            resizeMode="cover"
+            source={
+              userData?.photo ? {uri: `${baseUrl}${userData?.photo}`} :
+              require('../Assets/Images/dummyUser1.png')}
             style={{
               width: '100%',
               height: '100%',
-              backgroundColor: 'blue',
+              // backgroundColor: 'blue',
             }}
           />
         </View>
         <View style={styles.userInfo}>
-          <CustomText style={styles.txt5}>DONNA W. WADE</CustomText>
+          <CustomText style={styles.txt5}>{userData?.name}</CustomText>
           <CustomText style={styles.txt6}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit.Sed magna
             dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.

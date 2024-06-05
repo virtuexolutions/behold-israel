@@ -22,9 +22,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import numeral from 'numeral';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
+import { baseUrl } from '../Config';
 
 const CartItem = ({item, fromCheckout}) => {
-  // console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item);
+  console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item?.photo);
   const cartData = useSelector(state => state.commonReducer.cart);
   console.log("🚀 ~ CartItem ~ cartData:", cartData)
 
@@ -48,7 +49,7 @@ const CartItem = ({item, fromCheckout}) => {
             }}
           />
           <CustomImage
-            source={item?.image}
+            source={{uri:`${baseUrl}${item?.photo}`}}
             style={{
               width: windowWidth * 0.3,
               height: windowHeight * 0.15,
@@ -69,7 +70,7 @@ const CartItem = ({item, fromCheckout}) => {
             top:0
           }}
                 name={'circle-with-cross'}
-                as={Entypo}s
+                as={Entypo}
                 color={Color.white}
                 size={moderateScale(15, 0.3)}
                 onPress={() => {
@@ -177,7 +178,7 @@ const CartItem = ({item, fromCheckout}) => {
             ]}>
             <CustomText style={styles.amount}>
 
-              {cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.qty }
+              {(cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.quantity).toString() }
             {/* {item?.price * item?.qty}  */}
               {/* {item?.price * item?.qty} PKR */}
             </CustomText>
@@ -195,7 +196,7 @@ const CartItem = ({item, fromCheckout}) => {
                 size={moderateScale(25, 0.3)}
                 onPress={() => {
                   console.log('increment')
-                  item?.qty < item?.totalquantity &&
+                  // item?.quantity < item?.totalquantity &&
                     dispatch(increamentQuantity({id: item?.id}));
                 }}
               />
@@ -206,7 +207,7 @@ const CartItem = ({item, fromCheckout}) => {
                   marginHorizontal: moderateScale(5, 0.3),
                   fontSize: moderateScale(12, 0.3),
                 }}>
-                {item?.qty}
+                {item?.quantity}
               </CustomText>
               <Icon
                 name={'circle-with-minus'}
@@ -214,7 +215,7 @@ const CartItem = ({item, fromCheckout}) => {
                 color={Color.white}
                 size={moderateScale(24, 0.3)}
                 onPress={() => {
-                  item?.qty > 1 && dispatch(decrementQuantity({id: item?.id}));
+                   dispatch(decrementQuantity({id: item?.id}));
                 }}
               />
             </View>

@@ -70,7 +70,7 @@ const CommonSlice = createSlice({
       const itemAddCart = state.cart.find(item => item.id === itemId);
 
       if (itemAddCart) {
-        itemAddCart.qty++;
+        itemAddCart.quantity++;
       }
     },
     decrementQuantity(state, action) {
@@ -78,8 +78,8 @@ const CommonSlice = createSlice({
       const itemAddCart = state.cart.find(item => item.id === itemId);
 
       if (itemAddCart) {
-        if (itemAddCart.qty >= 1) {
-          itemAddCart.qty--;
+        if (itemAddCart.quantity >= 1) {
+          itemAddCart.quantity--;
         } else if (itemAddCart == 1) {
           state.cart = state.cart.filter(
             (item, index) => item.id !== action.payload.id,

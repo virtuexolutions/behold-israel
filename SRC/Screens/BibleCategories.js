@@ -6,7 +6,10 @@ import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
 import CustomText from '../Components/CustomText';
 import CustomImage from '../Components/CustomImage';
 import { useNavigation } from '@react-navigation/native';
-
+import { Icon } from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
+import LinearGradient from 'react-native-linear-gradient';
 let cardContents=[
     {
         id: 'c1',
@@ -24,7 +27,7 @@ let cardContents=[
     },
   ];
 
-function Card({image, heading, description, subtitle ,onPress}){
+function Card({image, heading, description, subtitle ,onPress,}){
     const navigation = useNavigation();
     return(
 
@@ -44,6 +47,7 @@ function Card({image, heading, description, subtitle ,onPress}){
       marginRight:19
         //  paddingHorizontal:'25'
      }} >
+
             
              <CustomText style={styles.txt5}>{heading}</CustomText>
              <CustomText style={styles.txt6}>{description}</CustomText>
@@ -57,8 +61,10 @@ function Card({image, heading, description, subtitle ,onPress}){
 }
 
 
-const BibleCategories = () => {
-    const navigation = useNavigation()
+const BibleCategories = ({route}) => {
+  const fromTabs = route?.params?.fromTab;
+
+  const navigation = useNavigation()
   
     return (
         <ScrollView>
@@ -73,14 +79,57 @@ const BibleCategories = () => {
     gap:23,
     // justifyContent: 'space-between'
 }}>
+           <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top:28,
+          left:fromTabs ? 17 : 7,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :fromTabs ?  Color.white : 'transparent',
+            paddingTop: moderateScale(6.6),
 
+            // marginTop :moderateScale
+          }}
+          name={fromTabs ? 'menu': 'arrow-back'}
+          as={fromTabs ? Feather : Ionicons}
+          size={moderateScale(25, 0.3)}
+          color={fromTabs ? Color.black : Color.white}
+          onPress={() => {
+              if(fromTabs){
+            navigation.toggleDrawer();
+          }
+          else{
+              navigation.goBack();
+          }
+            // navigationN.dispatch(DrawerActions.toggleDrawer())
+            
+          }}
+          />
+        </View>
 <View>
     <ImageBackground
+    
     style={{
         width: windowWidth,
         height: 200,
-        paddingLeft:11,
-        justifyContent:'center'
+        paddingLeft:moderateScale(40,0.3),
+        justifyContent:'center',
+        opacity:0.85,
+        elevation:6,
+        zIndex:0,
+
     }}
     source={require('../Assets/Images/holy-bible-wooden.jpg')}
     >
@@ -89,6 +138,23 @@ const BibleCategories = () => {
         <CustomText style={[styles.txt6,{textAlign:'left'}]}>Lorem ipsum dolor sit amet, 
             consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.</CustomText>
     </ImageBackground>
+
+    
+    <LinearGradient
+       start={{x: 0, y: 0.05}}
+       end={{x: 0, y: 0.75}}
+       colors={['#ffffff00', '#141414']}
+    style={{width:windowWidth , height:windowHeight * 0.1,
+    // borderTopLeftRadius:moderateScale(6,0.2),
+    // borderTopRightRadius:moderateScale(6,0.2),
+    opacity:0.85,
+    // shadowOffset: {height: 2, width: 0},
+    // shadowOpacity: 1,
+    // shadowRadius: 4,
+    zIndex:1,
+    position:'absolute', bottom:0}}></LinearGradient>
+    
+
 </View>
 
 

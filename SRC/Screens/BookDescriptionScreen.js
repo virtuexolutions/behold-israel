@@ -5,8 +5,12 @@ import { windowHeight, windowWidth } from '../Utillity/utils';
 import { moderateScale } from 'react-native-size-matters';
 import Color from '../Assets/Utilities/Color';
 import BookDescription from '../Components/BookDescription';
+import { Icon } from 'native-base';
+import Feather from 'react-native-vector-icons/Feather'
+import { useNavigation } from '@react-navigation/native';
 
 const BookDescriprtionScreen = (props) => {
+    const navigation = useNavigation();
     const data = props?.route?.params?.item
     console.log("🚀 ~ file: BookDescriptionScreen.js:11 ~ BookDescriprtionScreen ~ data:", data)
     const description =[
@@ -21,7 +25,43 @@ const BookDescriprtionScreen = (props) => {
                 // justifyContent: 'center',
                 alignItems: 'center',
             }}
+
             source={require('../Assets/Images/recorded.png')}>
+                    <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={'arrow-left'}
+            as={Feather}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
+            onPress={() => {
+            //   navigation.toggleDrawer();
+            navigation.goBack();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View>
             <CustomText
                 numberOfLines={1}
                 isBold

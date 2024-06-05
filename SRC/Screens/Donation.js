@@ -8,9 +8,11 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  ToastAndroid,
+  ActivityIndicator,
 } from 'react-native';
-import React, {useState} from 'react';
-import {windowHeight, windowWidth} from '../Utillity/utils';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
+import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Hidden, Icon, Select} from 'native-base';
 import {moderateScale} from 'react-native-size-matters';
@@ -18,55 +20,31 @@ import CustomText from '../Components/CustomText';
 import CustomButton from '../Components/CustomButton';
 import Header from '../Components/Header';
 import Feather from 'react-native-vector-icons/Feather';
-import {color, position} from 'native-base/lib/typescript/theme/styled-system';
-import DonationComponent from '../Components/DonationComponent';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Color from '../Assets/Utilities/Color';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import DropDownSingleSelect from '../Components/DropDownSingleSelect';
+import {CardField, createToken} from '@stripe/stripe-react-native';
+import {Post} from '../Axios/AxiosInterceptorFunction';
+import {useSelector} from 'react-redux';
+import { useIsFocused } from '@react-navigation/native';
 
 const Donations = props => {
+  const isFocused = useIsFocused()
+  const token = useSelector(state => state.authReducer.token);
   const categoryName = props?.route?.params?.categoryName;
-  console.log('🚀 ~ Donations ~ categoryName:', categoryName);
   const value = props?.route?.params?.value;
-  // console.log('🚀 ~ Donations ~ value:', value);
   const valueArray = props?.route?.params?.valueArray;
-  // console.log('🚀 ~ Donations ~ valueArray:', valueArray);
   const fromDrawer = props?.route?.params?.fromDrawer;
+  const [selectedCategory, setSelectedCategory] = useState("");
 
-  // console.log('🚀 ~ Donations ~ for =================>:', data);
-
+  const [stripeToken, setStripeToken] = useState('');
   const [donationCount, setDonationCount] = useState(10);
-  console.log('🚀 ~ Donations ~ donationCount:', donationCount);
-  const [selectedItem, setSelectedItem] = useState('');
-  // console.log('🚀 ~ Donations ~ selectedItem:', selectedItem);
-  const [selectedCategory, setSelectedCategory] = useState('');
-  console.log('🚀 ~ Donations ~ selectedCategory:', selectedCategory);
-  console.log();
-  // const data = [
-  //   {
-  //     id: 1,
-  //     image: require('../Assets/Images/donationn.jpg'),
-  //     title: 'Donation',
-  //   },
-  //   {
-  //     id: 2,
-  //     image: require('../Assets/Images/donationn.jpg'),
-  //     title: 'Donation',
-  //   },
-  //   {
-  //     id: 3,
-  //     image: require('../Assets/Images/donationn.jpg'),
-  //     title: 'Donation',
-  //   },
-  //   {
-  //     id: 4,
-  //     image: require('../Assets/Images/donationn.jpg'),
-  //     title: 'Donation',
-  //   },
-  // ];
-  const donationArray = ['donation', 'support For Life', 'giving'];
-  const SharingWithOthersArrays = {
+  const [selectedItem, setSelectedItem] = useState(value || '');
+  const [isLoading, setIsLoading] = useState(false);
+  const [drawerState, setDrawerState] = useState(fromDrawer)
+  const [selectedArray, setSelectedArray] = useState([]);
+  const [SharingWithOthersArrays, setSharingWithOthersArray] = useState({
     donationArray: ['Widow', 'Poor', 'Handicaps', 'Orphans', 'HealthCare'],
     supportForLifeArray: [
       'Pregnant Woman',
@@ -89,7 +67,121 @@ const Donations = props => {
       'Support for the Ministry',
       'Second Collection',
     ],
+  });
+  const donationArray = ['donation', 'support For Life', 'giving'];
+
+  
+  const Donate = async () => {
+    const url = 'auth/donate';
+    const body = {
+      category: selectedCategory,
+      sub_category: selectedItem,
+      donation_amount: donationCount,
+      // stripeToken:stripeToken,
+    };
+    if (stripeToken == '') {
+      alert('Please enter your card details');
+    } else {
+      body.stripeToken = stripeToken;
+    }
+    for (let key in body) {
+      if (body[key] == '') {
+        return Platform.OS == 'android'
+          ? ToastAndroid.show(`${key} is empty`, ToastAndroid.SHORT)
+          : alert(`requried field is empty`);
+      }
+    }
+    //  return console.log("🚀 ~ Donate ~ body:", body)
+    setIsLoading(true);
+    const response = await Post(url, body, apiHeader(token));
+    console.log('🚀 ~ Donate ~ response:', response?.data);
+    setIsLoading(false);
+    ToastAndroid.show(`Donated`, ToastAndroid.SHORT);
+    setSelectedItem('');
+    setSelectedCategory('');
+    setStripeToken('');
   };
+
+  const stripePaymentFunction = () => {
+    createToken({
+      type: 'Card',
+    })
+      .then(token => {
+        console.log('token=============> ', token);
+        setStripeToken(token?.token?.id);
+        // setIsModal(false)
+      })
+
+      .catch(error => {
+        console.log('error= ', error);
+      });
+  };
+
+
+  useEffect(() => {
+   if(!isFocused){
+      setSelectedCategory('');
+      setSelectedItem('');
+      setSelectedArray([])
+   } 
+
+    console.log("----  RUNNING FIRST MOUNT (isFocused) ----- ", isFocused);
+  }, [isFocused]);
+  console.log("🚀 ~ Donations ~ selectedArray:", selectedArray)
+  useEffect(() => {
+  //  console.log(categoryName);
+
+      setSelectedCategory(categoryName || "");
+      setSelectedItem(value || '');
+      console.log('Running 1st useeffect')
+
+  }, [categoryName, value]);
+
+  useEffect(() => {
+    if (!isFocused) {
+      console.log('focused lost')
+    setSelectedCategory('');
+    setSelectedItem('');
+    setSelectedArray([]);
+    }
+    }, [fromDrawer]);
+  useEffect(() => {
+    const newSelectedArray =
+        selectedCategory.toLowerCase() == 'Donation'.toLowerCase()
+        ? SharingWithOthersArrays.donationArray
+        : selectedCategory.toLowerCase() == 'supportForLife'.toLowerCase()
+        ? SharingWithOthersArrays.supportForLifeArray
+        : selectedCategory.toLowerCase() == 'support For Life'.toLowerCase()
+        ? SharingWithOthersArrays.supportForLifeArray
+        : SharingWithOthersArrays.givingArray;
+        
+        setSelectedArray(newSelectedArray);
+        setSelectedItem(prevItem => prevItem === value ? '' : value);
+
+      
+    
+      // setSelectedArray(
+      //   selectedCategory?.toLowerCase() == 'donation'.toLowerCase()
+      //   ? SharingWithOthersArrays?.donationArray
+      //   : selectedCategory?.toLowerCase() == 'support For Life'.toLowerCase()
+      //   ? SharingWithOthersArrays?.supportForLifeArray
+      //   : SharingWithOthersArrays?.givingArray,
+      //   );
+      console.log("Running Select Category dependiceies")
+    
+     
+  }, [selectedCategory, value, drawerState]);
+ 
+  // console.log( selectedCategory?.toLowerCase() == 'donation'
+  // ?SharingWithOthersArrays?.donationArray
+  // :selectedCategory?.toLowerCase() == 'supportForLife'.toLowerCase()
+  // ?SharingWithOthersArrays?.supportForLifeArray
+  // :SharingWithOthersArrays?.givingArray  , selectedCategory)
+  // console.log("Consoling values ====> " ,selectedCategory, selectedItem);
+  // console.log("array", selectedArray)
+
+
+ 
   return (
     <ImageBackground
       resizeMode="cover"
@@ -99,10 +191,13 @@ const Donations = props => {
       <ScrollView>
         <Header
           showLeft={true}
-          leftName={'menu'}
+          // leftName={'menu'}
+          showBack={true}
+          // fromDrawer ={fromDrawer}
           leftType={Feather}
           title={'Donation'}
         />
+
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={() => {}}
@@ -142,12 +237,13 @@ const Donations = props => {
 
         <View style={styles.container}>
           <DropDownSingleSelect
+            key={donationArray.length}
             array={donationArray}
             item={selectedCategory}
             setItem={setSelectedCategory}
-            placeholder={fromDrawer ? categoryName : 'select'}
+            placeholder={categoryName ||'select'}
             //   height={windowHeight*0.06}
-            disabled={fromDrawer ? true : false}
+            disabled={fromDrawer}
             width={windowWidth * 0.9}
             dropdownStyle={{
               width: windowWidth * 0.9,
@@ -155,30 +251,22 @@ const Donations = props => {
               // marginTop: moderateScale(-10, 0.3),
             }}
           />
-          {selectedCategory != '' ||
-            (categoryName != undefined && (
-              <DropDownSingleSelect
-                array={
-                  fromDrawer
-                    ? valueArray
-                    : selectedCategory == 'donation'
-                    ? SharingWithOthersArrays?.donationArray
-                    : selectedCategory == 'support For Life'
-                    ? SharingWithOthersArrays?.supportForLifeArray
-                    : SharingWithOthersArrays?.givingArray
-                }
-                item={selectedItem}
-                setItem={setSelectedItem}
-                placeholder={fromDrawer ? value : 'select'}
-                //   height={windowHeight*0.06}
-                width={windowWidth * 0.9}
-                dropdownStyle={{
-                  width: windowWidth * 0.9,
-                  borderBottomWidth: 0,
-                  // marginTop: moderateScale(-10, 0.3),
-                }}
-              />
-            ))}
+          {( selectedCategory != "" &&
+            <DropDownSingleSelect
+            key={selectedArray.length}
+              array={selectedArray}
+              item={selectedItem}
+              setItem={setSelectedItem}
+              placeholder={selectedItem || 'select'}
+              //   height={windowHeight*0.06}
+              width={windowWidth * 0.9}
+              dropdownStyle={{
+                width: windowWidth * 0.9,
+                borderBottomWidth: 0,
+                // marginTop: moderateScale(-10, 0.3),
+              }}
+            />
+          )}
           <CustomText style={styles.text}>
             How much you want to donate?
           </CustomText>
@@ -248,14 +336,55 @@ const Donations = props => {
           </View>
           <View style={styles.donationInputBox}>
             <CustomText style={styles.cardh1}>Card Information</CustomText>
-            <View style={styles.input}>
-              <CustomText>Enter your card details</CustomText>
-            </View>
+            <CardField
+              postalCodeEnabled={true}
+              placeholders={{
+                number: '4242 4242 4242 4242',
+              }}
+              cardStyle={{
+                backgroundColor: '#D3D3D3',
+                borderRadius: 15,
+                width: 320,
+              }}
+              style={{
+                width: '100%',
+                height: 50,
+                marginVertical: 10,
+              }}
+              onCardChange={cardDetails => {
+                console.log('cardDetails', cardDetails);
+                // if(cardDetails?.complete) {
+                //   // stripePaymentFunction();
+                //   ToastAndroid.show("Card Details has been completed", ToastAndroid.SHORT)
+                // }
+              }}
+              onFocus={focusedField => {
+                console.log('focusField', focusedField);
+              }}
+            />
+            <CustomButton
+              isBold
+              text={'Confirm'}
+              textColor={Color.white}
+              width={windowWidth * 0.35}
+              height={windowHeight * 0.05}
+              onPress={() => {
+                stripePaymentFunction();
+                // setIsModal(false)
+              }}
+              bgColor={Color.red}
+              // isGradient
+              borderRadius={moderateScale(30, 0.3)}
+            />
           </View>
           <CustomButton
             isBold
-            onPress={() => {}}
-            text={'Donate Now'}
+            onPress={Donate}
+            text={ isLoading ? (
+              <ActivityIndicator size={'small'} color={Color.white} />
+            ) : (
+              'Donate Now'
+            )}
             textColor={Color.white}
             width={windowWidth * 0.8}
             height={windowHeight * 0.07}
@@ -322,7 +451,7 @@ const styles = StyleSheet.create({
   },
   donationInputBox: {
     marginTop: moderateScale(11, 0.2),
-    height: windowHeight * 0.18,
+    height: windowHeight * 0.25,
     borderRadius: moderateScale(17, 0.2),
     opacity: 0.9,
     width: windowWidth * 0.93,

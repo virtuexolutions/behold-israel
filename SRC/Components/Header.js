@@ -46,6 +46,7 @@ const Header = props => {
     cart,
     Notify,
     hideUser,
+    // fromDrawer
   } = props;
 
   const [searchText, setSearchText] = useState('');
@@ -102,7 +103,7 @@ const Header = props => {
             name={'arrow-back'}
             as={Ionicons}
             size={moderateScale(25, 0.3)}
-            color={Color.black}
+            color={Color.white}
             onPress={() => {
               navigationN.goBack();
             }}
@@ -123,7 +124,10 @@ const Header = props => {
             size={moderateScale(25, 0.3)}
             color={Color.black}
             onPress={() => {
-              navigationN.toggleDrawer();
+              
+                navigationN.toggleDrawer();
+
+              
               // navigationN.dispatch(DrawerActions.toggleDrawer())
               
             }}
@@ -162,9 +166,9 @@ const Header = props => {
           {cartData?.length > 0 && (
             <View
               style={{
-                width: moderateScale(14, 0.6),
-                height: moderateScale(14, 0.6),
-                borderRadius: moderateScale(7, 0.6),
+                width: moderateScale(17, 0.6),
+                height: moderateScale(17, 0.6),
+                borderRadius: moderateScale(9, 0.6),
                 justifyContent: 'center',
                 alignItems: 'center',
                 backgroundColor: 'red',
@@ -174,8 +178,11 @@ const Header = props => {
                 top: 0,
               }}>
               <CustomText
+              isBold
                 style={{
-                  fontSize: 8,
+                  fontSize: moderateScale(10,0.2),
+                  color:Color.white,
+                  textAlign:'center'
                 }}>
                 {cartData?.length < 10 ? cartData?.length : '9+'}
               </CustomText>

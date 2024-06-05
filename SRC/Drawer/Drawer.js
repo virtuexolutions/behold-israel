@@ -29,11 +29,13 @@ import navigationService from '../navigationService';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DrawerDropDown from '../Components/DrawerDropDown';
+import { baseUrl } from '../Config';
 
 const Drawer = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const userData = useSelector(state => state.commonReducer.userData);
+  // console.log("🚀 ~ Drawer ~ userData:", userData)
   const token = useSelector(state => state.authReducer.token);
   const role = useSelector(state => state.authReducer.role);
   const [menuIndices, setMenuIndices] = useState({
@@ -76,7 +78,7 @@ const Drawer = () => {
       // iconName: 'home',
       // iconType: Entypo,
       onPress: () => {
-        navigation.navigate('HomeScreen');
+        navigation.navigate("TabNavigation");
       },
     },
     {
@@ -104,7 +106,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Widow',
-                    valueArray: SharingWithOthersArrays?.donationArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -120,7 +122,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Poor',
-                    valueArray: SharingWithOthersArrays?.donationArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -136,7 +138,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Handicaps',
-                    valueArray: SharingWithOthersArrays?.donationArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -152,7 +154,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Orphans',
-                    valueArray: SharingWithOthersArrays?.donationArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -168,7 +170,6 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'HealthCare',
-                    valueArray: SharingWithOthersArrays?.donationArray,
                     fromDrawer: true,
                   });
                 }
@@ -198,7 +199,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Pregnant Woman',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -215,7 +216,7 @@ const Drawer = () => {
                     navigation.navigate('Donation', {
                       categoryName: 'supportForLife',
                       value: 'Pregnanat Teenager',
-                      valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                     
                       fromDrawer: true,
                     });
                   }
@@ -232,7 +233,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Up Keep of the ARK',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -248,7 +249,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Utilities',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -264,7 +265,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Seminary',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -286,7 +287,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Support for the priest',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -302,7 +303,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Support for the religious',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -322,7 +323,7 @@ const Drawer = () => {
                     categoryName: 'supportForLife',
                     value:
                       'Long Term Project with your name on the plaque on the wall',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -338,7 +339,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Project: One room for retreat N6M ( $6000)',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -358,7 +359,7 @@ const Drawer = () => {
                     categoryName: 'supportForLife',
                     value:
                       'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
-                    valueArray: SharingWithOthersArrays?.supportForLifeArray,
+                   
                     fromDrawer: true,
                   });
                 }
@@ -389,7 +390,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Weekly Giving',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -404,7 +405,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Monthly',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -419,7 +420,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Quarterly',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -434,7 +435,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Termly',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -449,7 +450,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Annually',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -464,7 +465,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Support for the Ministry',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -479,7 +480,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Second Collection',
-                    valueArray: SharingWithOthersArrays?.givingArray,
+                  
                     fromDrawer: true,
                   });
                 }
@@ -515,7 +516,7 @@ const Drawer = () => {
           name: 'Events & Community',
           expandable: false,
           onPress: () => {{
-            navigation.navigate('EventAndComunity')
+            navigation.navigate('EventAndComunity' , {fromDrawer : true})
           }},
         },
         {
@@ -788,7 +789,9 @@ const Drawer = () => {
             <View style={styles.Profile}>
               <CustomImage
                 resizeMode={'cover'}
-                source={require('../Assets/Images/dummyUser.png')}
+                source={
+                  userData?.photo ? {uri: `${baseUrl}${userData?.photo}`} :
+                  require('../Assets/Images/dummyUser.png')}
                 style={{width: '100%', height: '100%'}}
               />
             </View>
@@ -797,7 +800,7 @@ const Drawer = () => {
               <CustomText
                 style={{fontSize: moderateScale(16, 0.6), color: Color.black}}
                 isBold>
-                john
+                {userData?.name}
               </CustomText>
 
               <CustomText
@@ -806,7 +809,7 @@ const Drawer = () => {
                   fontSize: moderateScale(11, 0.6),
                   color: Color.black,
                 }}>
-                john@gmail.com
+                {userData?.email}
               </CustomText>
             </View>
           </View>

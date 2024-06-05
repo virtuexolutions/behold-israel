@@ -69,7 +69,7 @@ const HomeScreen = () => {
     {
       id: 3,
       image: require('../Assets/Images/store.png'),
-      onPress: () => navigationService.navigate('Store'),
+      onPress: () => navigationService.navigate('Store', {fromHomeScreen: true}),
 
       title: 'STORE',
       description:
@@ -86,7 +86,7 @@ const HomeScreen = () => {
     {
       id: 5,
       image: require('../Assets/Images/donation.png'),
-      onPress: () => navigationService.navigate('DonationScreen'),
+      onPress: () => navigationService.navigate('Donation'),
 
       title: 'Donation',
       description:

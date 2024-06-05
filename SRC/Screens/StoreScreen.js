@@ -1,5 +1,5 @@
-import {ImageBackground, StyleSheet, Text, View, FlatList} from 'react-native';
-import React from 'react';
+import {ImageBackground, StyleSheet, Text, View, FlatList, ActivityIndicator} from 'react-native';
+import React, { useEffect, useState } from 'react';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import {moderateScale} from 'react-native-size-matters';
 import CustomText from '../Components/CustomText';
@@ -14,12 +14,31 @@ import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import Header from '../Components/Header';
 import Feather from 'react-native-vector-icons/Feather'
+import { Get } from '../Axios/AxiosInterceptorFunction';
 
-const StoreScreen = () => {
+const StoreScreen = ({route}) => {
   const navigation = useNavigation();
+  const token = useSelector(state => state.authReducer.token);
+  const fromHomeScreen = route?.params?.fromHomeScreen;
   const cartData = useSelector(state => state.commonReducer.cart);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   console.log('🚀 ~ StoreScreen ~ cartData:', cartData?.length);
 
+  const getProducts = async () =>{
+    const url = "auth/product";
+    setIsLoading(true);
+    const response = await Get(url, token);
+    setIsLoading(false);
+    console.log("🚀 ~ getProducts ~ response:", response?.data)
+    if(response !== undefined){
+      setProducts(response?.data?.product_list)
+    }
+
+  }
+  useEffect(() =>{
+    getProducts();
+  },[])
   const cardsArray = [
     {
       id: 1,
@@ -82,7 +101,6 @@ const StoreScreen = () => {
       totalquantity: 15,
     },
   ];
-
   return (
     <ImageBackground
       style={{
@@ -92,12 +110,46 @@ const StoreScreen = () => {
       }}
       source={require('../Assets/Images/recorded.png')}>
         {/* <Icon onPress={() => navigation.navigate('MyDrawer')} name={'menu'} as={Feather} color={Color.white} size={ moderateScale(18,.6)} /> */}
-      <Header title={'store'} cart={true} 
+      <Header showBack={fromHomeScreen} title={'store'} cart={true} 
       onPress={() =>{
         navigation.toggleDrawer();
       }}
       
       />
+       {/* <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor :Color.white,
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={'menu'}
+            as={Feather}
+            size={moderateScale(25, 0.3)}
+            color={Color.black}
+            onPress={() => {
+              navigation.toggleDrawer();
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View> */}
       {/* <View
         style={[
           styles.rowContainner,
@@ -195,7 +247,7 @@ const StoreScreen = () => {
         />
       </View>
 
-      <FlatList
+    {isLoading ? <ActivityIndicator size={moderateScale(24,0.2)} color={'white'}/>  : <FlatList
         showsVerticalScrollIndicator={true}
         nestedScrollEnabled={true}
         scrollEnabled={true}
@@ -206,11 +258,18 @@ const StoreScreen = () => {
           padding: moderateScale(10, 0.6),
           paddingBottom: moderateScale(350, 0.6),
         }}
-        data={cardsArray}
+        data={products}
         renderItem={({item, index}) => {
           return <KidsCards item={item} />;
         }}
-      />
+        ListEmptyComponent={() =>{
+          return (
+            <View>
+
+            </View>
+          );
+        }}
+      />}
     </ImageBackground>
   );
 };

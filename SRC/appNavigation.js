@@ -66,6 +66,8 @@ import Team from './Screens/Team';
 import ResetPassword from './Screens/ResetPassword';
 import EnterEmail from './Screens/EnterEmail';
 import VerifyNumber from './Screens/VerifyNumber';
+import OrderScreen from './Screens/OrderScreen';
+import OrderDetails from './Screens/OrderDetails';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -108,7 +110,7 @@ const AppNavigator = () => {
         <RootNav.Navigator
           initialRouteName={firstScreen}
           screenOptions={{headerShown: false}}>
-          <RootNav.Screen name="TabNavigation" component={TabNavigation} />
+          {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
           <RootNav.Screen
             name="WalkThroughScreen"
@@ -123,6 +125,8 @@ const AppNavigator = () => {
           />
           <RootNav.Screen name="DonationHistory" component={DonationHistory} />
           <RootNav.Screen name="MyAccounts" component={Account} />
+          <RootNav.Screen name="YourOrders" component={OrderScreen} />
+          <RootNav.Screen name="OrderDetails" component={OrderDetails} />
           <RootNav.Screen name="HelpAndSupport" component={HelpAndSupport} />
           <RootNav.Screen name="Profile" component={Profile} />
           <RootNav.Screen name="Signup" component={Signup} />
@@ -147,12 +151,13 @@ const AppNavigator = () => {
             component={KidsLectureScreen}
           />
           <RootNav.Screen name="LiveLecture" component={LiveLecture} />
-          <RootNav.Screen name="DonationScreen" component={Donation} />
+          <RootNav.Screen name="Donation" component={Donation} />
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
           <RootNav.Screen name="EnterEmail" component={EnterEmail} />
           <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
+          
           {/* <RootNav.Screen
             name="RecommandedBooks"
             component={RecommandedBooks}
@@ -217,7 +222,7 @@ export const TabNavigation = () => {
 
             color = focused ? Color.theme2 : Color.white;
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else if (route.name === 'Donation') {
+          } else if (route.name === 'BibleCategories') {
             iconName = focused ? 'donate' : 'donate';
             type = FontAwesome5;
             color = focused ? Color.theme2 : Color.white;
@@ -269,8 +274,15 @@ export const TabNavigation = () => {
           </View>
         ),
       })}>
-      <Tabs.Screen name={'HomeScreen'} component={HomeScreen} />
-      <Tabs.Screen name={'Donation'} component={Donation} />
+      <Tabs.Screen name={'HomeScreen'} component={HomeScreen}  />
+      {/* <Tabs.Screen name={'HomeScreen'} component={HomeScreen}  /> */}
+      {/* <Tabs.Screen name={'Donation'} component={Donation} initialParams={{ fromDrawer: false }} /> */}
+      {/* <Tabs.Screen name={'OldTestament'} component={TestmentsScreeen} initialParams={{ fromTab: true }} />
+    />  */}
+      <Tabs.Screen
+name="BibleCategories" component={BibleCategories}
+initialParams={{ fromTab: true }}
+/>
       <Tabs.Screen name={'Campaigns'} component={Campaigns} />
 
       {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
@@ -297,6 +309,8 @@ export const MyDrawer = () => {
       }}>
       {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
       {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
+      <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
+
       <DrawerNavigation.Screen
         name="MemberShipForm"
         component={MemberShipForm}
@@ -309,13 +323,13 @@ export const MyDrawer = () => {
         name="EventAndComunity"
         component={EventAndComunity}
       />
-      <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
       <DrawerNavigation.Screen
         name="OutReachMissions"
         component={OutReachMissions}
       />
       <DrawerNavigation.Screen name="AboutUs" component={AboutUs} />
       <DrawerNavigation.Screen name="GalleryFror" component={GalleryFror} />
+      {/* <DrawerNavigation.Screen name="Donation" component={Donation} /> */}
 
       <DrawerNavigation.Screen name="GoodThings" component={GoodThings} />
       <DrawerNavigation.Screen name="QrScanScreen" component={QrScanScreen} />

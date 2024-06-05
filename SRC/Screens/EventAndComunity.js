@@ -24,7 +24,8 @@ import Color from '../Assets/Utilities/Color';
 import {SliderBox} from 'react-native-image-slider-box';
 // import { SafeAreaView } from 'react-native-safe-area-context'
 
-const EventAndComunity = () => {
+const EventAndComunity = (props) => {
+  const fromDrawer = props?.route?.params?.fromDrawer;
   const meetup = [
     {
       id: '1',
@@ -68,7 +69,7 @@ const EventAndComunity = () => {
           }}>
           <Header
             // headerColor={'transparent'}
-            showLeft={true}
+            showBack={fromDrawer ? false : true}
             leftName={'menu'}
             leftType={Feather}
             title={'Donation'}

@@ -5,10 +5,15 @@ import CustomImage from './CustomImage'
 import { windowHeight, windowWidth } from '../Utillity/utils'
 import { moderateScale } from 'react-native-size-matters'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddToCart } from '../Store/slices/common'
+import { AddToCart, RemoveToCart } from '../Store/slices/common'
 import { useNavigation } from '@react-navigation/native'
+import { Icon } from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Color from '../Assets/Utilities/Color'
+import { baseUrl } from '../Config'
 
 const KidsCards = ({item}) => {
+    console.log("🚀 ~ KidsCards ~ item:", item)
     const navigation =useNavigation()
 const dispatch =useDispatch()
 //   console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
@@ -20,17 +25,7 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
   return (
     <TouchableOpacity
-    onPress={() => {
-        if (cardData.find((data, index) => data?.id == item?.id)) {
-            Platform.OS == 'android'
-              ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
-              : Alert.alert('item already added');
-          } else {
-              dispatch(AddToCart(item))
-            // dispatch(AddToCart({...item, quantity: 1, size_id: {}}));
-          }
-        console.log('item succsessfully add to cart')
-}}
+
     
     style={{
         backgroundColor:Color.white,
@@ -59,9 +54,10 @@ const cardData = useSelector(state => state.commonReducer.cart);
                 borderRadius:moderateScale(10,.6),
                 overFlow:'hidden'
             }}
-            source={item?.image}
+            source={{uri: `${baseUrl}${item?.photo}`}}
             />
         </View>
+
         <CustomText 
             // numberOfLines={2}
             isBold
@@ -84,7 +80,7 @@ const cardData = useSelector(state => state.commonReducer.cart);
                 paddingVertical: moderateScale(2,.6),
                 // paddingHorizontal: moderateScale(10, .6)
             }}>
-     {item?.discription}
+     {item?.description}
         </CustomText>  
         <CustomText 
             numberOfLines={1}
@@ -97,6 +93,31 @@ const cardData = useSelector(state => state.commonReducer.cart);
             }}>
      {item?.price}
         </CustomText> 
+        <TouchableOpacity 
+            onPress={() => {
+                if (cardData.find((data, index) => data?.id == item?.id)) {
+                    // Platform.OS == 'android'
+                    //   ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+                    //   : Alert.alert('item already added');
+                    dispatch(RemoveToCart({id: item?.id}))
+                  } else {
+                      dispatch(AddToCart({...item, quantity: 1}))
+                          // Platform.OS == 'android'
+                    //   ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+                    //   : Alert.alert('item already added');
+                    // dispatch(AddToCart({...item, quantity: 1, size_id: {}}));
+                  }
+                console.log('item succsessfully add to cart')
+        }}
+        >
+            <Icon
+            as={Ionicons}
+            name={cardData?.some((data, index) => data?.id === item?.id) ? 'cart' : 'cart-outline'}
+            size={moderateScale(24,0.3)}
+            color={Color.black}
+            />
+
+        </TouchableOpacity>
     </TouchableOpacity>
   )
 }

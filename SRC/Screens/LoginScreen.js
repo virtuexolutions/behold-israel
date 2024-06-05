@@ -73,7 +73,7 @@ const LoginScreen = (props) => {
 
    console.log('LoginResponse============>>>>>>>', response);
     if (response?.data?.success) {
-      console.log("Login Testing =============>>>>>>",response?.data?.user_info)
+       console.log("Login Testing =============>>>>>>",response?.data?.user_info)
       dispatch(setUserData(response?.data?.user_info));
       dispatch(SetUserRole(response?.data?.user_info?.role))
       dispatch(setUserToken({token: response?.data?.token}));

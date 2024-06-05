@@ -22,6 +22,8 @@ import {Icon, Toast} from 'native-base';
 // import { selectedProductSize } from '../Store/slices/common';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {useNavigation} from '@react-navigation/native';
+import CustomImage from '../Components/CustomImage';
+import CustomText from '../Components/CustomText';
 
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
@@ -151,6 +153,31 @@ const CheckoutScreen = ({route}) => {
                   borderRadius={moderateScale(30, 0.3)}
                   // isGradient
                 />
+              </View>
+            );
+          }}
+          ListEmptyComponent={()=>{
+            return(
+              <View style={{ width:windowWidth, height:windowHeight,
+              justifyContent:'center',
+              alignItems:'center'
+              }}>
+                <View
+                style={{width:windowWidth * 0.6, height:windowHeight * 0.45}}
+                >
+
+                <CustomImage
+                resizeMode={'contain'}
+                style={{width:'100%', height:'100%'}}
+                source={require('../Assets/Images/empty-cart.png')}
+                />
+                </View>
+                <CustomText
+                isBold
+                style={{color:'white', fontSize: moderateScale(25,0.2)}}
+                >
+                  No Items in Cart
+                </CustomText>
               </View>
             );
           }}

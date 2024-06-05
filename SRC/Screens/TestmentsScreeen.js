@@ -4,10 +4,14 @@ import { moderateScale } from 'react-native-size-matters'
 import { windowHeight, windowWidth } from '../Utillity/utils'
 import OldTestment from '../Components/OldTestment'
 import CustomText from '../Components/CustomText'
+import { Icon } from 'native-base'
+import Feather from "react-native-vector-icons/Feather";
+import Ionicons from 'react-native-vector-icons/Ionicons'
 // import CardContainer from '../Components/CardContainer'
 
-const TestmentsScreeen = () => {
-
+const TestmentsScreeen = ({route, navigation}) => {
+const fromTabs = route?.params?.fromTab;
+    console.log("🚀 ~ TestmentsScreeen ~ fromTabs:", fromTabs)
     const OldTestmentBooksName = [
 
 
@@ -74,12 +78,51 @@ const TestmentsScreeen = () => {
         <ImageBackground
             style={{
                 width: windowWidth,
-                minHeight: windowHeight,
+                height: fromTabs ? windowHeight * 0.94 : windowHeight,
                 paddingBottom: moderateScale(40, 0.6),
                 alignItems: 'center',
             }}
             resizeMode="cover"
             source={require('../Assets/Images/recorded.png')}>
+                           <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top: 35,
+          left:20,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+            height :windowHeight*0.05,
+            width:windowHeight*0.05,
+            borderRadius :windowHeight*0.05 /2,
+            backgroundColor : fromTabs ? Color.white :'transparent',
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+            name={fromTabs ? 'menu': 'arrow-back'}
+            as={fromTabs ? Feather : Ionicons}
+            size={moderateScale(25, 0.3)}
+            color={fromTabs ? Color.black : Color.white}
+            onPress={() => {
+                if(fromTabs){
+              navigation.toggleDrawer();
+            }
+            else{
+                navigation.goBack();
+            }
+              // navigationN.dispatch(DrawerActions.toggleDrawer())
+              
+            }}
+          />
+        </View>
             <CustomText
                 numberOfLines={1}
                 isBold
@@ -94,6 +137,7 @@ const TestmentsScreeen = () => {
                     borderRadius: moderateScale(10, .6),
                     borderColor: Color.white,
                     width: windowWidth * 0.85,
+                    // height: windowHeight,
                     alignItems: 'center',
                     borderWidth: moderateScale(1, .6),
                     padding: moderateScale(20, .6),

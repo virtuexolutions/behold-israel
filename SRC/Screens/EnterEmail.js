@@ -50,7 +50,7 @@ const EnterEmail = props => {
     const response = await Post(url, {email: email}, apiHeader());
     setIsLoading(false);
     if (response != undefined) {
-      console.log('response data =>', response?.data);
+      console.log('response data =>', response?.data?.data[0]?.code);
       Platform.OS == 'android'
         ? ToastAndroid.show(`OTP sent to ${email}`, ToastAndroid.SHORT)
         : alert(`OTP sent to ${email}`);
@@ -58,11 +58,11 @@ const EnterEmail = props => {
         ? props.navigation.navigate('VerifyNumber', {
             fromForgot: fromForgot,
             email: `${email}`,
-            code: response?.data?.code,
+            code: response?.data.data[0].code,
           })
         : navigationService.navigate('VerifyNumber', {
             email: `${email}`,
-            code: response?.data?.code,
+            code: response?.data.data[0]?.code,
           });
     }
   };
@@ -130,7 +130,7 @@ const EnterEmail = props => {
           <View style={{paddingVertical: moderateScale(30, 0.3) , alignItems : 'center'}}>
             <CustomText isBold style={styles.txt2}>Forget Password</CustomText>
             <CustomText style={styles.txt3} numberOfLines={3}>
-            Enter the email address and we'll send and email with instructions
+            Enter the email address and we'll send an email with instructions
               to reset your password{' '}
             {/* Forgot your password ? don't worry, jsut take a simple step and create your new password! */}
             </CustomText>
