@@ -283,8 +283,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
               }}>
               <TouchableOpacity
                 onPress={() => {
-                  setIsModal(true);
+                  // setIsModal(true);
                   setIsChecked('pay through stripe');
+                  ToastAndroid.show('Order Placed' , ToastAndroid.SHORT)
                 }}
                 style={{
                   width: windowHeight * 0.015,

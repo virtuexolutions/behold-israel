@@ -46,6 +46,7 @@ import ProductDetail from './Screens/ProductDetail';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
 
 import ChangePassword from './Screens/ChangePassword';
+import SelectChapter from './Screens/SelectChapter';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -96,6 +97,8 @@ const AppNavigator = () => {
           <RootNav.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
           <RootNav.Screen name="TermsAndConditions" component={TermsAndConditions} />
           <RootNav.Screen name="DonationHistory" component={DonationHistory} />
+          <RootNav.Screen name="Donation" component={Donation} />
+          <RootNav.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen}/>
           <RootNav.Screen name="MyAccounts" component={Account} />
           <RootNav.Screen name="HelpAndSupport" component={HelpAndSupport} />
           <RootNav.Screen name="Profile" component={Profile} />
@@ -105,7 +108,6 @@ const AppNavigator = () => {
           <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
           {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
           <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/>
-          <RootNav.Screen name="BookDescriptionScreen" component={BookDescriprtionScreen}/>
           <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/>
           <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/>
           <RootNav.Screen name="LiveLecture" component={LiveLecture}/>
@@ -116,6 +118,8 @@ const AppNavigator = () => {
           {/* <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/> */}
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
           <RootNav.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
+          <RootNav.Screen name="SelectChapter" component={SelectChapter} />
+
 
 
 

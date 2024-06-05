@@ -21,15 +21,16 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import numeral from 'numeral';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import moment from 'moment';
 
 const CartItem = ({item, fromCheckout}) => {
-  // console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item);
+  console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item?.image);
   const cartData = useSelector(state => state.commonReducer.cart);
-  console.log("🚀 ~ CartItem ~ cartData:", cartData)
+  console.log('🚀 ~ CartItem ~ cartData:', cartData);
 
   const dispatch = useDispatch();
-  const  navigation =useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.cardContainer} key={item?.id}>
@@ -57,31 +58,37 @@ const CartItem = ({item, fromCheckout}) => {
           />
         </View>
         <View style={styles.other1}>
-          <View style={{
-            flexDirection:'row',
-            // position:'absolute'
-          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              // position:'absolute'
+            }}>
             <CustomText style={styles.text1}>{item?.title}</CustomText>
-          <Icon
-          style={{
-            position:'absolute',
-            right:10,
-            top:0
-          }}
-                name={'circle-with-cross'}
-                as={Entypo}s
-                color={Color.white}
-                size={moderateScale(15, 0.3)}
-                onPress={() => {
-               
-               dispatch(RemoveToCart({id: item?.id}))
-               
-                }}
-              />
+            <Icon
+              style={{
+                position: 'absolute',
+                right: 10,
+                top: 0,
+              }}
+              name={'circle-with-cross'}
+              as={Entypo}
+              s
+              color={Color.white}
+              size={moderateScale(15, 0.3)}
+              onPress={() => {
+                dispatch(RemoveToCart({id: item?.id}));
+              }}
+            />
           </View>
-          <CustomText style={[styles.text1 ,{
-            fontSize:moderateScale(11,.6)
-          }]}>{item?.discription}</CustomText>
+          <CustomText
+            style={[
+              styles.text1,
+              {
+                fontSize: moderateScale(11, 0.6),
+              },
+            ]}>
+            {item?.discription}
+          </CustomText>
           {/* <View
             style={{
               flexDirection: 'row',
@@ -176,10 +183,7 @@ const CartItem = ({item, fromCheckout}) => {
               },
             ]}>
             <CustomText style={styles.amount}>
-
-              {cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.qty }
-            {/* {item?.price * item?.qty}  */}
-              {/* {item?.price * item?.qty} PKR */}
+              {numeral(item?.price * item?.qty).format('$0.00')}
             </CustomText>
 
             <View
@@ -194,7 +198,7 @@ const CartItem = ({item, fromCheckout}) => {
                 color={Color.white}
                 size={moderateScale(25, 0.3)}
                 onPress={() => {
-                  console.log('increment')
+                  console.log('increment');
                   item?.qty < item?.totalquantity &&
                     dispatch(increamentQuantity({id: item?.id}));
                 }}
@@ -202,7 +206,7 @@ const CartItem = ({item, fromCheckout}) => {
               <CustomText
                 isBold
                 style={{
-                  color:Color.white,
+                  color: Color.white,
                   marginHorizontal: moderateScale(5, 0.3),
                   fontSize: moderateScale(12, 0.3),
                 }}>
@@ -284,7 +288,7 @@ const styles = StyleSheet.create({
     // marginRight: moderateScale(5, 0.3),
   },
   amount: {
-    fontSize: moderateScale(18, 0.3),
+    fontSize: moderateScale(14, 0.6),
     color: Color.white,
   },
 });

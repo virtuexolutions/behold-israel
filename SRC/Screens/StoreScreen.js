@@ -1,5 +1,5 @@
 import {ImageBackground, StyleSheet, Text, View, FlatList} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import {moderateScale} from 'react-native-size-matters';
 import CustomText from '../Components/CustomText';
@@ -12,74 +12,80 @@ import {Icon} from 'native-base';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import {search} from 'react-native-country-picker-modal/lib/CountryService';
 
 const StoreScreen = () => {
   const navigation = useNavigation();
   const cartData = useSelector(state => state.commonReducer.cart);
-  console.log('🚀 ~ StoreScreen ~ cartData:', cartData?.length);
+  const [searchText, setsearchText] = useState('');
+  const [cardsArray, setCardsArray] = useState([]);
 
-  const cardsArray = [
-    {
-      id: 1,
-      image: require('../Assets/Images/cardpic1.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty:1,
-      totalquantity :10
-    },
-    {
-      id: 2,
-      image: require('../Assets/Images/cardpic2.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty:1,
-      totalquantity :23
-    },
-    {
-      id: 3,
-      image: require('../Assets/Images/cardpic6.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty:1,
-      totalquantity :16
-    },
-    {
-      id: 4,
-      image: require('../Assets/Images/cardpic4.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty:1,
-      totalquantity :14
-    },
-    {
-      id: 5,
-      image: require('../Assets/Images/cardpic5.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
-      price: '$74.00',
-      qty:1,
-      totalquantity :20
-    },
-    {
-      id: 6,
-      image: require('../Assets/Images/cardpic3.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty:1,
-      totalquantity :15
-    },
-  ];
+  useEffect(() => {
+    if (searchText == '') {
+      setCardsArray([
+        {
+          id: 1,
+          image: require('../Assets/Images/cardpic1.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 10,
+        },
+        {
+          id: 2,
+          image: require('../Assets/Images/cardpic2.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 23,
+        },
+        {
+          id: 3,
+          image: require('../Assets/Images/cardpic6.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 16,
+        },
+        {
+          id: 4,
+          image: require('../Assets/Images/cardpic4.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 14,
+        },
+        {
+          id: 5,
+          image: require('../Assets/Images/cardpic5.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 20,
+        },
+        {
+          id: 6,
+          image: require('../Assets/Images/cardpic3.png'),
+          title: 'Lorem ipsum dolor',
+          discription:
+            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          price: 74.0,
+          qty: 1,
+          totalquantity: 15,
+        },
+      ]);
+    }
+  }, [searchText]);
 
   return (
     <ImageBackground
@@ -158,6 +164,11 @@ const StoreScreen = () => {
             width: windowWidth * 0.75,
             backgroundColor: Color.white,
           }}
+          arrayItem={'Product'}
+          array={cardsArray}
+          setNewData={setCardsArray}
+          search={searchText}
+          setSearch={setsearchText}
         />
         <CustomButton
           bgColor={Color.theme2}
@@ -179,11 +190,11 @@ const StoreScreen = () => {
         <CustomText numberOfLines={1} isBold style={styles.heading2}>
           New arrivals
         </CustomText>
-        <CustomButton
+        {/* <CustomButton
           text={'See All Collection'}
           textColor={Color.veryLightGray}
           fontSize={moderateScale(13, 0.6)}
-        />
+        /> */}
       </View>
 
       <FlatList

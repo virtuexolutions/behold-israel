@@ -1,5 +1,5 @@
 import { ImageBackground, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import {moderateScale, ScaledSheet} from 'react-native-size-matters';
 
 import {apiHeader, windowHeight, windowWidth} from '../Utillity/utils';
@@ -24,12 +24,13 @@ let cardContents=[
     },
   ];
 
-function Card({image, heading, description, subtitle ,onPress}){
+function Card({image, heading, description, subtitle ,onPress ,setSelectedTestment}){
     const navigation = useNavigation();
     return(
 
         <TouchableOpacity onPress={() => {
-            navigation.navigate('TestmentsScreeen')
+            // setSelectedTestment(heading)
+            navigation.navigate('TestmentsScreeen',{selectedTestment :heading})
             console.log('helllooooooooooooooooooo========>')
         }}>
 
@@ -59,6 +60,8 @@ function Card({image, heading, description, subtitle ,onPress}){
 
 const BibleCategories = () => {
     const navigation = useNavigation()
+    const [selectedTestment ,setSelectedTestment] =useState('')
+    // console.log("🚀 ~ BibleCategories ~===========>selectedT/estment:", selectedTestment)
   
     return (
         <ScrollView>
@@ -96,6 +99,7 @@ const BibleCategories = () => {
     cardContents.map((content,id)=>{
         return(
             <Card
+            setSelectedTestment={setSelectedTestment}
             key={content.id}
             image={content.image}
             heading={content.heading}

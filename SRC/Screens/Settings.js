@@ -49,14 +49,14 @@ const Settings = () => {
         navigationService.navigate('TermsAndConditions');
       },
     },
-    {
-      id: 7,
-      name: 'Account',
-      next: '>',
-      onPress: () => {
-        navigationService.navigate('MyAccounts');
-      },
-    },
+    // {
+    //   id: 7,
+    //   name: 'Account',
+    //   next: '>',
+    //   onPress: () => {
+    //     navigationService.navigate('MyAccounts');
+    //   },
+    // },
     {
       id: 8,
       name: 'Help & support',

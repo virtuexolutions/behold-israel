@@ -136,11 +136,11 @@ const DonationDetails = props => {
                 style={{
                   // width: windowWidth * 0.1,
                   // height: windowHeight * 0.02,
-                  backgroundColor: 'rgba(0,0,0,0.3)',
+                  // backgroundColor: 'rgba(0,0,0,0.3)',
                   padding: moderateScale(5, 0.6),
                   borderRadius: moderateScale(10, 0.6),
                 }}>
-                <Icon
+                {/* <Icon
                   name={'sharealt'}
                   as={AntDesign}
                   color={Color.black}
@@ -148,7 +148,7 @@ const DonationDetails = props => {
                   onPress={() => {
                     // fun()
                   }}
-                />
+                /> */}
               </View>
             </View>
           </View>
@@ -181,7 +181,7 @@ const DonationDetails = props => {
               isBold>
               title
             </CustomText>
-            {item?.type == 'variable' ? (
+          
               <>
                 <CustomText
                   style={{
@@ -192,7 +192,7 @@ const DonationDetails = props => {
                     paddingVertical: moderateScale(5, 0.6),
                   }}
                   isBold>
-                  {`Rs${detail?.collected} Fund raised from Rs${detail?.target}`}
+                  {`$100 Fund raised from $1000`}
                   {/* dhjkshdjfkhsd */}
                 </CustomText>
                 <View
@@ -205,7 +205,7 @@ const DonationDetails = props => {
                   <View
                     style={{
                       backgroundColor: Color.themeColor,
-                      width: `${(detail?.collected / detail?.target) * 100}%`,
+                      width: `20%`,
                       borderRadius: moderateScale(15, 0.6),
                       height: moderateScale(10, 0.6),
                     }}
@@ -229,7 +229,7 @@ const DonationDetails = props => {
                       color: Color.black,
                     }}
                     isBold>
-                    donators
+                   12 donators
                   </CustomText>
                   <CustomText
                     style={{
@@ -239,76 +239,11 @@ const DonationDetails = props => {
                       color: Color.black,
                     }}>
                     {/* {moment(detail?.expire_date).diff(moment(), 'days')} */}
-                    days left
+                   5 days left
                   </CustomText>
                 </View>
               </>
-            ) : (
-              <>
-                <View
-                  style={{
-                    width: windowWidth * 0.9,
-                    height: moderateScale(10, 0.6),
-                    alignSelf: 'center',
-                    backgroundColor: '#DDDDDD',
-                    marginTop: moderateScale(10, 0.3),
-                    borderRadius: moderateScale(20, 0.6),
-                  }}>
-                  <View
-                    style={{
-                      width: `${
-                        (item?.ticket_counter / item?.ticket_tickets) * 100
-                      }%`,
-                      height: moderateScale(10, 0.6),
-
-                      backgroundColor: '#3E3028',
-
-                      borderRadius: moderateScale(20, 0.6),
-                    }}></View>
-                </View>
-                <View
-                  style={{
-                    width: windowWidth * 0.9,
-                    justifyContent: 'space-between',
-                    flexDirection: 'row',
-                    //  height: moderateScale(10, 0.6),
-                    alignSelf: 'center',
-                    marginBottom: 10,
-                  }}>
-                  <CustomText
-                    style={{
-                      width: windowWidth * 0.4,
-                      fontSize: moderateScale(12, 0.6),
-                      color: Color.black,
-                    }}
-                    isBold>
-                    {/* {`Sold tickets ${item?.ticket_counter}` } */}
-                    Sold tickets
-                  </CustomText>
-                  <CustomText
-                    style={{
-                      fontSize: moderateScale(12, 0.6),
-                      color: Color.black,
-                    }}
-                    isBold>
-                    {/* {`total tickets ${item?.ticket_tickets}` } */}
-                    total tickets
-                  </CustomText>
-                </View>
-                <CustomText
-                  style={{
-                    width: windowWidth * 0.9,
-                    marginTop: moderateScale(10, 0.3),
-                    // backgroundColor: 'red',
-                    fontSize: moderateScale(14, 0.6),
-                    paddingVertical: moderateScale(5, 0.6),
-                  }}
-                  isBold>
-                  {/* {`Price: PKR${detail?.fix_amount}`} */}
-                  price
-                </CustomText>
-              </>
-            )}
+          
             <View
               style={{
                 width: windowWidth,
@@ -350,7 +285,7 @@ const DonationDetails = props => {
                   color: Color.black,
                 }}>
                 {/* {detail?.donators}  */}
-                donators 20
+                donators 12
               </CustomText>
             </View>
 
@@ -394,7 +329,7 @@ const DonationDetails = props => {
             }}>
             <CustomButton
               onPress={() => {
-                navigation.navigate('DonateNow', {campaignData: detail});
+                navigation.navigate('Donation', {campaignData: detail});
               }}
               text={'Donate Now'}
               textColor={Color.white}

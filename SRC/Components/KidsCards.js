@@ -5,10 +5,13 @@ import CustomImage from './CustomImage'
 import { windowHeight, windowWidth } from '../Utillity/utils'
 import { moderateScale } from 'react-native-size-matters'
 import { useDispatch, useSelector } from 'react-redux'
-import { AddToCart } from '../Store/slices/common'
+import { AddToCart, RemoveToCart } from '../Store/slices/common'
 import { useNavigation } from '@react-navigation/native'
+import CustomButton from './CustomButton'
+import Color from '../Assets/Utilities/Color'
 
 const KidsCards = ({item}) => {
+    console.log("🚀 ~ KidsCards ~ item:", item?.image)
     const navigation =useNavigation()
 const dispatch =useDispatch()
 //   console.log("🚀 ~ file: KidsCards.js:9 ~ KidsCards ~ item:", item)
@@ -19,7 +22,9 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
 
   return (
+    <View>
     <TouchableOpacity
+    activeOpacity={0.9  }
     onPress={() => {
         if (cardData.find((data, index) => data?.id == item?.id)) {
             Platform.OS == 'android'
@@ -48,11 +53,18 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
         }}>
             <CustomImage
-              onPress={() => {
-                navigation.navigate('ProductDetail' ,{item :item})
-                console.log('image')
-            //   dispatch(AddToCart(item))
-            }}
+             onPress={() => {
+                if (cardData.find((data, index) => data?.id == item?.id)) {
+                    Platform.OS == 'android'
+                      ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+                      : Alert.alert('item already added');
+                  } else {
+                      dispatch(AddToCart(item))
+                      console.log('item succsessfully add to cart')
+                    // dispatch(AddToCart({...item, quantity: 1, size_id: {}}));
+                  }
+        }}
+             
             style={{
                 height:"100%",
                 width:'100%',
@@ -95,9 +107,50 @@ const cardData = useSelector(state => state.commonReducer.cart);
                 // paddingVertical: moderateScale(10, .6),
                 // paddingHorizontal: moderateScale(10, .6)
             }}>
-     {item?.price}
+     ${item?.price}
         </CustomText> 
+        <CustomText 
+         onPress={() => {
+            navigation.navigate('ProductDetail' ,{item :item})
+           
+        }}
+            numberOfLines={1}
+            style={{
+                fontSize: moderateScale(10, 0.6),
+                color:Color.themeBlack,
+                position : 'absolute' ,
+                bottom  : 10, 
+                right : 2,
+
+                // paddingVertical: moderateScale(10, .6),
+                // paddingHorizontal: moderateScale(10, .6)
+            }}>
+     View details
+        </CustomText>
     </TouchableOpacity>
+    {
+        cardData.find((data, index) => data?.id == item?.id) &&
+    
+    <CustomButton
+                isBold
+                onPress={() => {
+                 dispatch(RemoveToCart({id : item?.id }))
+                }}
+                text={'Remove'}
+                textColor={Color.theme2}
+                width={windowWidth * 0.3}
+                height={windowHeight * 0.04}
+                fontSize={moderateScale(13, 0.6)}
+                // marginBottom={moderateScale(10,.3)}
+                // marginTop={moderateScale(20, 0.3)}
+                bgColor={Color.themeColor}
+                borderRadius={moderateScale(1, 0.3)}
+                borderColor={Color.theme2}
+                borderWidth={1}
+                // isGradient
+              />
+            }
+    </View>
   )
 }
 

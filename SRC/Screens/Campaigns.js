@@ -140,11 +140,13 @@ import SearchbarComponent from '../Components/SearchbarComponent';
                 }}>
                       <SearchbarComponent
                     placeHolderColor={Color.veryLightGray}
-                    placeholderName={'What do you need?'}
+                    placeholderName={'Search for campaigns to donate'}
                     SearchStyle={{
                         width: windowWidth * 0.85,
                         backgroundColor: Color.white,
-                    }} />
+                    }} 
+                    disable={false}
+                    />
              
   
                 <View

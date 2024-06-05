@@ -158,10 +158,11 @@ const ProductDetail = props => {
             <View style={[styles.container]}>
               <CustomImage
                 source={item?.image}
-                resizeMode={'contain'}
+                resizeMode={'stretch'}
                 style={{
+                  width: '100%',
                   height: '100%',
-                  height: '100%',
+                 
                 }}
               />
             </View>
@@ -186,7 +187,7 @@ const ProductDetail = props => {
                 {finalItem?.title}
               </CustomText>
 
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 activeOpacity={0.6}
                 onPress={() => {
                   setLike(!like);
@@ -206,7 +207,7 @@ const ProductDetail = props => {
                     color={Color.white}
                   />
                 )}
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
 
             <View
@@ -233,7 +234,7 @@ const ProductDetail = props => {
                     marginRight: moderateScale(10, 0.3),
                     // width: windowWidth * 0.24,
                   }}>
-                  {item?.price}
+                  ${item?.price}
                 </CustomText>
                 {item?.discount_price && (
                   <CustomText
@@ -411,13 +412,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   container: {
-    paddingTop: moderateScale(10, 0.6),
+    // paddingTop: moderateScale(10, 0.6),
     height: windowHeight * 0.3,
     width: windowWidth * 0.88,
     borderRadius:moderateScale(10,.6),
     overflow:'hidden',
     alignSelf: 'center',
-    backgroundColor: 'green',
+    // backgroundColor: 'green',
   },
   colorContainer: {
     height: windowHeight * 0.04,
