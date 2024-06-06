@@ -219,6 +219,11 @@ const StoreScreen = ({route}) => {
             width: windowWidth * 0.75,
             backgroundColor: Color.white,
           }}
+          arrayItem={'Product'}
+          array={cardsArray}
+          setNewData={setCardsArray}
+          search={searchText}
+          setSearch={setsearchText}
         />
         <CustomButton
           bgColor={Color.theme2}
@@ -240,11 +245,11 @@ const StoreScreen = ({route}) => {
         <CustomText numberOfLines={1} isBold style={styles.heading2}>
           New arrivals
         </CustomText>
-        <CustomButton
+        {/* <CustomButton
           text={'See All Collection'}
           textColor={Color.veryLightGray}
           fontSize={moderateScale(13, 0.6)}
-        />
+        /> */}
       </View>
 
     {isLoading ? <ActivityIndicator size={moderateScale(24,0.2)} color={'white'}/>  : <FlatList

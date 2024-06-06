@@ -68,6 +68,7 @@ import EnterEmail from './Screens/EnterEmail';
 import VerifyNumber from './Screens/VerifyNumber';
 import OrderScreen from './Screens/OrderScreen';
 import OrderDetails from './Screens/OrderDetails';
+import SelectChapter from './Screens/SelectChapter';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -124,6 +125,8 @@ const AppNavigator = () => {
             component={TermsAndConditions}
           />
           <RootNav.Screen name="DonationHistory" component={DonationHistory} />
+          <RootNav.Screen name="Donation" component={Donation} />
+          <RootNav.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen}/>
           <RootNav.Screen name="MyAccounts" component={Account} />
           <RootNav.Screen name="YourOrders" component={OrderScreen} />
           <RootNav.Screen name="OrderDetails" component={OrderDetails} />
@@ -169,6 +172,19 @@ const AppNavigator = () => {
           /> */}
           {/* <RootNav.Screen name="AboutBooks" component={AboutBooks} /> */}
           {/* <RootNav.Screen name="GalleryFror" component={GalleryFror} /> */}
+          <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/>
+          <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/>
+          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/>
+          <RootNav.Screen name="LiveLecture" component={LiveLecture}/>
+          <RootNav.Screen name="DonationScreen" component={Donation}/>
+          <RootNav.Screen name="DonationDetails" component={DonationDetails}/>
+          <RootNav.Screen name="DonateNow" component={DonateNow}/>
+          <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/>
+          {/* <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/> */}
+          <RootNav.Screen name="ProductDetail" component={ProductDetail} />
+          <RootNav.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
+          <RootNav.Screen name="SelectChapter" component={SelectChapter} />
+
 
           <RootNav.Screen
             name="PlaceOrderScreen"

@@ -27,10 +27,10 @@ import { baseUrl } from '../Config';
 const CartItem = ({item, fromCheckout}) => {
   console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item?.photo);
   const cartData = useSelector(state => state.commonReducer.cart);
-  console.log("🚀 ~ CartItem ~ cartData:", cartData)
+  console.log('🚀 ~ CartItem ~ cartData:', cartData);
 
   const dispatch = useDispatch();
-  const  navigation =useNavigation()
+  const navigation = useNavigation();
 
   return (
     <View style={styles.cardContainer} key={item?.id}>
@@ -58,10 +58,11 @@ const CartItem = ({item, fromCheckout}) => {
           />
         </View>
         <View style={styles.other1}>
-          <View style={{
-            flexDirection:'row',
-            // position:'absolute'
-          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              // position:'absolute'
+            }}>
             <CustomText style={styles.text1}>{item?.title}</CustomText>
           <Icon
           style={{
@@ -80,9 +81,15 @@ const CartItem = ({item, fromCheckout}) => {
                 }}
               />
           </View>
-          <CustomText style={[styles.text1 ,{
-            fontSize:moderateScale(11,.6)
-          }]}>{item?.discription}</CustomText>
+          <CustomText
+            style={[
+              styles.text1,
+              {
+                fontSize: moderateScale(11, 0.6),
+              },
+            ]}>
+            {item?.discription}
+          </CustomText>
           {/* <View
             style={{
               flexDirection: 'row',
@@ -203,7 +210,7 @@ const CartItem = ({item, fromCheckout}) => {
               <CustomText
                 isBold
                 style={{
-                  color:Color.white,
+                  color: Color.white,
                   marginHorizontal: moderateScale(5, 0.3),
                   fontSize: moderateScale(12, 0.3),
                 }}>
@@ -285,7 +292,7 @@ const styles = StyleSheet.create({
     // marginRight: moderateScale(5, 0.3),
   },
   amount: {
-    fontSize: moderateScale(18, 0.3),
+    fontSize: moderateScale(14, 0.6),
     color: Color.white,
   },
 });

@@ -24,19 +24,25 @@ const SearchbarComponent = ({
   fontSize,
   alignSelf,
   SearchStyle,
+  search,
+  setSearch,
+  disable
 }) => {
   console.log("🚀 ~ file: SearchbarComponent.js:28 ~ arrayItem:", arrayItem)
   console.log("🚀 ~ file: SearchbarComponent.js:28 ~ array:", array)
-  const [search, setSearch] = useState('');
+  // const [search, setSearch] = useState('');
   const orderData = useSelector(state => state.commonReducer.order);
 
   const OnSearch = text => {
+  //  return console.log("🚀 ~ OnSearch ~ text:", text)
     let tempdata = array.filter(item => {
       return (arrayItem == 'order'
         ? item?.orderId.toString().indexOf(text) > -1
-        : arrayItem == 'Product' ? item?.Title?.toLowerCase().indexOf(text?.toLowerCase()) > -1
+        : arrayItem == 'Product' ? item?.title?.toLowerCase().indexOf(text?.toLowerCase()) > -1
         : item?.name?.toLowerCase().indexOf(text?.toLowerCase()) > -1)
     });
+    console.log("🚀 ~ tempdata ~ tempdata:", tempdata)
+    // console.log("🚀 ~ tempdata ~ tempdata:", tempdata)
 
     setNewData(tempdata);
   };
@@ -73,6 +79,7 @@ const SearchbarComponent = ({
             setSearch(text);
             OnSearch(text);
           }}
+          editable={disable}
         />
       </View>
 

@@ -24,8 +24,8 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
 
   return (
+    <View>
     <TouchableOpacity
-
     
     style={{
         backgroundColor:Color.white,
@@ -43,11 +43,18 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
         }}>
             <CustomImage
-              onPress={() => {
-                navigation.navigate('ProductDetail' ,{item :item})
-                console.log('image')
-            //   dispatch(AddToCart(item))
-            }}
+             onPress={() => {
+                if (cardData.find((data, index) => data?.id == item?.id)) {
+                    Platform.OS == 'android'
+                      ? ToastAndroid.show('item already added', ToastAndroid.SHORT)
+                      : Alert.alert('item already added');
+                  } else {
+                      dispatch(AddToCart(item))
+                      console.log('item succsessfully add to cart')
+                    // dispatch(AddToCart({...item, quantity: 1, size_id: {}}));
+                  }
+        }}
+             
             style={{
                 height:"100%",
                 width:'100%',
@@ -91,7 +98,7 @@ const cardData = useSelector(state => state.commonReducer.cart);
                 // paddingVertical: moderateScale(10, .6),
                 // paddingHorizontal: moderateScale(10, .6)
             }}>
-     {item?.price}
+     ${item?.price}
         </CustomText> 
         <TouchableOpacity 
             onPress={() => {
@@ -119,6 +126,29 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
         </TouchableOpacity>
     </TouchableOpacity>
+    {
+        cardData.find((data, index) => data?.id == item?.id) &&
+    
+    <CustomButton
+                isBold
+                onPress={() => {
+                 dispatch(RemoveToCart({id : item?.id }))
+                }}
+                text={'Remove'}
+                textColor={Color.theme2}
+                width={windowWidth * 0.3}
+                height={windowHeight * 0.04}
+                fontSize={moderateScale(13, 0.6)}
+                // marginBottom={moderateScale(10,.3)}
+                // marginTop={moderateScale(20, 0.3)}
+                bgColor={Color.themeColor}
+                borderRadius={moderateScale(1, 0.3)}
+                borderColor={Color.theme2}
+                borderWidth={1}
+                // isGradient
+              />
+            }
+    </View>
   )
 }
 
