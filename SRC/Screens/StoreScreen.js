@@ -39,68 +39,7 @@ const StoreScreen = ({route}) => {
   useEffect(() =>{
     getProducts();
   },[])
-  const cardsArray = [
-    {
-      id: 1,
-      image: require('../Assets/Images/cardpic1.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 10,
-    },
-    {
-      id: 2,
-      image: require('../Assets/Images/cardpic2.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 23,
-    },
-    {
-      id: 3,
-      image: require('../Assets/Images/cardpic6.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 16,
-    },
-    {
-      id: 4,
-      image: require('../Assets/Images/cardpic4.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 14,
-    },
-    {
-      id: 5,
-      image: require('../Assets/Images/cardpic5.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. ',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 20,
-    },
-    {
-      id: 6,
-      image: require('../Assets/Images/cardpic3.png'),
-      title: 'Lorem ipsum dolor',
-      discription:
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-      price: '$74.00',
-      qty: 1,
-      totalquantity: 15,
-    },
-  ];
+  
   return (
     <ImageBackground
       style={{
@@ -220,10 +159,10 @@ const StoreScreen = ({route}) => {
             backgroundColor: Color.white,
           }}
           arrayItem={'Product'}
-          array={cardsArray}
-          setNewData={setCardsArray}
-          search={searchText}
-          setSearch={setsearchText}
+          array={products}
+          setNewData={() =>{}}
+          search={''}
+          setSearch={() =>{}}
         />
         <CustomButton
           bgColor={Color.theme2}

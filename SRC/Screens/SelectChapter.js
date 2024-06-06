@@ -13,6 +13,9 @@ import {windowHeight, windowWidth} from '../Utillity/utils';
 import OldTestment from '../Components/OldTestment';
 import CustomText from '../Components/CustomText';
 import {useNavigation} from '@react-navigation/native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Icon } from 'native-base';
+
 // import CardContainer from '../Components/CardContainer'
 
 const SelectChapter = props => {
@@ -42,6 +45,38 @@ const SelectChapter = props => {
       }}
       resizeMode="cover"
       source={require('../Assets/Images/recorded.png')}>
+                              <View
+        style={{
+          height: moderateScale(30, 0.3),
+          width: moderateScale(30, 0.3),
+          borderRadius: moderateScale(5, 0.3),
+          justifyContent: 'center',
+          alignItems: 'center',
+          position: 'absolute',
+          zIndex:1,
+          top:28,
+          left:17,
+        }}>
+           <Icon
+          style={{
+            textAlign:'center',
+        
+            paddingTop: moderateScale(6.6),
+
+            // marginTop :moderateScale
+          }}
+          name={'arrow-back'}
+          as={ Ionicons}
+          size={moderateScale(25, 0.3)}
+          color={Color.white}
+          onPress={() => {
+     
+              navigation.goBack();
+                  // navigationN.dispatch(DrawerActions.toggleDrawer())
+            
+          }}
+          />
+          </View>
       <CustomText numberOfLines={1} isBold style={styles.heading}>
         {selectedbook?.book}
       </CustomText>

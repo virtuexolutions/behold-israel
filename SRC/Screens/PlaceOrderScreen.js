@@ -519,9 +519,9 @@ const styles = StyleSheet.create({
   back: {
     width: moderateScale(35, 0.6),
     height: moderateScale(35, 0.6),
-    borderRadius: moderateScale(5, 0.6),
-    borderWidth: 0.5,
-    borderColor: '#FFFFFF',
+    // borderRadius: moderateScale(5, 0.6),
+    // borderWidth: 0.5,
+    // borderColor: '#FFFFFF',
     position: 'absolute',
     left: moderateScale(10, 0.6),
     top: moderateScale(10, 0.6),

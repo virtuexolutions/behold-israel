@@ -62,7 +62,8 @@ function Card({image, heading, description, subtitle ,onPress ,setSelectedTestme
 }
 
 
-const BibleCategories = () => {
+const BibleCategories = ({route}) =>{ 
+    const fromTabs= route?.params?.fromTab;
     const navigation = useNavigation()
     const [selectedTestment ,setSelectedTestment] =useState('')
     // console.log("🚀 ~ BibleCategories ~===========>selectedT/estment:", selectedTestment)

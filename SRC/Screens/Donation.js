@@ -36,6 +36,7 @@ const Donations = props => {
   const value = props?.route?.params?.value;
   const valueArray = props?.route?.params?.valueArray;
   const fromDrawer = props?.route?.params?.fromDrawer;
+  const navigation = props?.navigation;
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const [stripeToken, setStripeToken] = useState('');
@@ -97,9 +98,11 @@ const Donations = props => {
     console.log('🚀 ~ Donate ~ response:', response?.data);
     setIsLoading(false);
     ToastAndroid.show(`Donated`, ToastAndroid.SHORT);
+    
     setSelectedItem('');
     setSelectedCategory('');
     setStripeToken('');
+    navigation.goBack();
   };
 
   const stripePaymentFunction = () => {

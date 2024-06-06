@@ -7,6 +7,7 @@ import CustomImage from '../Components/CustomImage'
 import { Icon } from 'native-base'
 import AntDesgin from 'react-native-vector-icons/AntDesign'
 import Color from '../Assets/Utilities/Color'
+import CustomButton from '../Components/CustomButton'
 import LectureCards from '../Components/LectureCards'
 
 const RecordedLecture = () => {

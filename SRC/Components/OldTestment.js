@@ -11,6 +11,8 @@ import {moderateScale} from 'react-native-size-matters';
 import {windowWidth} from '../Utillity/utils';
 import Color from '../Assets/Utilities/Color';
 import {useNavigation} from '@react-navigation/native';
+import { Icon } from 'native-base';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const OldTestment = ({item ,setSelectedBook ,selectedbook}) => {
  
@@ -36,6 +38,7 @@ const OldTestment = ({item ,setSelectedBook ,selectedbook}) => {
           borderBottomWidth: moderateScale(1, 0.6),
           borderColor: Color.white,
         }}>
+       
         <Text
           style={{
             textAlign: 'center',

@@ -11,6 +11,8 @@ import { Icon } from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Color from '../Assets/Utilities/Color'
 import { baseUrl } from '../Config'
+import CustomButton from './CustomButton'
+
 
 const KidsCards = ({item}) => {
     console.log("🚀 ~ KidsCards ~ item:", item)
@@ -126,7 +128,7 @@ const cardData = useSelector(state => state.commonReducer.cart);
 
         </TouchableOpacity>
     </TouchableOpacity>
-    {
+    {/* {
         cardData.find((data, index) => data?.id == item?.id) &&
     
     <CustomButton
@@ -147,7 +149,7 @@ const cardData = useSelector(state => state.commonReducer.cart);
                 borderWidth={1}
                 // isGradient
               />
-            }
+            } */}
     </View>
   )
 }

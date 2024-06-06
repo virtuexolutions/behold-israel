@@ -154,7 +154,7 @@ const AppNavigator = () => {
             component={KidsLectureScreen}
           />
           <RootNav.Screen name="LiveLecture" component={LiveLecture} />
-          <RootNav.Screen name="Donation" component={Donation} />
+          {/* <RootNav.Screen name="Donation" component={Donation} /> */}
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
@@ -172,18 +172,13 @@ const AppNavigator = () => {
           /> */}
           {/* <RootNav.Screen name="AboutBooks" component={AboutBooks} /> */}
           {/* <RootNav.Screen name="GalleryFror" component={GalleryFror} /> */}
-          <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/>
-          <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/>
-          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/>
-          <RootNav.Screen name="LiveLecture" component={LiveLecture}/>
+          {/* <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/> */}
+          {/* <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/> */}
+          {/* <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/> */}
+          {/* <RootNav.Screen name="LiveLecture" component={LiveLecture}/> */}
           <RootNav.Screen name="DonationScreen" component={Donation}/>
-          <RootNav.Screen name="DonationDetails" component={DonationDetails}/>
-          <RootNav.Screen name="DonateNow" component={DonateNow}/>
-          <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/>
-          {/* <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen}/> */}
-          <RootNav.Screen name="ProductDetail" component={ProductDetail} />
-          <RootNav.Screen name="PlaceOrderScreen" component={PlaceOrderScreen} />
-          <RootNav.Screen name="SelectChapter" component={SelectChapter} />
+
+          <RootNav.Screen name="SelectChapter" component={SelectChapter} /> 
 
 
           <RootNav.Screen
@@ -238,7 +233,7 @@ export const TabNavigation = () => {
 
             color = focused ? Color.theme2 : Color.white;
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
-          } else if (route.name === 'BibleCategories') {
+          } else if (route.name === 'BibleCategoriesScreen') {
             iconName = focused ? 'donate' : 'donate';
             type = FontAwesome5;
             color = focused ? Color.theme2 : Color.white;
@@ -296,7 +291,7 @@ export const TabNavigation = () => {
       {/* <Tabs.Screen name={'OldTestament'} component={TestmentsScreeen} initialParams={{ fromTab: true }} />
     />  */}
       <Tabs.Screen
-name="BibleCategories" component={BibleCategories}
+name="BibleCategoriesScreen" component={BibleCategories}
 initialParams={{ fromTab: true }}
 />
       <Tabs.Screen name={'Campaigns'} component={Campaigns} />
@@ -345,7 +340,6 @@ export const MyDrawer = () => {
       />
       <DrawerNavigation.Screen name="AboutUs" component={AboutUs} />
       <DrawerNavigation.Screen name="GalleryFror" component={GalleryFror} />
-      {/* <DrawerNavigation.Screen name="Donation" component={Donation} /> */}
 
       <DrawerNavigation.Screen name="GoodThings" component={GoodThings} />
       <DrawerNavigation.Screen name="QrScanScreen" component={QrScanScreen} />
