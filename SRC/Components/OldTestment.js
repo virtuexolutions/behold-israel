@@ -25,7 +25,7 @@ const OldTestment = ({item ,setSelectedBook ,selectedbook}) => {
       <TouchableOpacity
         onPress={() => {
           setSelectedBook(data);
-          navigation.navigate('SelectChapter', { book: selectedbook});
+          navigation.navigate('SelectChapter', {book:data});
         }}
         numberOfLines={1}
         isBold
