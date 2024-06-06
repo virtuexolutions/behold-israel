@@ -14,14 +14,14 @@ let cardContents=[
     {
         id: 'c1',
         image: require('../Assets/Images/old_tastement_img.png'),
-        heading:'Old Tetstament',
+        heading:'Old Testament',
         description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lectus nisi, tincidunt eget egestas ac, lobortis sed nisi. Nunc vestibulum est eget tristique commodo. Sed nisl lacus,',
         subtitle:'Lorem ipsum dolor sit amet'
     },
     {
         id: 'c2',
         image: require('../Assets/Images/old_tastement_img.png'),
-        heading:'New Tetstament',
+        heading:'New Testament',
         description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lectus nisi, tincidunt eget egestas ac, lobortis sed nisi. Nunc vestibulum est eget tristique commodo. Sed nisl lacus,',
         subtitle:'Lorem ipsum dolor sit amet'
     },
