@@ -552,9 +552,15 @@ const Drawer = () => {
               id: 's1',
               itemName: 'Sermons & Teachings',
               innerMostMenuItems: [
-                {id: 'st1', itemName: 'Recorded Sermons', onPress: () => {}},
-                {id: 'st2', itemName: 'Podcasts', onPress: () => {}},
-                {id: 'st3', itemName: 'Video teachings', onPress: () => {}},
+                {id: 'st1', itemName: 'Recorded Sermons', onPress: () => {
+                  navigation.navigate('RecordedSermons',{ fromDrawer : true})
+                }},
+                {id: 'st2', itemName: 'Podcasts', onPress: () => {
+                  navigation.navigate('podcasts')
+                }},
+                {id: 'st3', itemName: 'Video teachings', onPress: () => {
+                  navigation.navigate('video_teachings')
+                }},
               ],
               expandable: true,
               onPress: index => {
@@ -571,7 +577,9 @@ const Drawer = () => {
               itemName: 'Resources for Growth',
               innerMostMenuItems: [
                 {id: 'rg1', itemName: 'Recommended Books', onPress: () => {navigation.navigate('RecommandedBooks')}},
-                {id: 'rg2', itemName: 'Podcast', onPress: () => {}},
+                {id: 'rg2', itemName: 'Podcast', onPress: () => {
+                  navigation.navigate('podcasts')
+                }},
                 {id: 'rg2', itemName: 'Online Courses', onPress: () => {}},
               ],
               expandable: true,
@@ -640,19 +648,25 @@ const Drawer = () => {
               id: 'cc1',
               itemName: 'Cartoons',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('cartoons')
+              },
             },
             {
               id: 'cc2',
               itemName: 'Animations',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('animations')
+              },
             },
             {
               id: 'cc3',
               itemName: 'Stories',
               expandable: false,
-              onPress: () => {},
+              onPress: () => {
+                navigation.navigate('stories')
+              },
             },
             {
               id: 'cc4',

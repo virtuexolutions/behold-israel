@@ -7,6 +7,7 @@ import {
   ToastAndroid,
   ScrollView,
   ImageBackground,
+  Platform,
   // Modal,
 } from 'react-native';
 import React, {useState} from 'react';
@@ -87,7 +88,21 @@ const PlaceOrderScreen = () => {
     );
     return {totalQ, total, discount}
   };
-
+  const stripePaymentFunction = () => {
+    createToken({
+      type: 'Card',
+    })
+      .then(token => {
+         console.log('token=============> ', token);
+        setStripeToken(token?.token?.id)
+        Platform.OS == 'android'
+        ? ToastAndroid.show(`Confirmed!`, ToastAndroid.SHORT)
+        : alert(`Confirmed!`);
+      })
+      .catch(error => {
+        console.log('error= ', error);
+      });
+  };
   const PlaceOrder = async () => {
     let totalQ = 0;
     let total = 0;
@@ -187,19 +202,7 @@ const PlaceOrderScreen = () => {
     }
   };
 
-  const stripePaymentFunction = () => {
-    createToken({
-      type: 'Card',
-    })
-      .then(token => {
-         console.log('token=============> ', token);
-        setStripeToken(token?.token?.id)
-        // setIsModal(false)
-      })
-      .catch(error => {
-        console.log('error= ', error);
-      });
-  };
+ 
 
   return (
     <ScrollView

@@ -35,6 +35,7 @@ const Header = props => {
   const {
     title,
     showBack,
+    backBtnStyle,
     color,
     showList,
     headerColor,
@@ -46,6 +47,8 @@ const Header = props => {
     cart,
     Notify,
     hideUser,
+    height,
+    style,
     // fromDrawer
   } = props;
 
@@ -80,8 +83,13 @@ const Header = props => {
   return (
     <View
       style={[styles.header2,{
+
     backgroundColor:headerColor ? headerColor :'transparent',
 
+      }. 
+      style && style,
+      height && {
+        height: height
       }]}
       // start={{x: 0, y: 0}}
       // end={{x: 1, y: 1}}
@@ -103,7 +111,7 @@ const Header = props => {
             name={'arrow-back'}
             as={Ionicons}
             size={moderateScale(25, 0.3)}
-            color={Color.white}
+            color={backBtnStyle? backBtnStyle : Color.white}
             onPress={() => {
               navigationN.goBack();
             }}

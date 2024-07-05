@@ -160,7 +160,7 @@ const Signup = () => {
             alignItems: 'center',
           }}
           source={require('../Assets/Images/bgc.png')}>
-          <View
+          {/* <View
             style={{
               // marginTop: 40,
               // alignItems:'center',
@@ -201,7 +201,30 @@ const Signup = () => {
                   setImagePicker(true);
                 }}
               />
+            </TouchableOpacity> */}
+             <View>
+            {Object.keys(image).length > 0 ? (
+              <CustomImage source={{uri: image?.uri}} style={styles.image} />
+            ) : (
+              <CustomImage
+                style={styles.image}
+                source={require('../Assets/Images/dummyUser1.png')}
+              />
+            )}
+            <TouchableOpacity
+              onPress={() => {
+                setShowModal(true);
+              }}
+              style={styles.edit}>
+              <Icon
+                name="pencil"
+                as={FontAwesome}
+                style={styles.icon2}
+                color={Color.black}
+                size={moderateScale(16, 0.3)}
+              />
             </TouchableOpacity>
+          </View>
           <View
             style={{
               // paddingVertical: moderateScale(30, 0.3),
@@ -567,21 +590,40 @@ const styles = ScaledSheet.create({
     fontSize: moderateScale(10, 0.6),
     color: Color.white,
   },
+  // edit: {
+  //   backgroundColor: Color.white,
+  //   width: moderateScale(20, 0.3),
+  //   height: moderateScale(20, 0.3),
+  //   position: 'absolute',
+  //   top: moderateScale(145,0.2),
+  //   // bottom: 29,
+  //   // right: 5,
+  //   right: moderateScale(145,0.3),
+  //   // bottom: 20,
+  //   borderRadius: moderateScale(10, 0.3),
+  //   elevation: 8,
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  //   zIndex: 1,
+  // },
   edit: {
     backgroundColor: Color.white,
-    width: moderateScale(20, 0.3),
-    height: moderateScale(20, 0.3),
+    width: moderateScale(25, 0.3),
+    height: moderateScale(25, 0.3),
     position: 'absolute',
-    top: 140,
-    // bottom: 29,
-    // right: 5,
-    right: 155,
-    // bottom: 20,
-    borderRadius: moderateScale(10, 0.3),
+    bottom: moderateScale(5, 0.3),
+    right: moderateScale(1, 0.3),
+    borderRadius: moderateScale(12.5, 0.3),
     elevation: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    zIndex: 1,
+  },
+  image: {
+    width: moderateScale(100, 0.3), 
+    height: moderateScale(100, 0.3),
+    borderRadius: moderateScale(49, 0.3),
+    marginLeft: moderateScale(2.5, 0.3),
+    marginTop: moderateScale(2.5, 0.3),
   },
 });
 

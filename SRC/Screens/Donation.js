@@ -81,7 +81,7 @@ const Donations = props => {
       // stripeToken:stripeToken,
     };
     if (stripeToken == '') {
-      alert('Please enter your card details');
+     return alert('Please enter your card details');
     } else {
       body.stripeToken = stripeToken;
     }
@@ -111,11 +111,13 @@ const Donations = props => {
     })
       .then(token => {
         console.log('token=============> ', token);
+        if(token?.token){
         setStripeToken(token?.token?.id);
-        // setIsModal(false)
-      })
-
-      .catch(error => {
+        Platform.OS == 'android'
+        ? ToastAndroid.show(`Confirmed!`, ToastAndroid.SHORT)
+        : alert(`Confirmed!`);
+      }
+      }).catch(error => {
         console.log('error= ', error);
       });
   };
@@ -128,9 +130,9 @@ const Donations = props => {
       setSelectedArray([])
    } 
 
-    console.log("----  RUNNING FIRST MOUNT (isFocused) ----- ", isFocused);
+    // console.log("----  RUNNING FIRST MOUNT (isFocused) ----- ", isFocused);
   }, [isFocused]);
-  console.log("🚀 ~ Donations ~ selectedArray:", selectedArray)
+  // console.log("🚀 ~ Donations ~ selectedArray:", selectedArray)
   useEffect(() => {
   //  console.log(categoryName);
 
@@ -170,7 +172,7 @@ const Donations = props => {
       //   ? SharingWithOthersArrays?.supportForLifeArray
       //   : SharingWithOthersArrays?.givingArray,
       //   );
-      console.log("Running Select Category dependiceies")
+      // console.log("Running Select Category dependiceies")
     
      
   }, [selectedCategory, value, drawerState]);
@@ -354,6 +356,7 @@ const Donations = props => {
                 height: 50,
                 marginVertical: 10,
               }}
+              
               onCardChange={cardDetails => {
                 console.log('cardDetails', cardDetails);
                 // if(cardDetails?.complete) {
@@ -454,8 +457,9 @@ const styles = StyleSheet.create({
   },
   donationInputBox: {
     marginTop: moderateScale(11, 0.2),
-    height: windowHeight * 0.25,
+    // height: windowHeight ,
     borderRadius: moderateScale(17, 0.2),
+    
     opacity: 0.9,
     width: windowWidth * 0.93,
     alignSelf: 'center',

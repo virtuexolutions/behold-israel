@@ -69,6 +69,11 @@ import VerifyNumber from './Screens/VerifyNumber';
 import OrderScreen from './Screens/OrderScreen';
 import OrderDetails from './Screens/OrderDetails';
 import SelectChapter from './Screens/SelectChapter';
+import CartoonsScreen from './Screens/CartoonsScreen';
+import AnimationsScreen from './Screens/AnimationsScreen';
+import Stories from './Screens/Stories';
+import Podcasts from './Screens/Podcasts';
+import VideoTeachings from './Screens/VideoTeachings';
 
 const AppNavigator = () => {
   // const isLogin = false;
@@ -347,6 +352,32 @@ export const MyDrawer = () => {
         name="RecommandedBooks"
         component={RecommandedBooks}
       />
+      <DrawerNavigation.Screen
+        name="RecordedSermons"
+        component={RecordedLecture}
+      />
+      <DrawerNavigation.Screen
+        name="podcasts"
+        component={Podcasts}
+      />
+      <DrawerNavigation.Screen
+        name="video_teachings"
+        component={VideoTeachings}
+      />
+
+      <DrawerNavigation.Screen
+        name="cartoons"
+        component={CartoonsScreen}
+      />
+      <DrawerNavigation.Screen
+        name="animations"
+        component={AnimationsScreen}
+      />
+      <DrawerNavigation.Screen
+        name="stories"
+        component={Stories}
+      />
+    
       <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
       <DrawerNavigation.Screen name="Contact" component={Team} />
     </DrawerNavigation.Navigator>

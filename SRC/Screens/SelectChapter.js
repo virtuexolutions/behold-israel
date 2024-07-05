@@ -20,19 +20,12 @@ import { Icon } from 'native-base';
 
 const SelectChapter = props => {
   const selectedbook = props?.route?.params?.book;
-  console.log(
-    '🚀 ~ SelectChapter ~ selectedbook==============>aye :',
-    selectedbook,
-  );
 
   const navigation = useNavigation();
 
   const [book, setBook] = useState(selectedbook?.book);
   const [selectedChapter, setSelectedChapter] = useState('');
-  console.log(
-    '🚀 ~ SelectChapter ~ selectedChapter================:',
-    selectedChapter,
-  );
+  
 
   return (
     <ImageBackground

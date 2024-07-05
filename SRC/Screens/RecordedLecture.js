@@ -9,8 +9,11 @@ import AntDesgin from 'react-native-vector-icons/AntDesign'
 import Color from '../Assets/Utilities/Color'
 import CustomButton from '../Components/CustomButton'
 import LectureCards from '../Components/LectureCards'
+import WebView from 'react-native-webview'
+import Header from '../Components/Header'
 
-const RecordedLecture = () => {
+const RecordedLecture = ({route}) => {
+    const fromDrawer = route?.params?.fromDrawer;
     const dummyArray =[
     {
         image :require('../Assets/Images/lecture2.png'),
@@ -40,7 +43,7 @@ const RecordedLecture = () => {
     ]
     return (
         <>
-            <View style={{
+            {/* <View style={{
                 height: windowHeight * 0.3,
                 width: windowWidth,
             }}>
@@ -121,6 +124,51 @@ const RecordedLecture = () => {
                 }}
             />
             </ImageBackground>
+
+             */}
+                 <View style={{
+        width : windowWidth ,
+        height : windowHeight,
+      overflow:'hidden',
+        // alignItems : 'center',
+        // justifyContent : 'center',
+        backgroundColor:"#221c30"
+    }}>
+      <Header 
+      showBack={!fromDrawer} title='Recorded Sermons'
+      />
+      {/* <YoutubePlayer
+        height={300}
+        play={true}
+        videoId={"u91HNUsuujg"}
+        // playList={"PL55RiY5tL51rudermnWTq1LlGC1BL1g3l"}
+        // playList={["hNKHa7r2iOs", "O7cF8-bz2jE"]}
+        
+        /> */}
+        <View style={{width:windowWidth, height: windowHeight * 0.9, overflow:'hidden'}}>
+
+        <WebView
+                source={{ uri:"https://www.youtube.com/@RecordedSermons-gx1vg" }}
+                style={styles.webview}
+                // scrollEnabled
+                scalesPageToFit={true}
+                    injectedJavaScript={`
+                    const style = document.createElement('style');
+                    style.type = 'text/css';
+                    style.innerHTML = '.style-scope.ytd-app, ytm-pivot-bar-renderer, ytm-mobile-topbar-renderer { display: none !important; }';
+                    document.head.appendChild(style);
+                  `}
+                />
+        </View>
+        {/* <YoutubePlayer
+        height={300}
+        play={true}
+        videoId={"tc4apQ8fjVs"}
+        playList={"PL55RiY5tL51rudermnWTq1LlGC1BL1g3l"}
+        // playList={["hNKHa7r2iOs", "O7cF8-bz2jE"]}
+        
+        /> */}
+    </View>
         </>
 
     )
@@ -176,5 +224,12 @@ const styles = StyleSheet.create({
         borderBottomWidth:moderateScale(1,.6),
         borderColor:Color.white
     },
+    webview:{
+        width:windowWidth,
+        height: "95%",
+        position:'absolute',
+        // zIndex:1,
+        bottom:moderateScale(30,0.2),
+      }
 
 })

@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  ScrollView,
 } from 'react-native';
 import React from 'react';
 import CustomImage from '../Components/CustomImage';
@@ -145,7 +146,7 @@ const Settings = () => {
     },
   ];
   return (
-    
+    <ScrollView style={styles.mainScreen}>
     <ImageBackground
       resizeMode="cover"
       style={styles.mainScreen}
@@ -195,6 +196,8 @@ const Settings = () => {
       </View>
     </ImageBackground>
 
+    </ScrollView>
+
   );
 };
 
@@ -202,7 +205,8 @@ export default Settings;
 
 const styles = StyleSheet.create({
   mainScreen: {
-    flex: 1,
+  width: windowWidth,
+  height:windowHeight
   },
   imageContainer: {
     width: windowWidth * 0.3,
