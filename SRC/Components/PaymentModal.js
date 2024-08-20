@@ -68,7 +68,7 @@ const PaymentModal = ({isModal, setIsModal, setToken}) => {
           />
         </View>
         <CardField
-          postalCodeEnabled={true}
+          postalCodeEnabled={false}
           placeholders={{
             number: '4242 4242 4242 4242',
           }}
@@ -76,6 +76,7 @@ const PaymentModal = ({isModal, setIsModal, setToken}) => {
             backgroundColor: '#D3D3D3',
             borderRadius: 15,
             width: 320,
+            textColor:'black'
           }}
           style={{
             width: '85%',
@@ -89,53 +90,12 @@ const PaymentModal = ({isModal, setIsModal, setToken}) => {
             console.log('focusField', focusedField);
           }}
         />
-
-        {/* <View
-          style={{
-            alignItems: 'center',
-            justifyContent: 'center',
-            // paddingVertical:moderateScale(10,.3)
-          }}>
-          <CardField
-            postalCodeEnabled={false}
-            placeholders={{
-              number: '4242 4242 4242 4242',
-            }}
-            // cardStyle={{
-            //   backgroundColor:Color.lightGrey,
-            //   borderRadius:moderateScale(15,.6),
-            //   width: windowWidth * 0.8,
-            //   // backgroundColor: '#FFFFFF',
-            //   // textColor: '#000000',
-            //   // color:Color.red,
-            // }}
-
-            // style={{
-            //   // backgroundColor: 'red',
-            //   width: '85%',
-            //   height: windowHeight *0.07,
-            //   // paddingVertical:moderateScale(10,.3),
-            //   marginVertical:moderateScale(10 ,0.3) ,
-            //   // paddingHorizontal: moderateScale(20, 0.3),
-            // }}
-            // onCardChange={cardDetails => {
-            //   console.log('cardDetails', cardDetails);
-            // }}
-            // onFocus={focusedField => {
-            //   console.log('focusField', focusedField);
-            // }}
-          />
-        </View>  */}
         <View
           style={{
             flexDirection: 'row',
             alignSelf: 'flex-end',
-            // position:'absolute',
-            // right:10,
-            // bottom:0,
             justifyContent: 'space-between',
             width: windowWidth * 0.5,
-            // marginVertical:moderateScale(20,.3),
             marginHorizontal: moderateScale(20, 0.3),
             paddingVertical: moderateScale(10, 0.3),
             // backgroundColor: 'red',

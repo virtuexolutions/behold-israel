@@ -7,6 +7,7 @@ import {
   RefreshControl,
   ImageBackground,
   FlatList,
+  StatusBar,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {Icon, ScrollView} from 'native-base';
@@ -33,10 +34,13 @@ import Feather from 'react-native-vector-icons/Feather';
 const HomeScreen = () => {
   const token = useSelector(state => state.authReducer.token);
   const userData = useSelector(state => state.commonReducer.userData);
+
+  const isFocused = useIsFocused();
+  const navigation = useNavigation();
+
   const [isLoading, setIsLoading] = useState(false);
   const [users, setUsers] = useState([]);
   const [isrefreshing, setIsRefreshing] = useState(false);
-  const navigation = useNavigation();
   const [selectedCategory, setSelectedCategory] = useState([]);
 
   const onRefresh = () => {
@@ -46,16 +50,14 @@ const HomeScreen = () => {
     }, 2000);
   };
 
-  const isFocused = useIsFocused();
-
   const dummyArray1 = [
     {
       id: 1,
       image: require('../Assets/Images/image1.png'),
-      title: 'BiBle',
+      title: 'BiBle Study Guides',
       onPress: () => navigationService.navigate('BibleCategories'),
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+        'Enrich your wisdom towards God’s Word with our Holy Spirit-centered Bible study guides. Curated for personal reflection or group study to strengthen the spiritual journey.',
     },
     {
       id: 2,
@@ -64,16 +66,17 @@ const HomeScreen = () => {
       onPress: () => navigationService.navigate('RecordedLecture'),
 
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+        'Nourish your soul with our thoughtfully curated recorded lectures. Each session is carefully chosen to inspire and uplift, guiding you to a stronger connection with your faith.',
     },
     {
       id: 3,
       image: require('../Assets/Images/store.png'),
-      onPress: () => navigationService.navigate('Store', {fromHomeScreen: true}),
+      onPress: () =>
+        navigationService.navigate('Store', {fromHomeScreen: true}),
 
       title: 'STORE',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+        'Explore our collection of ministry-focused items, including faith-inspired stickers, candles, and more that inspire your daily walk with God.',
     },
     {
       id: 4,
@@ -81,7 +84,7 @@ const HomeScreen = () => {
       onPress: () => navigationService.navigate('LiveLecture'),
       title: 'LIVE STREMING',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+        'Be part of live worship sessions, Bible studies, and special events streamed directly to your device. Experience the power of the Holy Spirit in real-time with our community.',
     },
     {
       id: 5,
@@ -90,7 +93,7 @@ const HomeScreen = () => {
 
       title: 'Donation',
       description:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed magna dolor, efficitur pulvinar placerat sed, auctor vestibulum elit.',
+        'Support the mission of Holy Ghost Fraternity. Your donations empower us to extend our reach, create more spiritual resources, and touch lives through community outreach—partner with us in spreading God’s love and grace.',
     },
   ];
 
@@ -117,29 +120,29 @@ const HomeScreen = () => {
           minHeight: windowHeight * 0.9,
           backgroundColor: Color.white,
         }}>
-           <View
-        style={{
-          height: moderateScale(30, 0.3),
-          width: moderateScale(30, 0.3),
-          borderRadius: moderateScale(5, 0.3),
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          zIndex:1,
-          top: 35,
-          left:20,
-        }}>
-           <Icon
+        <View
           style={{
-            textAlign:'center',
-            height :windowHeight*0.05,
-            width:windowHeight*0.05,
-            borderRadius :windowHeight*0.05 /2,
-            backgroundColor :Color.white,
-            paddingTop: moderateScale(6.6),
+            height: moderateScale(30, 0.3),
+            width: moderateScale(30, 0.3),
+            borderRadius: moderateScale(5, 0.3),
+            justifyContent: 'center',
+            alignItems: 'center',
+            position: 'absolute',
+            zIndex: 1,
+            top: 35,
+            left: 20,
+          }}>
+          <Icon
+            style={{
+              textAlign: 'center',
+              height: windowHeight * 0.05,
+              width: windowHeight * 0.05,
+              borderRadius: (windowHeight * 0.05) / 2,
+              backgroundColor: Color.white,
+              paddingTop: moderateScale(6.6),
 
-            // marginTop :moderateScale
-          }}
+              // marginTop :moderateScale
+            }}
             name={'menu'}
             as={Feather}
             size={moderateScale(25, 0.3)}
@@ -147,7 +150,6 @@ const HomeScreen = () => {
             onPress={() => {
               navigation.toggleDrawer();
               // navigationN.dispatch(DrawerActions.toggleDrawer())
-              
             }}
           />
         </View>
@@ -162,7 +164,6 @@ const HomeScreen = () => {
           start={{x: 1, y: 0}}
           end={{x: 0, y: 1}}
           colors={Color.tabBarGradient}>
-     
           <View
             style={{
               width: windowWidth,
@@ -179,14 +180,6 @@ const HomeScreen = () => {
               dotColor={Color.theme2}
               inactiveDotColor="#90A4AE"
             />
-
-            {/* <CustomImage
-            style={{
-              height: '100%',
-              width: '100%',
-            }}
-            source={require('../Assets/Images/banner.jpg')}
-          /> */}
           </View>
           <FlatList
             showsVerticalScrollIndicator={false}

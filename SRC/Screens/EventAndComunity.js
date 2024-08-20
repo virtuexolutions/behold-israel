@@ -47,7 +47,7 @@ const EventAndComunity = (props) => {
     },
   ];
   const images = [
-    require('../Assets/Images/s4.jpg'),
+    require('../Assets/Images/s1.jpg'),
     require('../Assets/Images/s2.jpg'),
     require('../Assets/Images/s3.jpg'),
     require('../Assets/Images/s2.jpg'),
@@ -72,7 +72,7 @@ const EventAndComunity = (props) => {
             showBack={fromDrawer ? false : true}
             leftName={'menu'}
             leftType={Feather}
-            title={'Donation'}
+            title={'Event & community'}
             // title={}
           />
           <View
@@ -93,13 +93,6 @@ const EventAndComunity = (props) => {
               inactiveDotColor="#90A4AE"
             />
 
-            {/* <CustomImage
-            style={{
-              height: '100%',
-              width: '100%',
-            }}
-            source={require('../Assets/Images/banner.jpg')}
-          /> */}
           </View>
           <CustomText numberOfLines={2} style={styles.descriptionText}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus nec

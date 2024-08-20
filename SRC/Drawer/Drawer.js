@@ -14,30 +14,25 @@ import CustomImage from '../Components/CustomImage';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import {moderateScale, ScaledSheet} from 'react-native-size-matters';
 import ScreenBoiler from '../Components/ScreenBoiler';
-import LinearGradient from 'react-native-linear-gradient';
 import CustomText from '../Components/CustomText';
 import {Icon} from 'native-base';
-import Feather from 'react-native-vector-icons/Feather';
-import Entypo from 'react-native-vector-icons/Entypo';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import {useNavigation} from '@react-navigation/native';
 import {SetUserRole, setUserLogoutAuth} from '../Store/slices/auth';
 import {useDispatch, useSelector} from 'react-redux';
 import {setUserLogOut} from '../Store/slices/common';
-import navigationService from '../navigationService';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import DrawerDropDown from '../Components/DrawerDropDown';
-import { baseUrl } from '../Config';
+import {baseUrl} from '../Config';
 
 const Drawer = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+
   const userData = useSelector(state => state.commonReducer.userData);
-  // console.log("🚀 ~ Drawer ~ userData:", userData)
   const token = useSelector(state => state.authReducer.token);
-  const role = useSelector(state => state.authReducer.role);
+
   const [menuIndices, setMenuIndices] = useState({
     parentIndex: -1,
     childIndex: -1,
@@ -78,14 +73,16 @@ const Drawer = () => {
       // iconName: 'home',
       // iconType: Entypo,
       onPress: () => {
-        navigation.navigate("TabNavigation");
+        navigation.navigate('TabNavigation');
       },
     },
     {
       name: 'About us',
-      onPress: () => {{
-        navigation.navigate('AboutUs')
-      }},
+      onPress: () => {
+        {
+          navigation.navigate('AboutUs');
+        }
+      },
     },
     {
       name: 'Sharing with other',
@@ -106,7 +103,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Widow',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -122,7 +119,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Poor',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -138,7 +135,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Handicaps',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -154,7 +151,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Donation',
                     value: 'Orphans',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -199,7 +196,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Pregnant Woman',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -216,7 +213,7 @@ const Drawer = () => {
                     navigation.navigate('Donation', {
                       categoryName: 'supportForLife',
                       value: 'Pregnanat Teenager',
-                     
+
                       fromDrawer: true,
                     });
                   }
@@ -233,7 +230,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Up Keep of the ARK',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -249,7 +246,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Utilities',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -265,7 +262,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Seminary',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -287,7 +284,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Support for the priest',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -303,7 +300,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Support for the religious',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -323,7 +320,7 @@ const Drawer = () => {
                     categoryName: 'supportForLife',
                     value:
                       'Long Term Project with your name on the plaque on the wall',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -339,7 +336,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'supportForLife',
                     value: 'Project: One room for retreat N6M ( $6000)',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -359,7 +356,7 @@ const Drawer = () => {
                     categoryName: 'supportForLife',
                     value:
                       'To train a seminarian in Senior seminary ( N100,000 000) $100,000',
-                   
+
                     fromDrawer: true,
                   });
                 }
@@ -390,7 +387,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Weekly Giving',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -405,7 +402,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Monthly',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -420,7 +417,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Quarterly',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -435,7 +432,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Termly',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -450,7 +447,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Annually',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -465,7 +462,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Support for the Ministry',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -480,7 +477,7 @@ const Drawer = () => {
                   navigation.navigate('Donation', {
                     categoryName: 'Giving',
                     value: 'Second Collection',
-                  
+
                     fromDrawer: true,
                   });
                 }
@@ -511,21 +508,25 @@ const Drawer = () => {
       iconName: menuIndex == 3 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
       menuItems: [
-        {
-          Id: '1',
-          name: 'Events & Community',
-          expandable: false,
-          onPress: () => {{
-            navigation.navigate('EventAndComunity' , {fromDrawer : true})
-          }},
-        },
+        // {
+        //   Id: '1',
+        //   name: 'Events & Community',
+        //   expandable: false,
+        //   onPress: () => {
+        //     {
+        //       navigation.navigate('EventAndComunity', {fromDrawer: true});
+        //     }
+        //   },
+        // },
         {
           Id: '2',
           name: 'Out-Reach & Missions',
           expandable: false,
-          onPress: () => {{
-            navigation.navigate('OutReachMissions')
-          }},
+          onPress: () => {
+            {
+              navigation.navigate('OutReachMissions');
+            }
+          },
         },
         // {Id: '3', name: 'Who are we?', onPress: () => {}},
       ],
@@ -552,15 +553,27 @@ const Drawer = () => {
               id: 's1',
               itemName: 'Sermons & Teachings',
               innerMostMenuItems: [
-                {id: 'st1', itemName: 'Recorded Sermons', onPress: () => {
-                  navigation.navigate('RecordedSermons',{ fromDrawer : true})
-                }},
-                {id: 'st2', itemName: 'Podcasts', onPress: () => {
-                  navigation.navigate('podcasts')
-                }},
-                {id: 'st3', itemName: 'Video teachings', onPress: () => {
-                  navigation.navigate('video_teachings')
-                }},
+                {
+                  id: 'st1',
+                  itemName: 'Recorded Sermons',
+                  onPress: () => {
+                    navigation.navigate('RecordedSermons', {fromDrawer: true});
+                  },
+                },
+                {
+                  id: 'st2',
+                  itemName: 'Podcasts',
+                  onPress: () => {
+                    navigation.navigate('podcasts');
+                  },
+                },
+                {
+                  id: 'st3',
+                  itemName: 'Video teachings',
+                  onPress: () => {
+                    navigation.navigate('video_teachings');
+                  },
+                },
               ],
               expandable: true,
               onPress: index => {
@@ -576,10 +589,20 @@ const Drawer = () => {
               id: 's2',
               itemName: 'Resources for Growth',
               innerMostMenuItems: [
-                {id: 'rg1', itemName: 'Recommended Books', onPress: () => {navigation.navigate('RecommandedBooks')}},
-                {id: 'rg2', itemName: 'Podcast', onPress: () => {
-                  navigation.navigate('podcasts')
-                }},
+                {
+                  id: 'rg1',
+                  itemName: 'Recommended Books',
+                  onPress: () => {
+                    navigation.navigate('RecommandedBooks');
+                  },
+                },
+                {
+                  id: 'rg2',
+                  itemName: 'Podcast',
+                  onPress: () => {
+                    navigation.navigate('podcasts');
+                  },
+                },
                 {id: 'rg2', itemName: 'Online Courses', onPress: () => {}},
               ],
               expandable: true,
@@ -606,9 +629,14 @@ const Drawer = () => {
           name: 'Gallery',
           // expandable:true,
           nestedMenuItems: [
-            {id: 'g1', itemName: 'FROR', expandable: false, onPress: () => {
-              navigation.navigate('GalleryFror')
-            }},
+            {
+              id: 'g1',
+              itemName: 'FROR',
+              expandable: false,
+              onPress: () => {
+                navigation.navigate('GalleryFror');
+              },
+            },
             {
               id: 'g2',
               itemName: 'Testimonials',
@@ -639,7 +667,14 @@ const Drawer = () => {
             setInnerMostMenuIndex(-1);
           },
         },
-        {Id: '3', name: 'Ministry', expandable: false, onPress: () => {}},
+        {
+          Id: '3',
+          name: 'Ministry',
+          expandable: false,
+          onPress: () => {
+            navigation.navigate('Contact');
+          },
+        },
         {
           Id: '4',
           name: 'Children Corner',
@@ -649,7 +684,7 @@ const Drawer = () => {
               itemName: 'Cartoons',
               expandable: false,
               onPress: () => {
-                navigation.navigate('cartoons')
+                navigation.navigate('cartoons');
               },
             },
             {
@@ -657,7 +692,7 @@ const Drawer = () => {
               itemName: 'Animations',
               expandable: false,
               onPress: () => {
-                navigation.navigate('animations')
+                navigation.navigate('animations');
               },
             },
             {
@@ -665,7 +700,7 @@ const Drawer = () => {
               itemName: 'Stories',
               expandable: false,
               onPress: () => {
-                navigation.navigate('stories')
+                navigation.navigate('stories');
               },
             },
             {
@@ -697,7 +732,9 @@ const Drawer = () => {
       name: 'shop',
       // iconName: menuIndex == 5 ? 'chevron-up' : 'chevron-down',
       iconType: EvilIcons,
-      onPress: () => {},
+      onPress: () => {
+        navigation.navigate('StoreScreen');
+      },
     },
     // {
     //   name: 'MemberShip',
@@ -734,9 +771,10 @@ const Drawer = () => {
     {
       name: 'blogs',
       onPress: () => {
-        Platform.OS == 'android'
-          ? ToastAndroid.show(`Action require`, ToastAndroid.SHORT)
-          : alert(`Action require`);
+        navigation.navigate('BlogScreen');
+        // Platform.OS == 'android'
+        //   ? ToastAndroid.show(`Action require`, ToastAndroid.SHORT)
+        //   : alert(`Action require`);
       },
     },
     {
@@ -751,12 +789,22 @@ const Drawer = () => {
             navigation.navigate('MemberShipForm');
           },
         },
-        {Id: '2', name: 'Prayer Request', onPress: () => {{
-          navigation.navigate('PrayerRequestForm')
-        }}},
-        {Id: '3', name: 'Contact US', onPress: () => {
-          navigation.navigate("Contact")
-        }},
+        {
+          Id: '2',
+          name: 'Prayer Request',
+          onPress: () => {
+            {
+              navigation.navigate('PrayerRequestForm');
+            }
+          },
+        },
+        {
+          Id: '3',
+          name: 'Contact US',
+          onPress: () => {
+            // navigation.navigate('Contact');
+          },
+        },
       ],
       onPress: index => {
         LayoutAnimation.configureNext(
@@ -785,27 +833,18 @@ const Drawer = () => {
             overflow: 'hidden',
             width: windowWidth * 0.71,
             backgroundColor: '#D3D3D3',
-            height: windowHeight * 0.85,
-            borderTopRightRadius: moderateScale(35, 0.6),
+            height: windowHeight * 0.86,
             borderBottomRightRadius: moderateScale(35, 0.6),
           }}>
-          <View
-            style={{
-              // backgroundColor :'red',
-              // marginTop :moderateScale(10,.6),
-              flexDirection: 'row',
-              // position :'absolute',
-
-              marginTop: moderateScale(45, 0.3),
-              alignItems: 'center',
-              marginLeft: moderateScale(10, 0.3),
-            }}>
+          <View style={styles.profileContainer}>
             <View style={styles.Profile}>
               <CustomImage
                 resizeMode={'cover'}
                 source={
-                  userData?.photo ? {uri: `${baseUrl}${userData?.photo}`} :
-                  require('../Assets/Images/dummyUser.png')}
+                  userData?.photo
+                    ? {uri: `${baseUrl}${userData?.photo}`}
+                    : require('../Assets/Images/dummyUser.png')
+                }
                 style={{width: '100%', height: '100%'}}
               />
             </View>
@@ -817,57 +856,18 @@ const Drawer = () => {
                 {userData?.name}
               </CustomText>
 
-              <CustomText
-                style={{
-                  width: windowWidth * 0.4,
-                  fontSize: moderateScale(11, 0.6),
-                  color: Color.black,
-                }}>
-                {userData?.email}
-              </CustomText>
+              <CustomText style={styles.email}>{userData?.email}</CustomText>
             </View>
           </View>
-          {/* <ScrollView style={{
-            // backgroundColor :'red',
-            height:windowHeight*0.2
-          }}> */}
-
-          <View
-            style={{
-              marginLeft: moderateScale(20, 0.3),
-              marginTop: moderateScale(25, 0.3),
-            }}>
+          <View style={styles.container}>
             {data.map((item, index) => (
-              <View
-                style={{
-                  borderColor: Color.veryLightGray,
-                  width: windowWidth * 0.6,
-
-                  borderBottomWidth: moderateScale(1, 0.6),
-                }}>
+              <View style={styles.mapView}>
                 <TouchableOpacity
                   onPress={
                     item?.menuItems ? () => item?.onPress(index) : item?.onPress
                   }
-                  style={{
-                    // width :'100%',
-                    width: windowWidth * 0.6,
-                    // justifyContent :'space-around',
-                    // borderBottomWidth: 0.5,
-                    borderColor: Color.black,
-                    marginVertical: moderateScale(10, 0.3),
-                    flexDirection: 'row',
-
-                    // alignItems: 'center',
-                  }}>
-                  <CustomText
-                    style={{
-                      fontSize: moderateScale(14, 0.6),
-                      color: Color.black,
-                      marginLeft: moderateScale(0, 0.3),
-                    }}>
-                    {item.name}
-                  </CustomText>
+                  style={styles.btn2}>
+                  <CustomText style={styles.text2}>{item.name}</CustomText>
                   {item?.iconName && (
                     <Icon
                       style={{
@@ -878,7 +878,11 @@ const Drawer = () => {
                       as={item?.iconType}
                       size={moderateScale(25, 0.3)}
                       color={Color.black}
-                      onPress={item?.onPress}
+                      onPress={
+                        item?.menuItems
+                          ? () => item?.onPress(index)
+                          : item?.onPress
+                      }
                     />
                   )}
                 </TouchableOpacity>
@@ -893,49 +897,31 @@ const Drawer = () => {
               </View>
             ))}
           </View>
-          {/* </ScrollView> */}
-
-          {/* )} */}
         </View>
-        </ScrollView>
+      </ScrollView>
 
-        <View
-          style={{
-            // marginLeft: moderateScale(5, 0.3),
-            marginTop: moderateScale(40, 0.3),
-            position: 'absolute',
+      <View
+        style={[
+          styles.bottom,
+          {
             bottom: menuIndex > -1 ? -10 : 50,
-            left: -15,
-          }}>
-          <TouchableOpacity
-            onPress={() => {
-              dispatch(setUserLogoutAuth());
-              dispatch(setUserLogOut());
-            }}
-            style={{
-              width: windowWidth * 0.45,
-              margin: moderateScale(15, 0.3),
-              flexDirection: 'row',
-              alignItems: 'center',
-            }}>
-            <CustomText
-              style={{
-                paddingHorizontal: moderateScale(10, 0.3),
-                fontSize: moderateScale(14, 0.6),
-                color: Color.black,
-                marginLeft: moderateScale(10, 0.3),
-              }}>
-              sign out
-            </CustomText>
-            <Icon
-              name={'logout'}
-              as={AntDesign}
-              // style={styles.icon2}
-              color={Color.black}
-              size={moderateScale(16, 0.3)}
-            />
-          </TouchableOpacity>
-        </View>
+          },
+        ]}>
+        <TouchableOpacity
+          onPress={() => {
+            dispatch(setUserLogoutAuth());
+            dispatch(setUserLogOut());
+          }}
+          style={styles.btn}>
+          <CustomText style={styles.text}>sign out</CustomText>
+          <Icon
+            name={'logout'}
+            as={AntDesign}
+            color={Color.black}
+            size={moderateScale(16, 0.3)}
+          />
+        </TouchableOpacity>
+      </View>
     </ScreenBoiler>
   );
 };
@@ -951,10 +937,58 @@ const styles = StyleSheet.create({
     borderColor: Color.white,
     overflow: 'hidden',
   },
+  profileContainer: {
+    flexDirection: 'row',
+    marginTop: moderateScale(45, 0.3),
+    alignItems: 'center',
+    marginLeft: moderateScale(10, 0.3),
+  },
   subMenu: {
     marginVertical: moderateScale(4, 0.3),
     flexDirection: 'row',
     alignItems: 'center',
     gap: moderateScale(8, 0.2),
+  },
+  bottom: {
+    marginTop: moderateScale(40, 0.3),
+    position: 'absolute',
+    left: -15,
+  },
+  btn: {
+    width: windowWidth * 0.45,
+    margin: moderateScale(15, 0.3),
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  text: {
+    paddingHorizontal: moderateScale(10, 0.3),
+    fontSize: moderateScale(14, 0.6),
+    color: Color.black,
+    marginLeft: moderateScale(10, 0.3),
+  },
+  container: {
+    marginLeft: moderateScale(20, 0.3),
+    marginTop: moderateScale(25, 0.3),
+  },
+  text2: {
+    fontSize: moderateScale(14, 0.6),
+    color: Color.black,
+    marginLeft: moderateScale(0, 0.3),
+  },
+  mapView: {
+    borderColor: Color.veryLightGray,
+    width: windowWidth * 0.6,
+    borderBottomWidth: moderateScale(1, 0.6),
+  },
+  btn2: {
+    width: windowWidth * 0.6,
+    borderColor: Color.black,
+    marginVertical: moderateScale(10, 0.3),
+    flexDirection: 'row',
+  },
+  email: {
+    width: windowWidth * 0.4,
+    fontSize: moderateScale(11, 0.6),
+    color: Color.black,
   },
 });

@@ -25,9 +25,8 @@ import { useNavigation } from '@react-navigation/native';
 import { baseUrl } from '../Config';
 
 const CartItem = ({item, fromCheckout}) => {
-  console.log('🚀 ~ file: CartItem.js:25 ~ CartItem ~ item:', item?.photo);
   const cartData = useSelector(state => state.commonReducer.cart);
-  console.log('🚀 ~ CartItem ~ cartData:', cartData);
+  console.log('mg=====>  ' ,(cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.quantity))
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -185,7 +184,7 @@ const CartItem = ({item, fromCheckout}) => {
             ]}>
             <CustomText style={styles.amount}>
 
-              {(cartData?.find((data ,index) => data?.id == item?.id)?.price *item?.quantity).toString() }
+              {(cartData?.find((data ,index) => data?.id == item?.id)?.price).toString() }
             {/* {item?.price * item?.qty}  */}
               {/* {item?.price * item?.qty} PKR */}
             </CustomText>
@@ -202,7 +201,6 @@ const CartItem = ({item, fromCheckout}) => {
                 color={Color.white}
                 size={moderateScale(25, 0.3)}
                 onPress={() => {
-                  console.log('increment')
                   // item?.quantity < item?.totalquantity &&
                     dispatch(increamentQuantity({id: item?.id}));
                 }}

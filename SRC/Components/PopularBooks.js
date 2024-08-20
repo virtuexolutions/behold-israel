@@ -9,7 +9,6 @@ import navigationService from '../navigationService';
 import { useNavigation } from '@react-navigation/native';
 
 const PopularBooks = ({item}) => {
-  console.log('🚀 ~ RecommandedBooksComponent ~ item:', item);
   const navigation =useNavigation()
   return (
     <TouchableOpacity
@@ -30,8 +29,7 @@ const PopularBooks = ({item}) => {
         }}>
         <CustomImage
           onPress={() => {
-            // navigation.navigate('ProductDetail' ,{item :item})
-            // console.log('image')
+            navigation.navigate('AboutBooks' ,{item :item})
           }}
           style={{
             height: '100%',

@@ -15,15 +15,15 @@ let cardContents=[
         id: 'c1',
         image: require('../Assets/Images/old_tastement_img.png'),
         heading:'Old Testament',
-        description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lectus nisi, tincidunt eget egestas ac, lobortis sed nisi. Nunc vestibulum est eget tristique commodo. Sed nisl lacus,',
-        subtitle:'Lorem ipsum dolor sit amet'
+        description:'To find comfort and encouragement during challenging times, we help individuals find solace and hope through spiritual teachings and knowledge about religious beliefs, practices, and history.',
+        // subtitle:'Lorem ipsum dolor sit amet'
     },
     {
         id: 'c2',
         image: require('../Assets/Images/old_tastement_img.png'),
         heading:'New Testament',
-        description:'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lectus nisi, tincidunt eget egestas ac, lobortis sed nisi. Nunc vestibulum est eget tristique commodo. Sed nisl lacus,',
-        subtitle:'Lorem ipsum dolor sit amet'
+        description:"For spiritual discipline,  we organize devotionals to help people deepen and nourish their spiritual connection. Our devotionals encourage spiritual guidance to strengthen people's faith.",
+        // subtitle:'Lorem ipsum dolor sit amet'
     },
   ];
 
@@ -34,7 +34,6 @@ function Card({image, heading, description, subtitle ,onPress ,setSelectedTestme
         <TouchableOpacity onPress={() => {
             // setSelectedTestment(heading)
             navigation.navigate('TestmentsScreeen',{selectedTestment :heading})
-            console.log('helllooooooooooooooooooo========>')
         }}>
 
         <ImageBackground source={image}

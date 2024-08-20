@@ -74,61 +74,34 @@ import AnimationsScreen from './Screens/AnimationsScreen';
 import Stories from './Screens/Stories';
 import Podcasts from './Screens/Podcasts';
 import VideoTeachings from './Screens/VideoTeachings';
+import BlogScreen from './Screens/BlogScreen';
+import BlogDetails from './Screens/BlogDetails';
 
 const AppNavigator = () => {
-  // const isLogin = false;
-  const isGoalCreated = useSelector(state => state.authReducer.isGoalCreated);
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
-  const role = useSelector(state => state.authReducer.role);
-  console.log('🚀 ~ file: appNavigation.js:31 ~ AppNavigator ~ role:', role);
-
-  console.log(
-    '🚀 ~ file: appNavigation.js:27 ~ AppNavigator ~ walkThrough:',
-    walkThrough,
-  );
-
-  const isVerified = useSelector(state => state.authReducer.isVerified);
   const token = useSelector(state => state.authReducer.token);
-  console.log('🚀 ~ file: appNavigation.js:33 ~ AppNavigator ~ token:', token);
-
-  // console.log('token>>>>', token);
-  // console.log('isVerified', isGoalCreated);
-
   const RootNav = createNativeStackNavigator();
   const RootNavLogged = createNativeStackNavigator();
 
   const AppNavigatorContainer = () => {
-    // const HomeScreen =
-    //   role == 'admin'
-    //     ? 'MyDrawer'
-    //     : role == 'customer'
-    //     ? 'HomeScreenOther'
-    //     : 'HomeScreenOther';
+ 
     const firstScreen = !walkThrough
       ? 'WalkThroughScreen'
       : token == null
       ? 'LoginScreen'
       : 'MyDrawer';
 
-    console.log('🚀 ~ AppNavigatorContainer ~ firstScreen:', firstScreen);
     return (
       <NavigationContainer ref={navigationService.navigationRef}>
         <RootNav.Navigator
           initialRouteName={firstScreen}
           screenOptions={{headerShown: false}}>
-          {/* <RootNav.Screen name="TabNavigation" component={TabNavigation} /> */}
           <RootNav.Screen name="MyDrawer" component={MyDrawer} />
-          <RootNav.Screen
-            name="WalkThroughScreen"
-            component={WalkThroughScreen}
-          />
+          <RootNav.Screen name="WalkThroughScreen" component={WalkThroughScreen} />
           <RootNav.Screen name="BibleCategories" component={BibleCategories} />
           <RootNav.Screen name="Store" component={StoreScreen} />
           <RootNav.Screen name="PrivacyPolicy" component={PrivacyPolicy} />
-          <RootNav.Screen
-            name="TermsAndConditions"
-            component={TermsAndConditions}
-          />
+          <RootNav.Screen name="TermsAndConditions" component={TermsAndConditions} />
           <RootNav.Screen name="DonationHistory" component={DonationHistory} />
           <RootNav.Screen name="Donation" component={Donation} />
           <RootNav.Screen name="BookDescriprtionScreen" component={BookDescriprtionScreen}/>
@@ -140,56 +113,24 @@ const AppNavigator = () => {
           <RootNav.Screen name="Signup" component={Signup} />
           <RootNav.Screen name="LoginScreen" component={LoginScreen} />
           <RootNav.Screen name="ChangePasswordScreen" component={ResetPassword} />
-          <RootNav.Screen
-            name="TestmentsScreeen"
-            component={TestmentsScreeen}
-          />
-          {/* <RootNav.Screen name="BibleCategories" component={BibleCategories} /> */}
-          <RootNav.Screen
-            name="OldTestamentCategories"
-            component={OldTestamentCategories}
-          />
-          <RootNav.Screen
-            name="BookDescriptionScreen"
-            component={BookDescriprtionScreen}
-          />
+          <RootNav.Screen name="TestmentsScreeen" component={TestmentsScreeen} />
+           <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories} />
+          <RootNav.Screen name="BookDescriptionScreen" component={BookDescriprtionScreen}/>
           <RootNav.Screen name="RecordedLecture" component={RecordedLecture} />
-          <RootNav.Screen
-            name="kidsLectureScreen"
-            component={KidsLectureScreen}
-          />
+          <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/>
           <RootNav.Screen name="LiveLecture" component={LiveLecture} />
-          {/* <RootNav.Screen name="Donation" component={Donation} /> */}
           <RootNav.Screen name="DonationDetails" component={DonationDetails} />
           <RootNav.Screen name="DonateNow" component={DonateNow} />
           <RootNav.Screen name="CheckoutScreen" component={CheckOutScreen} />
           <RootNav.Screen name="EnterEmail" component={EnterEmail} />
           <RootNav.Screen name="VerifyNumber" component={VerifyNumber} />
-          
-          {/* <RootNav.Screen
-            name="RecommandedBooks"
-            component={RecommandedBooks}
-          /> */}   
           <RootNav.Screen name="ProductDetail" component={ProductDetail} />
-          {/* <RootNav.Screen
-            name="OutReachMissions"
-            component={OutReachMissions}
-          /> */}
-          {/* <RootNav.Screen name="AboutBooks" component={AboutBooks} /> */}
-          {/* <RootNav.Screen name="GalleryFror" component={GalleryFror} /> */}
-          {/* <RootNav.Screen name="OldTestamentCategories" component={OldTestamentCategories}/> */}
-          {/* <RootNav.Screen name="RecordedLecture" component={RecordedLecture}/> */}
-          {/* <RootNav.Screen name="kidsLectureScreen" component={KidsLectureScreen}/> */}
-          {/* <RootNav.Screen name="LiveLecture" component={LiveLecture}/> */}
           <RootNav.Screen name="DonationScreen" component={Donation}/>
-
           <RootNav.Screen name="SelectChapter" component={SelectChapter} /> 
+          <RootNav.Screen name="PlaceOrderScreen" component={PlaceOrderScreen}/>
+          <RootNav.Screen name="BlogDetails" component={BlogDetails}/>
 
 
-          <RootNav.Screen
-            name="PlaceOrderScreen"
-            component={PlaceOrderScreen}
-          />
         </RootNav.Navigator>
       </NavigationContainer>
     );
@@ -221,11 +162,6 @@ export const TabNavigation = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          // backgroundColor:'pink',
-          // backgroundColor: Color.red,
-          // borderTopLeftRadius:15,
-          // borderTopRightRadius:15,
-          // paddingVertical:5
         },
         tabBarIcon: ({focused}) => {
           let iconName;
@@ -239,7 +175,7 @@ export const TabNavigation = () => {
             color = focused ? Color.theme2 : Color.white;
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
           } else if (route.name === 'BibleCategoriesScreen') {
-            iconName = focused ? 'donate' : 'donate';
+            iconName = focused ? 'bible' : 'bible';
             type = FontAwesome5;
             color = focused ? Color.theme2 : Color.white;
             size = focused ? moderateScale(30, 0.3) : moderateScale(20, 0.3);
@@ -291,17 +227,8 @@ export const TabNavigation = () => {
         ),
       })}>
       <Tabs.Screen name={'HomeScreen'} component={HomeScreen}  />
-      {/* <Tabs.Screen name={'HomeScreen'} component={HomeScreen}  /> */}
-      {/* <Tabs.Screen name={'Donation'} component={Donation} initialParams={{ fromDrawer: false }} /> */}
-      {/* <Tabs.Screen name={'OldTestament'} component={TestmentsScreeen} initialParams={{ fromTab: true }} />
-    />  */}
-      <Tabs.Screen
-name="BibleCategoriesScreen" component={BibleCategories}
-initialParams={{ fromTab: true }}
-/>
+      <Tabs.Screen name="BibleCategoriesScreen" component={BibleCategories} initialParams={{ fromTab: true }}/>
       <Tabs.Screen name={'Campaigns'} component={Campaigns} />
-
-      {/* <Tabs.Screen name={'BibleCategories'} component={BibleCategories} /> */}
       <Tabs.Screen name={'StoreScreen'} component={StoreScreen} />
       <Tabs.Screen name={'Settings'} component={Settings} />
     </Tabs.Navigator>
@@ -309,7 +236,6 @@ initialParams={{ fromTab: true }}
 };
 export const MyDrawer = () => {
   const DrawerNavigation = createDrawerNavigator();
-  console.log('🚀 ~ MyDrawer ~ DrawerNavigation:', DrawerNavigation);
   const firstScreen = 'HomeScreen';
   return (
     <DrawerNavigation.Navigator
@@ -323,63 +249,30 @@ export const MyDrawer = () => {
           backgroundColor: '#D3D3D3',
         },
       }}>
-      {/* <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} /> */}
-      {/* <DrawerNavigation.Screen name="ScanScreen" component={ScanScreen} /> */}
       <DrawerNavigation.Screen name="TabNavigation" component={TabNavigation} />
-
-      <DrawerNavigation.Screen
-        name="MemberShipForm"
-        component={MemberShipForm}
-      />
-      <DrawerNavigation.Screen
-        name="PrayerRequestForm"
-        component={PrayerRequestForm}
-      />
-      <DrawerNavigation.Screen
-        name="EventAndComunity"
-        component={EventAndComunity}
-      />
-      <DrawerNavigation.Screen
-        name="OutReachMissions"
-        component={OutReachMissions}
-      />
+      <DrawerNavigation.Screen name="HomeScreen" component={HomeScreen} />
+      <DrawerNavigation.Screen name="MemberShipForm" component={MemberShipForm}/>
+      <DrawerNavigation.Screen name="PrayerRequestForm" component={PrayerRequestForm}/>
+      <DrawerNavigation.Screen name="EventAndComunity" component={EventAndComunity}/>
+      <DrawerNavigation.Screen name="OutReachMissions" component={OutReachMissions} />
+      <DrawerNavigation.Screen name="BlogScreen" component={BlogScreen} />
       <DrawerNavigation.Screen name="AboutUs" component={AboutUs} />
       <DrawerNavigation.Screen name="GalleryFror" component={GalleryFror} />
-
       <DrawerNavigation.Screen name="GoodThings" component={GoodThings} />
       <DrawerNavigation.Screen name="QrScanScreen" component={QrScanScreen} />
-      <DrawerNavigation.Screen
-        name="RecommandedBooks"
-        component={RecommandedBooks}
-      />
-      <DrawerNavigation.Screen
-        name="RecordedSermons"
-        component={RecordedLecture}
-      />
-      <DrawerNavigation.Screen
-        name="podcasts"
-        component={Podcasts}
-      />
-      <DrawerNavigation.Screen
-        name="video_teachings"
-        component={VideoTeachings}
-      />
-
-      <DrawerNavigation.Screen
-        name="cartoons"
-        component={CartoonsScreen}
-      />
-      <DrawerNavigation.Screen
-        name="animations"
-        component={AnimationsScreen}
-      />
-      <DrawerNavigation.Screen
-        name="stories"
-        component={Stories}
-      />
-    
+      <DrawerNavigation.Screen name="RecommandedBooks" component={RecommandedBooks}/>
+      <DrawerNavigation.Screen name="RecordedSermons" component={RecordedLecture} />
+      <DrawerNavigation.Screen name="podcasts" component={Podcasts}/>
+      <DrawerNavigation.Screen name="video_teachings" component={VideoTeachings}/>
+      <DrawerNavigation.Screen name="cartoons" component={CartoonsScreen}/>
+      <DrawerNavigation.Screen name="animations" component={AnimationsScreen}/>
+      <DrawerNavigation.Screen name="stories" component={Stories}/>
       <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
       <DrawerNavigation.Screen name="Contact" component={Team} />
+      <DrawerNavigation.Screen name="BlogDetails" component={BlogDetails} />
+      {/* <DrawerNavigation.Screen name="BlogScreen" component={BlogScreen} /> */}
+
+
     </DrawerNavigation.Navigator>
   );
 };

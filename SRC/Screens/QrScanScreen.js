@@ -17,7 +17,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Color from '../Assets/Utilities/Color';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import DropDownSingleSelect from '../Components/DropDownSingleSelect';
-import {color, position} from 'native-base/lib/typescript/theme/styled-system';
+import {border, color, position} from 'native-base/lib/typescript/theme/styled-system';
 import Header from '../Components/Header';
 import Feather from 'react-native-vector-icons/Feather';
 import CustomImage from '../Components/CustomImage';
@@ -52,7 +52,7 @@ const QrScanScreen = () => {
       style={{
         width: windowWidth,
         height: windowHeight,
-        paddingBottom: moderateScale(40, 0.6),
+        paddingBottom: moderateScale(20, 0.6),
       }}
       source={require('../Assets/Images/setting_Bg.png')}>
       <Header
@@ -60,19 +60,15 @@ const QrScanScreen = () => {
         showLeft={true}
         leftName={'menu'}
         leftType={Feather}
-        title={true}
+        title={'Qr scan '}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={false}
+     
+      >
         <QrScanComponent />
 
         <View
-          style={{
-            marginVertical :moderateScale(10,.6),
-            marginHorizontal: moderateScale(20, 0.6),
-            width: windowWidth * 0.87,
-            borderWidth: 0.4,
-            borderColor: Color.red,
-          }}></View>
+          style={styles.border}></View>
         <QrScanComponent />
       </ScrollView>
     </ImageBackground>
@@ -96,4 +92,12 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  border:{
+    marginVertical :moderateScale(10,.6),
+    marginHorizontal: moderateScale(20, 0.6),
+    width: windowWidth * 0.87,
+    borderWidth: 0.4,
+    borderColor: Color.red,
+    // backgroundColor :'red'
+  }
 });

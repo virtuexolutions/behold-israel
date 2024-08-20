@@ -17,6 +17,34 @@ import Color from '../Assets/Utilities/Color';
 
 const TermsAndConditions = () => {
   const navigation = useNavigation();
+  const termsOfUse = [
+    {
+      id: 1,
+      heading: "Use of the App",
+      description: "You will not use the app for unlawful purposes and according to these Terms. You are prohibited from using the app in any manner that would harm, change, or reduce its operability."
+    },
+    {
+      id: 2,
+      heading: "Account Responsibilities",
+      description: "You are entirely responsible for protecting your account details and managing any activity under that account. You further warrant to promptly notify us of any known or suspected unauthorized use of your account."
+    },
+    {
+      id: 3,
+      heading: "Intellectual Property",
+      description: "Everything you can see, including the text, images, logos, or any other app material, belongs to Holy Ghost Fraternity or its licensors and is protected by intellectual property laws. All the content on this website may not be used, reproduced, or distributed without our written permission."
+    },
+    {
+      id: 4,
+      heading: "Limitation of Liability",
+      description: "As much as we endeavor to provide accurate information about the locations and ease of navigation in the app, we would like to inform the users that the information, products, and services provided through the app are provided on an ‘as is’ basis. Where the law allows it, we shall not accept responsibility for losses or damages arising from the use or inability to use the app."
+    },
+    {
+      id: 5,
+      heading: "Termination",
+      description: "We also retain the right to change your access to and overall app usage immediately. For any reason whatsoever, to our discretion, no reason must be provided. This includes but is not limited to violation of these Terms and part or all of the content deemed unlawful or otherwise harmful to the app and its users."
+    }
+  ];
+  
 
   return (
     <ImageBackground
@@ -73,9 +101,21 @@ const TermsAndConditions = () => {
             fontSize: moderateScale(12, 0.6),
           }}>
           {
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum \n\n t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). \n \n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32 f fsd fsdf s'
+            'Use of this app is governed by these Terms and Conditions; therefore, your use implies your acceptance of them. It is advised that the terms and conditions stated in the following pages be well understood before requesting any service from us.'
           }
         </CustomText>
+        {termsOfUse.map((item, index) =>{
+          return (
+            <View>
+               <CustomText isBold style={styles.heading}>
+           {item.id}. {item?.heading}
+        </CustomText>
+        <CustomText style={styles.text2}>
+        {item.description}
+        </CustomText>
+            </View>
+          )
+        })}
       </ScrollView>
     </ImageBackground>
   );
@@ -98,4 +138,21 @@ const styles = ScaledSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  heading:{
+    // textTransform: 'uppercase',
+    marginTop: moderateScale(10, 0.3),
+    marginHorizontal: moderateScale(10, 0.3),
+    color: Color.white,
+    // width : windowWidth ,
+    textAlign: 'justify',
+    fontSize: moderateScale(14, 0.6),
+  },
+  text2:{
+    marginTop: moderateScale(5, 0.3),
+    marginHorizontal: moderateScale(10, 0.3),
+    color: Color.white,
+    // width : windowWidth ,
+    textAlign: 'justify',
+    fontSize: moderateScale(12, 0.6),
+  }
 });

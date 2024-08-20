@@ -27,15 +27,9 @@ import CustomText from '../Components/CustomText';
 
 const CheckoutScreen = ({route}) => {
   const navigation = useNavigation();
-  //   const cartitem =useSelector(state => state.commonReducer.cart)
-  // console.log("🚀 ~ CheckoutScreen ~ cartitem:", cartitem)
   const selectedProductSize = useSelector(state => state.commonReducer.item);
   const cardData = useSelector(state => state.commonReducer.cart);
   const token = useSelector(state => state.authReducer.token);
-  console.log(
-    '🚀 ~ file: CheckOutScreen.js:27 ~ CheckOutScreen ~ token:',
-    token,
-  );
   const [finalAmount, setFinalAmount] = useState(0);
   const [productsForCard, setProdctsForCart] = useState([]);
   const subTotal = route?.params?.subTotal;

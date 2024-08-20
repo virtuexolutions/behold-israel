@@ -23,14 +23,12 @@ const StoreScreen = ({route}) => {
   const cartData = useSelector(state => state.commonReducer.cart);
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log('🚀 ~ StoreScreen ~ cartData:', cartData?.length);
 
   const getProducts = async () =>{
     const url = "auth/product";
     setIsLoading(true);
     const response = await Get(url, token);
     setIsLoading(false);
-    console.log("🚀 ~ getProducts ~ response:", response?.data)
     if(response !== undefined){
       setProducts(response?.data?.product_list)
     }
@@ -48,108 +46,12 @@ const StoreScreen = ({route}) => {
         paddingBottom: moderateScale(40, 0.6),
       }}
       source={require('../Assets/Images/recorded.png')}>
-        {/* <Icon onPress={() => navigation.navigate('MyDrawer')} name={'menu'} as={Feather} color={Color.white} size={ moderateScale(18,.6)} /> */}
       <Header showBack={fromHomeScreen} title={'store'} cart={true} 
       onPress={() =>{
         navigation.toggleDrawer();
       }}
       
       />
-       {/* <View
-        style={{
-          height: moderateScale(30, 0.3),
-          width: moderateScale(30, 0.3),
-          borderRadius: moderateScale(5, 0.3),
-          justifyContent: 'center',
-          alignItems: 'center',
-          position: 'absolute',
-          zIndex:1,
-          top: 35,
-          left:20,
-        }}>
-           <Icon
-          style={{
-            textAlign:'center',
-            height :windowHeight*0.05,
-            width:windowHeight*0.05,
-            borderRadius :windowHeight*0.05 /2,
-            backgroundColor :Color.white,
-            paddingTop: moderateScale(6.6),
-
-            // marginTop :moderateScale
-          }}
-            name={'menu'}
-            as={Feather}
-            size={moderateScale(25, 0.3)}
-            color={Color.black}
-            onPress={() => {
-              navigation.toggleDrawer();
-              // navigationN.dispatch(DrawerActions.toggleDrawer())
-              
-            }}
-          />
-        </View> */}
-      {/* <View
-        style={[
-          styles.rowContainner,
-          {
-            paddingHorizontal: moderateScale(10, 0.6),
-            paddingVertical: moderateScale(25, 0.6),
-            //   paddingTop: moderateScale(25, .6)
-          },
-        ]}>
-        <CustomText numberOfLines={1} isBold style={styles.Heading}>
-          store
-        </CustomText>
-
-        <View
-          style={{
-            flexDirection: 'row',
-          }}>
-          <CustomButton
-            onPress={() => {
-              cartData.length > 0 && navigation.navigate('CheckoutScreen');
-            }}
-            iconName={'shopping-cart'}
-            iconType={FontAwesome}
-            iconStyle={{
-              color: Color.white,
-              height: windowHeight * 0.05,
-              width: windowWidth * 0.09,
-              paddingTop: moderateScale(15, 0.6),
-              fontSize: moderateScale(30, 0.6),
-            }}
-          />
-          {cartData.length > 0 && (
-            <View
-              style={{
-                position: 'absolute',
-                right: 13,
-                top: 0,
-                height: windowHeight * 0.018,
-                width: windowHeight * 0.018,
-                backgroundColor: Color.theme2,
-                borderRadius: (windowHeight * 0.018) / 2,
-                alignItems: 'center',
-                justifyContent: 'center',
-                //   padding: moderateScale(5, 0.3),
-              }}>
-              <CustomText
-                // numberOfLines={1}
-                isBold
-                style={{
-                  textAlign: 'center ',
-                  fontSize: moderateScale(11, 0.6),
-                  color: Color.white,
-                  //   backgroundColor:'green',
-                  //   width: windowWidth * 0.6,
-                }}>
-                {cartData?.length}
-              </CustomText>
-            </View>
-          )}
-        </View>
-      </View> */}
       <View style={styles.rowContainner}>
         <SearchbarComponent
           placeHolderColor={Color.veryLightGray}
@@ -170,7 +72,7 @@ const StoreScreen = ({route}) => {
           width={windowHeight * 0.06}
           height={windowHeight * 0.06}
           text={'all'}
-          fontSize={moderateScale(14, 0.3)}
+          fontSize={moderateScale(13, 0.3)}
           borderRadius={(windowHeight * 0.06) / 2}
         />
       </View>

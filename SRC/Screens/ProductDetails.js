@@ -22,21 +22,15 @@ import CustomStatusBar from '../Components/CustomStatusBar';
 import Header from '../Components/Header';
 import {useIsFocused} from '@react-navigation/native';
 import Color from '../Assets/Utilities/Color';
-// import CommentsSection from '../Components/CommentsSection';
 import TextInputWithTitle from '../Components/TextInputWithTitle';
 import moment from 'moment';
 
 const ProductDetails = props => {
   const item = props?.route?.params?.item;
-  // const seller = props?.route?.params?.seller;
   const cartData = useSelector(state => state.commonReducer.cart);
-  // console.log(
-  //   '🚀 ~ file: DressesDetail.js:26 ~ DressesDetail ~ cartData:',
-  //   cartData,
-  // );
+
   const user = useSelector(state => state.commonReducer.userData);
   const cartitem = cartData?.find((x, index) => x?.id == item?.id);
-  // console.log("🚀 ~ file: DressesDetail.js:23 ~ DressesDetail ~ item:", item)
   const dispatch = useDispatch();
   const focused = useIsFocused();
   const [Selectedcolor, SetSelectedColor] = useState(
@@ -50,7 +44,7 @@ const ProductDetails = props => {
   const [index, setIndex] = useState(1);
   console.log(
     '🚀 ~ file: DressesDetail.js:28 ~ DressesDetail ~ item:',
-    item?.images[index-1],
+    item?.images[index - 1],
   );
   const [quantity, setQuantity] = useState(
     cartitem ? cartitem?.qty : item?.qty ? item?.qty : 1,
@@ -67,13 +61,13 @@ const ProductDetails = props => {
     dispatch(AddToCart(item));
   };
 
-  const images = [
-    require('../Assets/Images/image3.png'),
-    require('../Assets/Images/Mask2.png'),
-    require('../Assets/Images/image3.png'),
-    require('../Assets/Images/Mask2.png'),
-    require('../Assets/Images/Mask.png'),
-  ];
+  // const images = [
+  //   require('../Assets/Images/image3.png'),
+  //   require('../Assets/Images/Mask2.png'),
+  //   require('../Assets/Images/image3.png'),
+  //   require('../Assets/Images/Mask2.png'),
+  //   require('../Assets/Images/Mask.png'),
+  // ];
 
   const [finalItem, setFinalItem] = useState(
     cartitem != undefined ? cartitem : item,
@@ -561,7 +555,7 @@ const ProductDetails = props => {
                   text: yourComment,
                   time: moment().format(' hh:mm:ss a'),
                 };
-                console.log('Body is here==========>>>>>>>>>>>>>>>>>', body);
+                console.log('==========>>>>>>>>>>>>>>>>>', body);
                 setComments(prev => [
                   ...prev,
                   {

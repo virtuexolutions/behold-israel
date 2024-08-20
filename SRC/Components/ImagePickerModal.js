@@ -102,7 +102,11 @@ const ImagePickerModal = props => {
       if (Platform.OS == 'ios') {
         setShow(false);
       }
-      
+      if (response.didCancel) {
+      } else if (response.error) {
+      } else if (response.customButton) {
+        alert(response.customButton);
+      } 
       else {
         setFileObject &&
           setFileObject({

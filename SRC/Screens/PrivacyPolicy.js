@@ -69,6 +69,44 @@ import Color from '../Assets/Utilities/Color'
 
 const PrivacyPolicy = () => {
   const navigation = useNavigation();
+  const privacyPolicy = [
+    {
+      id: 1,
+      heading: "Introduction",
+      description: "Regarding privacy, safety, and security, the management of Holy Ghost Fraternity would like to convey our commitment to our members and guests. The following is a general description of how we will handle your personal information."
+    },
+    {
+      id: 2,
+      heading: "Information Collection",
+      description: "Information we receive from you directly comprises your personal data, name, email, date, and payment information when making a subscription or any other transactions or subscribing to our blog. We also obtain information through cookies and similar tools to optimize your experience within the app."
+    },
+    {
+      id: 3,
+      heading: "Use of Information",
+      description: "It’s shared with service providers for their use, to communicate with you about services, to optimize transactions, and for personalization. We also may use the data to promote our services and products to you; however, you can unsubscribe."
+    },
+    {
+      id: 4,
+      heading: "Data Security",
+      description: "To ensure the confidentiality of your data, we follow all the safety protocols the industry sets to secure data from unauthorized access, use, or disclosure. However, always some risks are associated with sending information through the internet or storing it electronically."
+    },
+    {
+      id: 5,
+      heading: "Sharing of Information",
+      description: "As a matter of policy, we do not share or barter your information with any third-party organization. We can disclose information to third parties helping us run the app, our operations, or our services to you as long as these parties adhere to our privacy policy – non-disclosure."
+    },
+    {
+      id: 6,
+      heading: "Your Rights",
+      description: "You have the right to receive information about the personal data kept about you, to rectify it, or to erase it. If you want to use your rights in this respect, feel free to contact us."
+    },
+    {
+      id: 7,
+      heading: "Changes to This Policy",
+      description: "Some changes to this Privacy Policy may be posted on our website and emailed to you, and it is your responsibility to review it to determine if any changes may affect you. Any change we make will be communicated by displaying the new policy on our app and changing the date of this policy."
+    }
+  ];
+  
 
   return (
     <ImageBackground
@@ -111,15 +149,38 @@ const PrivacyPolicy = () => {
                 textAlign : 'center',
                 fontSize : moderateScale(20,0.6),
             }}>Privacy Policy</CustomText>
-              <CustomText  style={{
-                marginTop : moderateScale(30,0.3),
-                marginHorizontal : moderateScale(10,0.3),
-                color : Color.white,
-                // width : windowWidth , 
-                textAlign : 'justify',
-                fontSize : moderateScale(12,0.6),
-            }}>{'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum \n\n t is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using Content here, content here, making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for lorem ipsum will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). \n \n Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32 f fsd fsdf s'}</CustomText>
-          </ScrollView>
+             {privacyPolicy.map((item,index) =>{
+              return(
+                <View>
+                     <CustomText
+  isBold
+  style={{
+    marginTop: moderateScale(10, 0.3),
+    marginHorizontal: moderateScale(10, 0.3),
+    color: Color.white,
+    // width : windowWidth ,
+    textAlign: 'justify',
+    fontSize: moderateScale(14, 0.6),
+  }}>
+
+{item?.id}. {item?.heading}
+
+</CustomText>
+<CustomText
+  style={{
+    marginTop: moderateScale(5, 0.3),
+    marginHorizontal: moderateScale(10, 0.3),
+    color: Color.white,
+    // width : windowWidth ,
+    textAlign: 'justify',
+    fontSize: moderateScale(12, 0.6),
+  }}>
+{item.description}
+</CustomText>
+                </View>
+              );
+             })}
+</ScrollView>
         </ImageBackground>
   )
 }
@@ -142,5 +203,4 @@ const styles = ScaledSheet.create({
                     justifyContent: 'center',
                   },
 })
-
 

@@ -10,10 +10,14 @@ const QrScanComponent = () => {
   return (
     <View
       style={{
-        height: windowHeight * 0.4,
+        height: windowHeight * 0.45,
         width: windowWidth,
         alignItems: 'center',
         justifyContent: 'center',
+        // backgroundColor :'red',
+        marginBottom :moderateScale(10,.3),
+        // borderBottomWidth :1,
+        // borderColor:Color.red
       }}>
       <View
         style={{

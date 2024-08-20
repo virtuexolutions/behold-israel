@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   View,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import {windowHeight, windowWidth} from '../Utillity/utils';
@@ -61,444 +63,454 @@ const MemberShipForm = () => {
         end={{x: 1, y: 0}}
         colors={['#2F1C6E', '#2FB4C0']}
         style={styles.container}>
-        <View style={styles.mainContainer}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           <ScrollView
             showsVerticalScrollIndicator={false}
-            style={
-              {
-                // marginTop:moderateScale(10,.3),
-              }
-            }
-            contentContainerStyle={
-              {
-                // paddingTop : moderateScale(10,0.6),
-              }
-            }>
-            <CustomText
-              isBold
-              style={{
-                color: '#FFC928',
-                // width: windowWidth,
-                textAlign: 'center',
-                fontSize: moderateScale(25, 0.6),
-                paddingVertical: moderateScale(15, 0.6),
-              }}>
-              membership form
-            </CustomText>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '90%',
-              }}>
-              <TextInputWithTitle
-                titleText={'first name'}
-                placeholder={'first name'}
-                setText={setName}
-                value={name}
-                viewHeight={0.06}
-                viewWidth={0.4}
-                inputWidth={0.35}
-                border={1}
-                borderColor={'#0F02022E'}
-                backgroundColor={'white'}
-                marginBottom={moderateScale(10, 0.3)}
-                color={'#ABB1C0'}
-                placeholderColor={'#ABB1C0'}
-                borderRadius={moderateScale(20, 0.6)}
-              />
-              <TextInputWithTitle
-                titleText={'last name'}
-                placeholder={'last name'}
-                setText={setLastName}
-                value={lastName}
-                viewHeight={0.06}
-                viewWidth={0.42}
-                inputWidth={0.35}
-                border={1}
-                borderColor={'#0F02022E'}
-                backgroundColor={'white'}
-                marginBottom={moderateScale(10, 0.3)}
-                color={'#ABB1C0'}
-                placeholderColor={'#ABB1C0'}
-                borderRadius={moderateScale(20, 0.6)}
-              />
-            </View>
-            <TextInputWithTitle
-              titleText={'email'}
-              placeholder={'email'}
-              setText={setEmail}
-              value={email}
-              viewHeight={0.06}
-              viewWidth={0.85}
-              inputWidth={0.8}
-              border={1}
-              borderColor={'#0F02022E'}
-              backgroundColor={'white'}
-              marginBottom={moderateScale(10, 0.3)}
-              color={'#ABB1C0'}
-              placeholderColor={'#ABB1C0'}
-              borderRadius={moderateScale(20, 0.6)}
-            />
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
-                width: '90%',
-              }}>
-              <TextInputWithTitle
-                titleText={'Dob'}
-                placeholder={'Dob'}
-                setText={setDate}
-                value={date}
-                viewHeight={0.06}
-                viewWidth={0.38}
-                inputWidth={0.3}
-                border={1}
-                borderColor={'#0F02022E'}
-                backgroundColor={'white'}
-                color={'#ABB1C0'}
-                placeholderColor={'#ABB1C0'}
-                borderRadius={moderateScale(25, 0.6)}
-              />
-
-              <DropDownSingleSelect
-                array={['male', 'female']}
-                item={gender}
-                setItem={setGender}
-                placeholder={'gender'}
-                width={windowWidth * 0.45}
-                dropdownStyle={{
-                  marginLeft: moderateScale(10, 0.3),
-                  width: windowWidth * 0.45,
-                  borderBottomWidth: 0,
-                  marginTop: moderateScale(0, 0.3),
-                }}
-              />
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
-                width: '90%',
-              }}>
-              <TextInputWithTitle
-                titleText={'Cell phone'}
-                placeholder={'Cell phone'}
-                setText={setContact}
-                value={contact}
-                viewHeight={0.06}
-                viewWidth={0.38}
-                inputWidth={0.35}
-                border={1}
-                borderColor={'#0F02022E'}
-                backgroundColor={'white'}
-                marginBottom={moderateScale(10, 0.3)}
-                color={'#ABB1C0'}
-                placeholderColor={'#ABB1C0'}
-                borderRadius={moderateScale(25, 0.6)}
-              />
-
-              <DropDownSingleSelect
-                array={['Ministries', 'Music']}
-                item={volunteer}
-                setItem={setVolunteer}
-                placeholder={'Volunteer'}
-                width={windowWidth * 0.45}
-                dropdownStyle={{
-                  marginTop: moderateScale(0, 0.3),
-                  marginLeft: moderateScale(10, 0.3),
-                  borderBottomWidth: 0,
-                  color: Color.black,
-                }}
-              />
-            </View>
-            <TextInputWithTitle
-              titleText={'profession'}
-              placeholder={'profession'}
-              setText={setProfession}
-              value={profession}
-              viewHeight={0.06}
-              viewWidth={0.85}
-              inputWidth={0.8}
-              border={1}
-              borderColor={'#0F02022E'}
-              backgroundColor={'white'}
-              marginBottom={moderateScale(10, 0.3)}
-              color={'#ABB1C0'}
-              placeholderColor={'#ABB1C0'}
-              borderRadius={moderateScale(20, 0.6)}
-            />
-            <TextInputWithTitle
-              titleText={'hobby'}
-              placeholder={'hobby'}
-              setText={setHobby}
-              value={hobby}
-              viewHeight={0.06}
-              viewWidth={0.85}
-              inputWidth={0.8}
-              border={1}
-              borderColor={'#0F02022E'}
-              backgroundColor={'white'}
-              color={'#ABB1C0'}
-              placeholderColor={'#ABB1C0'}
-              borderRadius={moderateScale(20, 0.6)}
-            />
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'flex-start',
-                width: '90%',
-              }}>
-              <DropDownSingleSelect
-                array={['Christian', 'Catholic', 'Pentecostal', 'other']}
-                item={religion}
-                setItem={setReligion}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                }}
-                placeholder={'religion'}
-                width={windowWidth * 0.4}
-              />
-
-              <DropDownSingleSelect
-                array={['Member', 'Chapter']}
-                item={joiningAs}
-                setItem={setJoiningAs}
-                placeholder={'joining as'}
-                width={windowWidth * 0.4}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                  marginLeft: moderateScale(-135, 0.3),
-                }}
-              />
-            </View>
-            <CustomText
-              isBold
-              style={{
-                color: '#FFC928',
-                width: windowWidth * 0.75,
-                paddingHorizontal: moderateScale(10, 0.6),
-                fontSize: moderateScale(25, 0.6),
-                paddingVertical: moderateScale(5, 0.6),
-              }}>
-              address
-            </CustomText>
-
-            <TextInputWithTitle
-              titleText={'address'}
-              placeholder={'address'}
-              setText={setAddress}
-              value={address}
-              viewHeight={0.06}
-              viewWidth={0.85}
-              inputWidth={0.8}
-              border={1}
-              borderColor={'#0F02022E'}
-              backgroundColor={'white'}
-              // marginBottom={moderateScale(10, 0.3)}
-              color={'#ABB1C0'}
-              placeholderColor={'#ABB1C0'}
-              borderRadius={moderateScale(20, 0.6)}
-            />
-
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '90%',
-              }}>
-              <DropDownSingleSelect
-                array={['male', 'female', 'other']}
-                item={country}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                }}
-                setItem={setCountry}
-                placeholder={'country'}
-                width={windowWidth * 0.4}
-              />
-
-              <DropDownSingleSelect
-                array={['male', 'female', 'other']}
-                item={state}
-                setItem={setState}
-                placeholder={'state'}
-                width={windowWidth * 0.4}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                  marginLeft: moderateScale(-135, 0.3),
-                }}
-              />
-            </View>
-            <View
-              style={{
-                flexDirection: 'row',
-                width: '90%',
-                marginTop: moderateScale(-10, 0.3),
-              }}>
-              <DropDownSingleSelect
-                array={['male', 'female', 'other']}
-                item={city}
-                setItem={setCity}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                }}
-                placeholder={'city'}
-                width={windowWidth * 0.4}
-              />
-
-              <DropDownSingleSelect
-                array={['male', 'female', 'other']}
-                item={zip}
-                setItem={setZip}
-                placeholder={'zip'}
-                width={windowWidth * 0.4}
-                dropdownStyle={{
-                  borderBottomWidth: 0,
-                  marginLeft: moderateScale(-135, 0.3),
-                }}
-              />
-            </View>
-            <View
-              style={{
-                paddingTop: moderateScale(10, 0.6),
-                flexDirection: 'row',
-                marginHorizontal: moderateScale(10, 0.6),
-                // justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <TouchableOpacity
-                onPress={() => setMaillingAddress(!maillingAddress)}
-                style={{
-                  width: windowHeight * 0.02,
-                  height: windowHeight * 0.02,
-                  borderRadius: (windowHeight * 0.02) / 2,
-                  borderWidth: moderateScale(1, 0.6),
-                  borderColor: Color.white,
-                }}>
-                {maillingAddress == true && (
-                  <Icon
-                    style={{
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                    name="check"
-                    as={Entypo}
-                    color={'#FFC928'}
-                    size={moderateScale(13, 0.6)}
-                  />
-                )}
-              </TouchableOpacity>
+            style={{}}
+            contentContainerStyle={{
+              paddingBottom: moderateScale(120, 0.6),
+            }}>
+            <View style={styles.mainContainer}>
               <CustomText
-                onPress={() => {
-                  console.log('maillingAddress===========>');
-                  setMaillingAddress(!maillingAddress);
-                }}
                 isBold
                 style={{
-                  color: Color.white,
-                  width: windowWidth * 0.75,
-                  paddingHorizontal: moderateScale(10, 0.6),
-                  fontSize: moderateScale(15, 0.6),
-                  paddingVertical: moderateScale(5, 0.6),
+                  color: '#FFC928',
+                  // width: windowWidth,
+                  textAlign: 'center',
+                  fontSize: moderateScale(25, 0.6),
+                  paddingVertical: moderateScale(15, 0.6),
                 }}>
-                mailling address
+                membership form
               </CustomText>
-            </View>
-            {maillingAddress == true && (
-              <>
-                <CustomText
-                  isBold
-                  style={{
-                    color: '#FFC928',
-                    width: windowWidth * 0.75,
-                    paddingHorizontal: moderateScale(10, 0.6),
-                    fontSize: moderateScale(25, 0.6),
-                    paddingVertical: moderateScale(5, 0.6),
-                  }}>
-                  mailling address
-                </CustomText>
-
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-between',
+                  width: '90%',
+                }}>
                 <TextInputWithTitle
-                  titleText={'address'}
-                  placeholder={'address'}
-                  setText={setAddress}
-                  value={address}
+                  titleText={'first name'}
+                  placeholder={'first name'}
+                  setText={setName}
+                  value={name}
                   viewHeight={0.06}
-                  viewWidth={0.85}
-                  inputWidth={0.8}
+                  viewWidth={0.4}
+                  inputWidth={0.35}
                   border={1}
                   borderColor={'#0F02022E'}
                   backgroundColor={'white'}
-                  // marginBottom={moderateScale(10, 0.3)}
+                  marginBottom={moderateScale(10, 0.3)}
                   color={'#ABB1C0'}
                   placeholderColor={'#ABB1C0'}
                   borderRadius={moderateScale(20, 0.6)}
                 />
+                <TextInputWithTitle
+                  titleText={'last name'}
+                  placeholder={'last name'}
+                  setText={setLastName}
+                  value={lastName}
+                  viewHeight={0.06}
+                  viewWidth={0.42}
+                  inputWidth={0.35}
+                  border={1}
+                  borderColor={'#0F02022E'}
+                  backgroundColor={'white'}
+                  marginBottom={moderateScale(10, 0.3)}
+                  color={'#ABB1C0'}
+                  placeholderColor={'#ABB1C0'}
+                  borderRadius={moderateScale(20, 0.6)}
+                />
+              </View>
+              <TextInputWithTitle
+                titleText={'email'}
+                placeholder={'email'}
+                setText={setEmail}
+                value={email}
+                viewHeight={0.06}
+                viewWidth={0.85}
+                inputWidth={0.8}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                marginBottom={moderateScale(10, 0.3)}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  width: '90%',
+                }}>
+                <TextInputWithTitle
+                  titleText={'Dob'}
+                  placeholder={'Dob'}
+                  setText={setDate}
+                  value={date}
+                  viewHeight={0.06}
+                  viewWidth={0.38}
+                  inputWidth={0.3}
+                  border={1}
+                  borderColor={'#0F02022E'}
+                  backgroundColor={'white'}
+                  color={'#ABB1C0'}
+                  placeholderColor={'#ABB1C0'}
+                  borderRadius={moderateScale(25, 0.6)}
+                />
 
-                <View
+                <DropDownSingleSelect
+                  array={['male', 'female']}
+                  item={gender}
+                  setItem={setGender}
+                  placeholder={'gender'}
+                  width={windowWidth * 0.45}
+                  dropdownStyle={{
+                    marginLeft: moderateScale(10, 0.3),
+                    width: windowWidth * 0.45,
+                    borderBottomWidth: 0,
+                    marginTop: moderateScale(0, 0.3),
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  width: '90%',
+                }}>
+                <TextInputWithTitle
+                  titleText={'Cell phone'}
+                  placeholder={'Cell phone'}
+                  setText={setContact}
+                  value={contact}
+                  viewHeight={0.06}
+                  viewWidth={0.38}
+                  inputWidth={0.35}
+                  border={1}
+                  borderColor={'#0F02022E'}
+                  backgroundColor={'white'}
+                  marginBottom={moderateScale(10, 0.3)}
+                  color={'#ABB1C0'}
+                  placeholderColor={'#ABB1C0'}
+                  borderRadius={moderateScale(25, 0.6)}
+                />
+
+                <DropDownSingleSelect
+                  array={['Ministries', 'Music']}
+                  item={volunteer}
+                  setItem={setVolunteer}
+                  placeholder={'Volunteer'}
+                  width={windowWidth * 0.45}
+                  dropdownStyle={{
+                    marginTop: moderateScale(0, 0.3),
+                    marginLeft: moderateScale(10, 0.3),
+                    borderBottomWidth: 0,
+                    color: Color.black,
+                  }}
+                />
+              </View>
+              <TextInputWithTitle
+                titleText={'profession'}
+                placeholder={'profession'}
+                setText={setProfession}
+                value={profession}
+                viewHeight={0.06}
+                viewWidth={0.85}
+                inputWidth={0.8}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                marginBottom={moderateScale(10, 0.3)}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+              <TextInputWithTitle
+                titleText={'hobby'}
+                placeholder={'hobby'}
+                setText={setHobby}
+                value={hobby}
+                viewHeight={0.06}
+                viewWidth={0.85}
+                inputWidth={0.8}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-start',
+                  width: '90%',
+                }}>
+                <DropDownSingleSelect
+                  array={['Christian', 'Catholic', 'Pentecostal', 'other']}
+                  item={religion}
+                  setItem={setReligion}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                  }}
+                  placeholder={'religion'}
+                  width={windowWidth * 0.4}
+                />
+
+                <DropDownSingleSelect
+                  array={['Member', 'Chapter']}
+                  item={joiningAs}
+                  setItem={setJoiningAs}
+                  placeholder={'joining as'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-135, 0.3),
+                  }}
+                />
+              </View>
+              <CustomText
+                isBold
+                style={{
+                  color: '#FFC928',
+                  width: windowWidth * 0.75,
+                  paddingHorizontal: moderateScale(10, 0.6),
+                  fontSize: moderateScale(25, 0.6),
+                  paddingVertical: moderateScale(5, 0.6),
+                }}>
+                address
+              </CustomText>
+
+              <TextInputWithTitle
+                titleText={'address'}
+                placeholder={'address'}
+                setText={setAddress}
+                value={address}
+                viewHeight={0.06}
+                viewWidth={0.85}
+                inputWidth={0.8}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                // marginBottom={moderateScale(10, 0.3)}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '90%',
+                }}>
+                <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={country}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                  }}
+                  setItem={setCountry}
+                  placeholder={'country'}
+                  width={windowWidth * 0.4}
+                />
+
+                <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={state}
+                  setItem={setState}
+                  placeholder={'state'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-135, 0.3),
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  width: '90%',
+                  marginTop: moderateScale(-10, 0.3),
+                }}>
+                <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={city}
+                  setItem={setCity}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                  }}
+                  placeholder={'city'}
+                  width={windowWidth * 0.4}
+                />
+
+                <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={zip}
+                  setItem={setZip}
+                  placeholder={'zip'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-135, 0.3),
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  paddingTop: moderateScale(10, 0.6),
+                  flexDirection: 'row',
+                  marginHorizontal: moderateScale(10, 0.6),
+                  alignItems: 'center',
+                }}>
+                <TouchableOpacity
+                  onPress={() => setMaillingAddress(!maillingAddress)}
                   style={{
-                    flexDirection: 'row',
-                    width: '90%',
+                    width: windowHeight * 0.02,
+                    height: windowHeight * 0.02,
+                    borderRadius: (windowHeight * 0.02) / 2,
+                    borderWidth: moderateScale(1, 0.6),
+                    borderColor: Color.white,
                   }}>
-                  <DropDownSingleSelect
-                    array={['male', 'female', 'other']}
-                    item={country}
-                    dropdownStyle={{
-                      borderBottomWidth: 0,
-                    }}
-                    setItem={setCountry}
-                    placeholder={'country'}
-                    width={windowWidth * 0.4}
-                  />
-
-                  <DropDownSingleSelect
-                    array={['male', 'female', 'other']}
-                    item={state}
-                    setItem={setState}
-                    placeholder={'state'}
-                    width={windowWidth * 0.4}
-                    dropdownStyle={{
-                      borderBottomWidth: 0,
-                      marginLeft: moderateScale(-135, 0.3),
-                    }}
-                  />
-                </View>
-                <View
+                  {maillingAddress == true && (
+                    <Icon
+                      style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                      }}
+                      name="check"
+                      as={Entypo}
+                      color={'#FFC928'}
+                      size={moderateScale(13, 0.6)}
+                    />
+                  )}
+                </TouchableOpacity>
+                <CustomText
+                  onPress={() => {
+                    console.log('maillingAddress===========>');
+                    setMaillingAddress(!maillingAddress);
+                  }}
+                  isBold
                   style={{
-                    flexDirection: 'row',
-                    width: '90%',
-                    marginTop: moderateScale(-10, 0.3),
+                    color: Color.white,
+                    width: windowWidth * 0.75,
+                    paddingHorizontal: moderateScale(10, 0.6),
+                    fontSize: moderateScale(15, 0.6),
+                    paddingVertical: moderateScale(5, 0.6),
                   }}>
-                  <DropDownSingleSelect
-                    array={['male', 'female', 'other']}
-                    item={city}
-                    setItem={setCity}
-                    dropdownStyle={{
-                      borderBottomWidth: 0,
-                    }}
-                    placeholder={'city'}
-                    width={windowWidth * 0.4}
+                  mailling address
+                </CustomText>
+              </View>
+              {maillingAddress == true && (
+                <>
+                  <CustomText
+                    isBold
+                    style={{
+                      color: '#FFC928',
+                      width: windowWidth * 0.75,
+                      paddingHorizontal: moderateScale(10, 0.6),
+                      fontSize: moderateScale(25, 0.6),
+                      paddingVertical: moderateScale(5, 0.6),
+                    }}>
+                    mailling address
+                  </CustomText>
+
+                  <TextInputWithTitle
+                    titleText={'address'}
+                    placeholder={'address'}
+                    setText={setAddress}
+                    value={address}
+                    viewHeight={0.06}
+                    viewWidth={0.85}
+                    inputWidth={0.8}
+                    border={1}
+                    borderColor={'#0F02022E'}
+                    backgroundColor={'white'}
+                    // marginBottom={moderateScale(10, 0.3)}
+                    color={'#ABB1C0'}
+                    placeholderColor={'#ABB1C0'}
+                    borderRadius={moderateScale(20, 0.6)}
                   />
 
-                  <DropDownSingleSelect
-                    array={['male', 'female', 'other']}
-                    item={zip}
-                    setItem={setZip}
-                    placeholder={'zip'}
-                    width={windowWidth * 0.4}
-                    dropdownStyle={{
-                      borderBottomWidth: 0,
-                      marginLeft: moderateScale(-135, 0.3),
-                    }}
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      width: '90%',
+                    }}>
+                    <DropDownSingleSelect
+                      array={['male', 'female', 'other']}
+                      item={country}
+                      dropdownStyle={{
+                        borderBottomWidth: 0,
+                      }}
+                      setItem={setCountry}
+                      placeholder={'country'}
+                      width={windowWidth * 0.4}
+                    />
+
+                    <DropDownSingleSelect
+                      array={['male', 'female', 'other']}
+                      item={state}
+                      setItem={setState}
+                      placeholder={'state'}
+                      width={windowWidth * 0.4}
+                      dropdownStyle={{
+                        borderBottomWidth: 0,
+                        marginLeft: moderateScale(-135, 0.3),
+                      }}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      flexDirection: 'row',
+                      width: '90%',
+                      marginTop: moderateScale(-10, 0.3),
+                    }}>
+                    <DropDownSingleSelect
+                      array={['male', 'female', 'other']}
+                      item={city}
+                      setItem={setCity}
+                      dropdownStyle={{
+                        borderBottomWidth: 0,
+                      }}
+                      placeholder={'city'}
+                      width={windowWidth * 0.4}
+                    />
+
+                    <DropDownSingleSelect
+                      array={['male', 'female', 'other']}
+                      item={zip}
+                      setItem={setZip}
+                      placeholder={'zip'}
+                      width={windowWidth * 0.4}
+                      dropdownStyle={{
+                        borderBottomWidth: 0,
+                        marginLeft: moderateScale(-135, 0.3),
+                      }}
+                    />
+                  </View>
+            
+                </>
+              )}
+                    <CustomButton
+                    isBold
+                    height={windowHeight * 0.07}
+                    width={windowWidth * 0.8}
+                    text={'submit'}
+                    onPress={() => {}}
+                    marginTop={moderateScale(20, 0.3)}
+                    bgColor={'#FFC928'}
+                    borderRadius={moderateScale(25, 0.6)}
+                    textColor={'black'}
+                    marginRight={moderateScale(35,.6)}
                   />
-                </View>
-              </>
-            )}
+            </View>
           </ScrollView>
-        </View>
+        </KeyboardAvoidingView>
       </LinearGradient>
     </ImageBackground>
   );
@@ -519,6 +531,9 @@ const styles = ScaledSheet.create({
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  container2: {
+    flex: 1,
   },
   mainContainer: {
     marginHorizontal: moderateScale(10, 0.6),

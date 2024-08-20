@@ -27,23 +27,23 @@ import DropDownSingleSelect from '../Components/DropDownSingleSelect';
 import {CardField, createToken} from '@stripe/stripe-react-native';
 import {Post} from '../Axios/AxiosInterceptorFunction';
 import {useSelector} from 'react-redux';
-import { useIsFocused } from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 
 const Donations = props => {
-  const isFocused = useIsFocused()
+  const isFocused = useIsFocused();
   const token = useSelector(state => state.authReducer.token);
   const categoryName = props?.route?.params?.categoryName;
   const value = props?.route?.params?.value;
   const valueArray = props?.route?.params?.valueArray;
   const fromDrawer = props?.route?.params?.fromDrawer;
   const navigation = props?.navigation;
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const [stripeToken, setStripeToken] = useState('');
   const [donationCount, setDonationCount] = useState(10);
   const [selectedItem, setSelectedItem] = useState(value || '');
   const [isLoading, setIsLoading] = useState(false);
-  const [drawerState, setDrawerState] = useState(fromDrawer)
+  const [drawerState, setDrawerState] = useState(fromDrawer);
   const [selectedArray, setSelectedArray] = useState([]);
   const [SharingWithOthersArrays, setSharingWithOthersArray] = useState({
     donationArray: ['Widow', 'Poor', 'Handicaps', 'Orphans', 'HealthCare'],
@@ -71,7 +71,6 @@ const Donations = props => {
   });
   const donationArray = ['donation', 'support For Life', 'giving'];
 
-  
   const Donate = async () => {
     const url = 'auth/donate';
     const body = {
@@ -81,7 +80,7 @@ const Donations = props => {
       // stripeToken:stripeToken,
     };
     if (stripeToken == '') {
-     return alert('Please enter your card details');
+      return alert('Please enter your card details');
     } else {
       body.stripeToken = stripeToken;
     }
@@ -98,7 +97,7 @@ const Donations = props => {
     console.log('🚀 ~ Donate ~ response:', response?.data);
     setIsLoading(false);
     ToastAndroid.show(`Donated`, ToastAndroid.SHORT);
-    
+
     setSelectedItem('');
     setSelectedCategory('');
     setStripeToken('');
@@ -111,72 +110,68 @@ const Donations = props => {
     })
       .then(token => {
         console.log('token=============> ', token);
-        if(token?.token){
-        setStripeToken(token?.token?.id);
-        Platform.OS == 'android'
-        ? ToastAndroid.show(`Confirmed!`, ToastAndroid.SHORT)
-        : alert(`Confirmed!`);
-      }
-      }).catch(error => {
+        if (token?.token) {
+          setStripeToken(token?.token?.id);
+          Platform.OS == 'android'
+            ? ToastAndroid.show(`Confirmed!`, ToastAndroid.SHORT)
+            : alert(`Confirmed!`);
+        }
+      })
+      .catch(error => {
         console.log('error= ', error);
       });
   };
 
-
   useEffect(() => {
-   if(!isFocused){
+    if (!isFocused) {
       setSelectedCategory('');
       setSelectedItem('');
-      setSelectedArray([])
-   } 
+      setSelectedArray([]);
+    }
 
     // console.log("----  RUNNING FIRST MOUNT (isFocused) ----- ", isFocused);
   }, [isFocused]);
   // console.log("🚀 ~ Donations ~ selectedArray:", selectedArray)
   useEffect(() => {
-  //  console.log(categoryName);
+    //  console.log(categoryName);
 
-      setSelectedCategory(categoryName || "");
-      setSelectedItem(value || '');
-      console.log('Running 1st useeffect')
-
+    setSelectedCategory(categoryName || '');
+    setSelectedItem(value || '');
+    console.log('Running 1st useeffect');
   }, [categoryName, value]);
 
   useEffect(() => {
     if (!isFocused) {
-      console.log('focused lost')
-    setSelectedCategory('');
-    setSelectedItem('');
-    setSelectedArray([]);
+      console.log('focused lost');
+      setSelectedCategory('');
+      setSelectedItem('');
+      setSelectedArray([]);
     }
-    }, [fromDrawer]);
+  }, [fromDrawer]);
+
   useEffect(() => {
     const newSelectedArray =
-        selectedCategory.toLowerCase() == 'Donation'.toLowerCase()
+      selectedCategory.toLowerCase() == 'Donation'.toLowerCase()
         ? SharingWithOthersArrays.donationArray
         : selectedCategory.toLowerCase() == 'supportForLife'.toLowerCase()
         ? SharingWithOthersArrays.supportForLifeArray
         : selectedCategory.toLowerCase() == 'support For Life'.toLowerCase()
         ? SharingWithOthersArrays.supportForLifeArray
         : SharingWithOthersArrays.givingArray;
-        
-        setSelectedArray(newSelectedArray);
-        setSelectedItem(prevItem => prevItem === value ? '' : value);
 
-      
-    
-      // setSelectedArray(
-      //   selectedCategory?.toLowerCase() == 'donation'.toLowerCase()
-      //   ? SharingWithOthersArrays?.donationArray
-      //   : selectedCategory?.toLowerCase() == 'support For Life'.toLowerCase()
-      //   ? SharingWithOthersArrays?.supportForLifeArray
-      //   : SharingWithOthersArrays?.givingArray,
-      //   );
-      // console.log("Running Select Category dependiceies")
-    
-     
+    setSelectedArray(newSelectedArray);
+    setSelectedItem(prevItem => (prevItem === value ? '' : value));
+
+    // setSelectedArray(
+    //   selectedCategory?.toLowerCase() == 'donation'.toLowerCase()
+    //   ? SharingWithOthersArrays?.donationArray
+    //   : selectedCategory?.toLowerCase() == 'support For Life'.toLowerCase()
+    //   ? SharingWithOthersArrays?.supportForLifeArray
+    //   : SharingWithOthersArrays?.givingArray,
+    //   );
+    // console.log("Running Select Category dependiceies")
   }, [selectedCategory, value, drawerState]);
- 
+
   // console.log( selectedCategory?.toLowerCase() == 'donation'
   // ?SharingWithOthersArrays?.donationArray
   // :selectedCategory?.toLowerCase() == 'supportForLife'.toLowerCase()
@@ -185,8 +180,6 @@ const Donations = props => {
   // console.log("Consoling values ====> " ,selectedCategory, selectedItem);
   // console.log("array", selectedArray)
 
-
- 
   return (
     <ImageBackground
       resizeMode="cover"
@@ -196,9 +189,7 @@ const Donations = props => {
       <ScrollView>
         <Header
           showLeft={true}
-          // leftName={'menu'}
           showBack={true}
-          // fromDrawer ={fromDrawer}
           leftType={Feather}
           title={'Donation'}
         />
@@ -222,7 +213,6 @@ const Donations = props => {
             source={require('../Assets/Images/deno-2.jpg')}>
             <CustomText
               numberOfLines={2}
-              // isBold
               style={{
                 backgroundColor: 'white',
                 opacity: 0.6,
@@ -246,30 +236,26 @@ const Donations = props => {
             array={donationArray}
             item={selectedCategory}
             setItem={setSelectedCategory}
-            placeholder={categoryName ||'select'}
-            //   height={windowHeight*0.06}
+            placeholder={categoryName || 'select'}
             disabled={fromDrawer}
             width={windowWidth * 0.9}
             dropdownStyle={{
               width: windowWidth * 0.9,
               borderBottomWidth: 0,
-              // marginTop: moderateScale(-10, 0.3),
             }}
-          />
-          {( selectedCategory != "" &&
+            />
+          {selectedCategory != '' && (
             <DropDownSingleSelect
             key={selectedArray.length}
-              array={selectedArray}
-              item={selectedItem}
-              setItem={setSelectedItem}
-              placeholder={selectedItem || 'select'}
-              //   height={windowHeight*0.06}
-              width={windowWidth * 0.9}
-              dropdownStyle={{
-                width: windowWidth * 0.9,
-                borderBottomWidth: 0,
-                // marginTop: moderateScale(-10, 0.3),
-              }}
+            array={selectedArray}
+            item={selectedItem}
+            setItem={setSelectedItem}
+            placeholder={selectedItem || 'select'}
+            width={windowWidth * 0.9}
+            dropdownStyle={{
+              width: windowWidth * 0.9,
+              borderBottomWidth: 0,
+            }}
             />
           )}
           <CustomText style={styles.text}>
@@ -291,7 +277,7 @@ const Donations = props => {
             placeholderColor={'#ABB1C0'}
             borderRadius={moderateScale(0, 0.6)}
             keyboardType={'numeric'}
-          />
+            />
         </View>
         <View style={{height: windowHeight * 0.65}}>
           <View style={styles.grayCard}>
@@ -300,8 +286,8 @@ const Donations = props => {
                 onPress={() => {
                   const temp = donationCount - 10;
                   temp >= 10
-                    ? setDonationCount(prev => parseInt(prev) - 10)
-                    : setDonationCount(10);
+                  ? setDonationCount(prev => parseInt(prev) - 10)
+                  : setDonationCount(10);
                 }}
                 style={styles.btn}>
                 <Icon
@@ -310,13 +296,13 @@ const Donations = props => {
                     temp >= 10
                       ? setDonationCount(prev => parseInt(prev) - 10)
                       : setDonationCount(10);
-                  }}
-                  style={styles.btnIcon}
-                  name="minus"
-                  as={FontAwesome}
-                  size={moderateScale(16, 0.6)}
-                  color={'#fff'}
-                />
+                    }}
+                    style={styles.btnIcon}
+                    name="minus"
+                    as={FontAwesome}
+                    size={moderateScale(16, 0.6)}
+                    color={'#fff'}
+                    />
               </TouchableOpacity>
               <CustomText numberOfLines={1} isBold style={styles.countText}>
                 ${parseInt(donationCount)}
@@ -335,14 +321,14 @@ const Donations = props => {
                   as={FontAwesome}
                   size={moderateScale(16, 0.6)}
                   color={'#fff'}
-                />
+                  />
               </TouchableOpacity>
             </View>
           </View>
           <View style={styles.donationInputBox}>
             <CustomText style={styles.cardh1}>Card Information</CustomText>
             <CardField
-              postalCodeEnabled={true}
+              postalCodeEnabled={false}
               placeholders={{
                 number: '4242 4242 4242 4242',
               }}
@@ -350,17 +336,17 @@ const Donations = props => {
                 backgroundColor: '#D3D3D3',
                 borderRadius: 15,
                 width: 320,
+                textColor: 'black',
               }}
               style={{
                 width: '100%',
                 height: 50,
                 marginVertical: 10,
               }}
-              
               onCardChange={cardDetails => {
                 console.log('cardDetails', cardDetails);
                 // if(cardDetails?.complete) {
-                //   // stripePaymentFunction();
+                  //   // stripePaymentFunction();
                 //   ToastAndroid.show("Card Details has been completed", ToastAndroid.SHORT)
                 // }
               }}
@@ -376,21 +362,21 @@ const Donations = props => {
               height={windowHeight * 0.05}
               onPress={() => {
                 stripePaymentFunction();
-                // setIsModal(false)
               }}
               bgColor={Color.red}
-              // isGradient
               borderRadius={moderateScale(30, 0.3)}
-            />
+              />
           </View>
           <CustomButton
             isBold
             onPress={Donate}
-            text={ isLoading ? (
-              <ActivityIndicator size={'small'} color={Color.white} />
-            ) : (
-              'Donate Now'
-            )}
+            text={
+              isLoading ? (
+                <ActivityIndicator size={'small'} color={Color.white} />
+              ) : (
+                'Donate Now'
+              )
+            }
             textColor={Color.white}
             width={windowWidth * 0.8}
             height={windowHeight * 0.07}
@@ -398,7 +384,7 @@ const Donations = props => {
             marginTop={moderateScale(20, 0.3)}
             bgColor={Color.theme2}
             borderRadius={moderateScale(30, 0.3)}
-          />
+            />
         </View>
       </ScrollView>
     </ImageBackground>
@@ -443,7 +429,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-
+    
     paddingHorizontal: moderateScale(10, 0.3),
     paddingVertical: moderateScale(15, 0.2),
   },
@@ -457,7 +443,6 @@ const styles = StyleSheet.create({
   },
   donationInputBox: {
     marginTop: moderateScale(11, 0.2),
-    // height: windowHeight ,
     borderRadius: moderateScale(17, 0.2),
     
     opacity: 0.9,
@@ -497,7 +482,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-
+    
     paddingHorizontal: moderateScale(10, 0.3),
     paddingVertical: moderateScale(5, 0.2),
   },
@@ -514,7 +499,6 @@ const styles = StyleSheet.create({
   },
   text: {
     width: windowWidth * 0.9,
-    // paddingHorizontal: moderateScale(15, 0.3),
     color: 'white',
     fontSize: moderateScale(16, 0.2),
     paddingTop: moderateScale(20, 0.6),
@@ -524,3 +508,4 @@ const styles = StyleSheet.create({
     width: windowWidth,
   },
 });
+

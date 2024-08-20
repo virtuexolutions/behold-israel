@@ -16,10 +16,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const OldTestment = ({item ,setSelectedBook ,selectedbook}) => {
  
-  console.log(
-    '🚀 ~ OldTestment ~ selectedbook==================>:',
-    selectedbook,
-  );
+
 
   const navigation = useNavigation();
   return item?.map((data, index) => {

@@ -18,11 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 import {Icon} from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import Color from '../Assets/Utilities/Color';
-import TextInputWithTitle from '../Components/TextInputWithTitle';
-import DropDownSingleSelect from '../Components/DropDownSingleSelect';
-import {color, position} from 'native-base/lib/typescript/theme/styled-system';
 import Header from '../Components/Header';
-import LinearGradient from 'react-native-linear-gradient';
 import CustomButton from '../Components/CustomButton';
 import CustomImage from '../Components/CustomImage';
 

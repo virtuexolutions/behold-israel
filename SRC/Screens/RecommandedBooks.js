@@ -32,7 +32,7 @@ import PopularBooks from '../Components/PopularBooks';
 const RecommandedBooks = () => {
   const navigation = useNavigation();
   const [saveBooks ,setSaveBooks] = useState(false)
-//   const [aboutBook ,setAboutBook] =useState(fa)
+
   const data = [
     {
       id: 1,
@@ -93,23 +93,12 @@ const RecommandedBooks = () => {
       />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={
-          {
-            // paddingTop: moderateScale(10, 0.6),
-          }
-        }
+        style={{}}
         contentContainerStyle={{
           paddingBottom: moderateScale(150, 0.3),
         }}>
         <CustomText
-          //   isBold
-          style={{
-            color: Color.white,
-            paddingHorizontal: moderateScale(10, 0.6),
-            width: windowWidth * 0.9,
-            fontSize: moderateScale(18, 0.6),
-            paddingVertical: moderateScale(10, 0.6),
-          }}>
+          style={styles.heading}>
           popular books
         </CustomText>
 
@@ -117,25 +106,20 @@ const RecommandedBooks = () => {
           horizontal
           scrollEnabled={true}
           data={data}
+          key={(item) => item?.id}
           renderItem={({item, index}) => {
             return <PopularBooks item={item} />;
           }}
         />
         <CustomText
-          //   isBold
-          style={{
-            color: Color.white,
-            paddingHorizontal: moderateScale(10, 0.6),
-            width: windowWidth * 0.9,
-            fontSize: moderateScale(18, 0.6),
-            paddingVertical: moderateScale(10, 0.6),
-          }}>
-          newest{' '}
+          style={styles.heading2}>
+          newest
         </CustomText>
         <FlatList
           showsVerticalScrollIndicator={false}
           scrollEnabled={true}
           data={data}
+          key={(item) => item?.id}
           renderItem={({item, index}) => {
             return <NewestBookComponent item={item} saveBooks={saveBooks} setSaveBooks={setSaveBooks}/>;
           }}
@@ -149,4 +133,18 @@ const RecommandedBooks = () => {
 export default RecommandedBooks;
 const styles = ScaledSheet.create({
 
+  heading:{
+    color: Color.white,
+    paddingHorizontal: moderateScale(10, 0.6),
+    width: windowWidth * 0.9,
+    fontSize: moderateScale(18, 0.6),
+    paddingVertical: moderateScale(10, 0.6),
+  },
+  heading2:{
+    color: Color.white,
+    paddingHorizontal: moderateScale(10, 0.6),
+    width: windowWidth * 0.9,
+    fontSize: moderateScale(18, 0.6),
+    paddingVertical: moderateScale(10, 0.6),
+  },
 });

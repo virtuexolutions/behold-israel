@@ -102,11 +102,7 @@ const Signup = () => {
     }
     if (Object.keys(image).length > 0) {
       formData.append('photo', image);
-    } else {
-      return Platform.OS == 'android'
-        ? ToastAndroid.show(`Uplaod profile photo`, ToastAndroid.SHORT)
-        : Alert.alert(`Uplaod profile photo`);
-    }
+    } 
     if (!validateEmail(email)) {
       return Platform.OS == 'android'
         ? ToastAndroid.show('Email is invalid', ToastAndroid.SHORT)
@@ -125,7 +121,7 @@ const Signup = () => {
     }
     
    const url = 'register';
-   console.log("🚀 ~ registerUser ~ body:", JSON.stringify(formData , null ,2));
+    console.log("🚀 ~ registerUser ~ body:", JSON.stringify(formData , null ,2));
    setIsLoading(true);
     const response = await Post(url, formData, apiHeader());
     setIsLoading(false);
@@ -213,7 +209,7 @@ const Signup = () => {
             )}
             <TouchableOpacity
               onPress={() => {
-                setShowModal(true);
+                setImagePicker(true);
               }}
               style={styles.edit}>
               <Icon
@@ -430,6 +426,7 @@ const Signup = () => {
                 borderRadius={moderateScale(30, 0.3)}
                 width={windowWidth * 0.3}
                 height={windowHeight * 0.04}
+
                 marginTop={moderateScale(20, 0.3)}
                 bgColor={Color.white}
                 isBold
