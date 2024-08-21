@@ -8,11 +8,11 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {windowHeight, windowWidth} from '../Utillity/utils';
 import CustomText from '../Components/CustomText';
 import {ScaledSheet, moderateScale} from 'react-native-size-matters';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {Icon} from 'native-base';
 import Feather from 'react-native-vector-icons/Feather';
 import Color from '../Assets/Utilities/Color';
@@ -23,12 +23,17 @@ import Header from '../Components/Header';
 import LinearGradient from 'react-native-linear-gradient';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CustomButton from '../Components/CustomButton';
-
+import DatePicker from 'react-native-date-picker';
+import AntDesign from 'react-native-vector-icons/AntDesign'; 
+import {Country, State, City} from 'country-state-city';
+import moment from 'moment';
 const MemberShipForm = () => {
   const navigation = useNavigation();
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(new Date())
+  console.log("🚀 ~ MemberShipForm ~ date:", date)
+  const [open, setOpen] = useState(false)
   const [contact, setContact] = useState('');
   const [profession, setProfession] = useState('');
   const [hobby, setHobby] = useState('');
@@ -39,10 +44,59 @@ const MemberShipForm = () => {
   const [religion, setReligion] = useState('');
   const [volunteer, setVolunteer] = useState('');
   const [country, setCountry] = useState('');
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const isFocused = useIsFocused();
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
-  const [zip, setZip] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [maillingAddress, setMaillingAddress] = useState(false);
+
+
+
+  useEffect(() => {
+    // Fetch all countries on component mount
+    const countryList = Country.getAllCountries();
+    setCountries(countryList);
+    console.log(countryList, 'countrylissssssssssst');
+    return () => {
+      setCountries([]);
+      setCities([]);
+      setStates([]);
+    };
+  }, [isFocused]);
+
+  const handleCountrySelect = selectedCountry => {
+    const coutryS = countries?.find(c => c.name === selectedCountry);
+    setCountry(coutryS);
+    const statesList = State.getStatesOfCountry(coutryS.isoCode);
+    setStates(statesList);
+    console.log(
+      '🚀 ~ PrayerRequestForm ~ country:',
+      selectedCountry,
+      coutryS,
+      statesList,
+    );
+
+    setState(null); // Reset state and city when country changes
+    setCities([]);
+  };
+
+  const handleStateSelect = selectedState => {
+    if (!selectedState || !country) {
+      console.error('Selected state or country is undefined.');
+      return;
+    }
+    setState(selectedState);
+    const citiesList = City.getCitiesOfState(
+      country.isoCode,
+      selectedState.isoCode,
+    );
+    setCities(citiesList);
+    setCity(null);
+  };
+
   return (
     <ImageBackground
       style={{
@@ -150,11 +204,17 @@ const MemberShipForm = () => {
                   titleText={'Dob'}
                   placeholder={'Dob'}
                   setText={setDate}
-                  value={date}
+                  value={moment(date).format('YY-MM-DD').toString()}
                   viewHeight={0.06}
                   viewWidth={0.38}
                   inputWidth={0.3}
                   border={1}
+                  onPressRight={() =>{
+                    setOpen(true)
+                  }}
+                  rightIcon= {true}
+                  iconName={'calendar'}
+                iconType={AntDesign}
                   borderColor={'#0F02022E'}
                   backgroundColor={'white'}
                   color={'#ABB1C0'}
@@ -302,8 +362,93 @@ const MemberShipForm = () => {
                 placeholderColor={'#ABB1C0'}
                 borderRadius={moderateScale(20, 0.6)}
               />
-
-              <View
+              
+              <View style={styles.row}>
+                {countries.length > 0 && (
+                  <DropDownSingleSelect
+                    array={countries}
+                    //  array={['male', 'female', 'other']}
+                    item={country}
+                    dropdownStyle={{
+                      borderBottomWidth: 0,
+                    }}
+                    setItem={name => handleCountrySelect(name)}
+                    // setItem={setCountry}
+                    placeholder={'country'}
+                    width={windowWidth * 0.4}
+                  />
+                )}
+                {/* <View style={{position: 'absolute', right: 0}}>
+                  <SelectDropdown
+                    dropdownStyle={{marginRight: moderateScale(20, 0.6)}}
+                    data={ states}
+                    defaultValue={state}
+                  />
+                </View> */}
+                <DropDownSingleSelect
+                  array={states}
+                  item={state}
+                  setItem={name =>
+                    handleStateSelect(states.find(s => s.name == name))
+                  }
+                  disabled={states.length === 0}
+                  placeholder={'state'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-140, 0.3),
+                  }}
+                />
+              </View>
+  <View style={styles.row}>
+                <DropDownSingleSelect
+                  array={cities}
+                  // array={['male', 'female', 'other']}
+                  item={city}
+                  setItem={name => {
+                    setCity(name);
+                  }}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                  }}
+                  disabled={cities.length === 0}
+                  placeholder={'city'}
+                  width={windowWidth * 0.4}
+                />
+                {/* <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={zip}
+                  setItem={setZip}
+                  placeholder={'zip'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-140, 0.3),
+                  }}
+                /> */}
+                <TextInputWithTitle
+                titleText={'address'}
+                style={{position:'absolute', 
+                // bottom: 0,
+                top: 15,
+                right
+              : 0}}
+                placeholder={'ZIP'}
+                setText={setZipCode}
+                value={zipCode}
+                viewHeight={0.06}
+                viewWidth={0.4}
+                inputWidth={0.4}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                marginBottom={moderateScale(5, 0.3)}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+              </View>
+              {/* <View
                 style={{
                   flexDirection: 'row',
                   width: '90%',
@@ -359,7 +504,7 @@ const MemberShipForm = () => {
                     marginLeft: moderateScale(-135, 0.3),
                   }}
                 />
-              </View>
+              </View> */}
               <View
                 style={{
                   paddingTop: moderateScale(10, 0.6),
@@ -436,63 +581,92 @@ const MemberShipForm = () => {
                     borderRadius={moderateScale(20, 0.6)}
                   />
 
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      width: '90%',
-                    }}>
-                    <DropDownSingleSelect
-                      array={['male', 'female', 'other']}
-                      item={country}
-                      dropdownStyle={{
-                        borderBottomWidth: 0,
-                      }}
-                      setItem={setCountry}
-                      placeholder={'country'}
-                      width={windowWidth * 0.4}
-                    />
-
-                    <DropDownSingleSelect
-                      array={['male', 'female', 'other']}
-                      item={state}
-                      setItem={setState}
-                      placeholder={'state'}
-                      width={windowWidth * 0.4}
-                      dropdownStyle={{
-                        borderBottomWidth: 0,
-                        marginLeft: moderateScale(-135, 0.3),
-                      }}
-                    />
-                  </View>
-                  <View
-                    style={{
-                      flexDirection: 'row',
-                      width: '90%',
-                      marginTop: moderateScale(-10, 0.3),
-                    }}>
-                    <DropDownSingleSelect
-                      array={['male', 'female', 'other']}
-                      item={city}
-                      setItem={setCity}
-                      dropdownStyle={{
-                        borderBottomWidth: 0,
-                      }}
-                      placeholder={'city'}
-                      width={windowWidth * 0.4}
-                    />
-
-                    <DropDownSingleSelect
-                      array={['male', 'female', 'other']}
-                      item={zip}
-                      setItem={setZip}
-                      placeholder={'zip'}
-                      width={windowWidth * 0.4}
-                      dropdownStyle={{
-                        borderBottomWidth: 0,
-                        marginLeft: moderateScale(-135, 0.3),
-                      }}
-                    />
-                  </View>
+               
+<View style={styles.row}>
+                {countries.length > 0 && (
+                  <DropDownSingleSelect
+                    array={countries}
+                    //  array={['male', 'female', 'other']}
+                    item={country}
+                    dropdownStyle={{
+                      borderBottomWidth: 0,
+                    }}
+                    setItem={name => handleCountrySelect(name)}
+                    // setItem={setCountry}
+                    placeholder={'country'}
+                    width={windowWidth * 0.4}
+                  />
+                )}
+                {/* <View style={{position: 'absolute', right: 0}}>
+                  <SelectDropdown
+                    dropdownStyle={{marginRight: moderateScale(20, 0.6)}}
+                    data={ states}
+                    defaultValue={state}
+                  />
+                </View> */}
+                <DropDownSingleSelect
+                  array={states}
+                  item={state}
+                  setItem={name =>
+                    handleStateSelect(states.find(s => s.name == name))
+                  }
+                  disabled={states.length === 0}
+                  placeholder={'state'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-140, 0.3),
+                  }}
+                />
+              </View>
+  <View style={styles.row}>
+                <DropDownSingleSelect
+                  array={cities}
+                  // array={['male', 'female', 'other']}
+                  item={city}
+                  setItem={name => {
+                    setCity(name);
+                  }}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                  }}
+                  disabled={cities.length === 0}
+                  placeholder={'city'}
+                  width={windowWidth * 0.4}
+                />
+                {/* <DropDownSingleSelect
+                  array={['male', 'female', 'other']}
+                  item={zip}
+                  setItem={setZip}
+                  placeholder={'zip'}
+                  width={windowWidth * 0.4}
+                  dropdownStyle={{
+                    borderBottomWidth: 0,
+                    marginLeft: moderateScale(-140, 0.3),
+                  }}
+                /> */}
+                <TextInputWithTitle
+                titleText={'address'}
+                style={{position:'absolute', 
+                // bottom: 0,
+                top: 15,
+                right
+              : 0}}
+                placeholder={'ZIP'}
+                setText={setZipCode}
+                value={zipCode}
+                viewHeight={0.06}
+                viewWidth={0.4}
+                inputWidth={0.4}
+                border={1}
+                borderColor={'#0F02022E'}
+                backgroundColor={'white'}
+                marginBottom={moderateScale(5, 0.3)}
+                color={'#ABB1C0'}
+                placeholderColor={'#ABB1C0'}
+                borderRadius={moderateScale(20, 0.6)}
+              />
+              </View>
             
                 </>
               )}
@@ -509,6 +683,19 @@ const MemberShipForm = () => {
                     marginRight={moderateScale(35,.6)}
                   />
             </View>
+            <DatePicker
+        modal
+      mode='date'
+        open={open}
+        date={date}
+        onConfirm={(date) => {
+          setOpen(false)
+          setDate(date)
+        }}
+        onCancel={() => {
+          setOpen(false)
+        }}
+      />
           </ScrollView>
         </KeyboardAvoidingView>
       </LinearGradient>
@@ -534,6 +721,10 @@ const styles = ScaledSheet.create({
   },
   container2: {
     flex: 1,
+  },
+  row: {
+    flexDirection: 'row',
+    width: '90%',
   },
   mainContainer: {
     marginHorizontal: moderateScale(10, 0.6),

@@ -28,20 +28,20 @@ const WalkThroughScreen = props => {
     {
       key: '1',
       image: require('../Assets/Images/walkthrough1.png'),
-      title: 'Lorem Ipsum Dolor',
-      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent. `,
+      title: 'Donations & Volunteering',
+      text: `Get along in meaningful initiatives that reflect your faith and values while you work with our charity and volunteering opportunities. It makes a remarkable difference in people’s lives. By dedicating your time, resources, and skills, you become hope for those in need, spreading love and positivity within your community and beyond.`,
     },
     {
       key: '2',
       image: require('../Assets/Images/walkthrough2.png'),
-      title: 'Lorem Ipsum Dolor',
-      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`,
+      title: 'Push Notifications',
+      text: `Never miss a chance of your spiritual inspiration with instant push notifications at Holy Ghost Fraternity. Receive daily reminders of live sermons, and updates on new content, all customized to your choices. Our timely notifications keep motivated, protecting your faith throughout the day.`,
     },
     {
       key: '3',
       image: require('../Assets/Images/walkthrough3.png'),
-      title: 'Lorem Ipsum Dolor',
-      text: `Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit. Pellentesque Eu Pulvinar Metus, Fringilla Semper Enim. Etiam Viverra Porttitor Nunc Laoreet Faucibus. Fusce Accumsan Mauris At Sem Finibus Gravida. Donec Cursus Tincidunt Eros In Efficitur. Maecenas Cursus Pretium Dui, In Tristique Turpis Finibus Nec. Class Aptent.`
+      title: 'Join Live Sermon',
+      text: `Allow yourself to observe the moment of worship with our live sermons that bring the church wherever you are. Join our community of believers from different backgrounds as you participate in inspiring teachings and worship. Our united and devoted atmosphere helps you deeply connect to God while experiencing live prayer sessions. `
     },
   ];
 

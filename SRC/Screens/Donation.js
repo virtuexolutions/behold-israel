@@ -224,8 +224,7 @@ const Donations = props => {
                 paddingVertical: moderateScale(5, 0.3),
                 width: '89%',
               }}>
-              Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
-              dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
+"Little drops of water make a mighty ocean.” Each donation, no matter the size, contributes to a powerful wave of change in the lives of people who need it the most. By filling out the form below, you can help us create an impactful world.
             </CustomText>
           </ImageBackground>
         </TouchableOpacity>

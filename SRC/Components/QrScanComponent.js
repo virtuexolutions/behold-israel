@@ -6,7 +6,7 @@ import CustomImage from './CustomImage';
 import Color from '../Assets/Utilities/Color';
 import CustomText from './CustomText';
 
-const QrScanComponent = () => {
+const QrScanComponent = ({title, description}) => {
   return (
     <View
       style={{
@@ -53,7 +53,7 @@ const QrScanComponent = () => {
             fontSize: moderateScale(18, 0.6),
             paddingVertical: moderateScale(10, 0.6),
           }}>
-          Donna W.wade
+        {title}
         </CustomText>
         <CustomText
           style={{
@@ -63,7 +63,7 @@ const QrScanComponent = () => {
             fontSize: moderateScale(12, 0.6),
           }}>
           {
-            'Lorem Ipsum is simply dummy text of the industry. Lorem Ipsum has been the industrys sta'
+            description
           }
         </CustomText>
         <View
@@ -83,10 +83,21 @@ const QrScanComponent = () => {
           />
         </View>
       </View>
+      <View
+          style={styles.border}></View>
     </View>
   );
 };
 
 export default QrScanComponent;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  border:{
+    marginVertical :moderateScale(10,.6),
+    marginHorizontal: moderateScale(20, 0.6),
+    width: windowWidth * 0.87,
+    borderWidth: 0.4,
+    borderColor: Color.red,
+    // backgroundColor :'red'
+  }
+});

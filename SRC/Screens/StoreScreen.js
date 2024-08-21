@@ -31,8 +31,8 @@ const StoreScreen = ({route}) => {
     setIsLoading(false);
     if(response !== undefined){
       setProducts(response?.data?.product_list)
+      console.log("🚀 ~ getProducts ~ response:", response?.data?.product_list);
     }
-
   }
   useEffect(() =>{
     getProducts();

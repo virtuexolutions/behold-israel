@@ -28,25 +28,43 @@ const QrScanScreen = () => {
   const [name, setName] = useState('');
   const [selectedItem, setSelectedItem] = useState([]);
   console.log('🚀 ~ GoodThings ~ selectedItem:', selectedItem);
-  const data = [
+  // const data = [
+  //   {
+  //     id: 1,
+  //     image: require('../Assets/Images/dummyUser.png'),
+  //   },
+  //   {
+  //     id: 2,
+  //     image: require('../Assets/Images/dummyUser.png'),
+  //   },
+  //   {
+  //     id: 3,
+  //     image: require('../Assets/Images/dummyUser.png'),
+  //   },
+  //   {
+  //     id: 4,
+  //     image: require('../Assets/Images/dummyUser.png'),
+  //   },
+  // ];
+
+  const resources = [
     {
       id: 1,
-      image: require('../Assets/Images/dummyUser.png'),
+      title: "Explore Our Online Hub",
+      description: "Want to explore more about our community and resources? Scan this QR code and visit our website, where you’ll find teachings, updates, and opportunities to have strength in your faith."
     },
     {
       id: 2,
-      image: require('../Assets/Images/dummyUser.png'),
+      title: "Spiritual Growth at Fingertips",
+      description: "Ready to start your spiritual journey? Use this QR code to synchronize with our app and access Christian teachings, live sermons, and more - just a click away."
     },
     {
       id: 3,
-      image: require('../Assets/Images/dummyUser.png'),
-    },
-    {
-      id: 4,
-      image: require('../Assets/Images/dummyUser.png'),
-    },
+      title: "Share Your Generosity",
+      description: "Become a reason for transforming lives with your generosity. Scan this QR code to reach our donation form and support us in our mission to support people and share the message of hope."
+    }
   ];
-
+  
   return (
     <ImageBackground
       style={{
@@ -65,11 +83,11 @@ const QrScanScreen = () => {
       <ScrollView showsVerticalScrollIndicator={false}
      
       >
-        <QrScanComponent />
-
+ {resources?.map((item , index) => <QrScanComponent title={item.title} description={item.description} />)}
+{/* 
         <View
           style={styles.border}></View>
-        <QrScanComponent />
+        <QrScanComponent /> */}
       </ScrollView>
     </ImageBackground>
   );

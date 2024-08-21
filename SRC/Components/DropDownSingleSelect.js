@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import {Dimensions, View} from 'react-native';
 import {scale, moderateScale, ScaledSheet} from 'react-native-size-matters';
 import SelectDropdown from 'react-native-select-dropdown';
@@ -31,21 +31,19 @@ const DropDownSingleSelect = ({
   Colors,
   elevation,
   dropdownStyle,
-  borderColor
+  borderColor,
 }) => {
-  const [data , setData] = useState([])
-
+  const [data, setData] = useState([]);
   useEffect(() => {
-    setData([])
-    array?.map((x , index)=>{
-      return(
-        typeof(array[0]) == 'object' ? setData((prev)=>[...prev , x?.name]) :setData(prev=>[...prev , x])
-      )
-    })
-    
-  }, [])
+    setData([]);
+    array?.map((x, index) => {
+      return typeof array[0] === 'object'
+      ? setData(prev => [...prev, x?.name])
+      : setData(prev => [...prev, x]);
+    });
+    console.log('Render Drop Down Single Select....')
+  }, [array]);
   
-
   return (
     <View
       style={[
@@ -56,11 +54,11 @@ const DropDownSingleSelect = ({
         },
         myJobs && {
           backgroundColor: Color.themeInputText,
-          width: width * 0.5,
+          width: width * 0.53,
           marginTop: 0,
           alignItems: 'center',
           borderRadius: 10,
-          
+
           borderWidth: 1,
         },
         elevation && {
@@ -73,9 +71,7 @@ const DropDownSingleSelect = ({
           shadowRadius: 5.46,
 
           elevation: 9,
-          
         },
-      
 
         extreme && {
           width: width * 1.13,
@@ -101,7 +97,6 @@ const DropDownSingleSelect = ({
         />
       )}
       <SelectDropdown
-        
         data={data}
         defaultValue={item}
         buttonStyle={{
@@ -111,14 +106,18 @@ const DropDownSingleSelect = ({
           ...(disabled && {backgroundColor: `${Color.veryLightGray}90`}),
           ...(myJobs && {
             backgroundColor: `${Color.themeInputText}`,
-            width: windowWidth * 0.35,
+            width: windowWidth * 0.55,
             borderRadius: 40,
           }),
-          ...(borderColor && {borderColor:borderColor, borderWidth:1, borderRadius:moderateScale(10,.6)}),
+          ...(borderColor && {
+            borderColor: borderColor,
+            borderWidth: 1,
+            borderRadius: moderateScale(10, 0.6),
+          }),
           ...(backgroundColor && {
             backgroundColor: backgroundColor,
           }),
-          
+
           ...(!iconName && {
             width: width,
           }),
@@ -133,16 +132,15 @@ const DropDownSingleSelect = ({
         }}
         dropdownStyle={{
           // backgroundColor :'red',
-          height :height*0.19,
+          // height :height*0.59,
           width: width,
           borderRadius: moderateScale(10, 0.3),
-          marginTop: -height * 0.06,
+          marginTop: -height * 0.01,
 
           ...(iconName && {
             position: 'absolute',
             left: moderateScale(40, 0.6),
           }),
-         
         }}
         rowStyle={{...styles.dropDownRow}}
         rowTextStyle={{

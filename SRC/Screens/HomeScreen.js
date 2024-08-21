@@ -33,6 +33,7 @@ import Feather from 'react-native-vector-icons/Feather';
 
 const HomeScreen = () => {
   const token = useSelector(state => state.authReducer.token);
+  console.log("🚀 ~ HomeScreen ~ token:", token)
   const userData = useSelector(state => state.commonReducer.userData);
 
   const isFocused = useIsFocused();

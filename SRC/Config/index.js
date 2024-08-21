@@ -1,5 +1,6 @@
 // export const baseUrl = "https://drpeter.ad-wize.net";  
-export const baseUrl = "https://musing-kapitsa.23-106-85-134.plesk.page";// live Url
+// export const baseUrl = "https://musing-kapitsa.23-106-85-134.plesk.page";// live Url
+export const baseUrl = "https://dr-peter.cstmpanel.com";// live Url
 
 export const imageUrl = `${baseUrl}/api/images/`;
 export const profilePicUrl = `${baseUrl}/uploads`

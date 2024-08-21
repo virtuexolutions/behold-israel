@@ -44,6 +44,7 @@ const TextInputWithTitle = props => {
       <View
         style={[
           styles.fieldSet,
+          props.style,
           {
             width: windowWidth * props.viewWidth,
             borderWidth: props.border,
@@ -113,7 +114,7 @@ const TextInputWithTitle = props => {
               },
             ]}
             size={moderateScale(17, 0.3)}
-            onPress={props.onPressLeft}
+            onPress={props.rightIcon  ? props.onPressRight :  props.onPressLeft}
           />
         )}
 

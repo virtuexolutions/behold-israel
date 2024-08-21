@@ -177,7 +177,7 @@ const PlaceOrderScreen = () => {
     if (response != undefined) {
       // console.log('', response?.data);
       dispatch(EmptyCart());
-      navigation.navigate('Store');
+      navigation.navigate('MyDrawer');
       //  navigation.goBack();
       // navigationService.navigate('PaymentInvoice', {
       //   body: response?.data?.order_info,
