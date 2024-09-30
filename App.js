@@ -84,6 +84,7 @@ const MainContainer = () => {
   if (isloading == true) {
     return <SplashScreen />;
   }
+  // return <SplashScreen />;
   return <AppNavigator/>
   // return <PrayerRequestForm/>
   // return <VerifyNumber/>

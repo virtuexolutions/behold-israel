@@ -672,7 +672,7 @@ const Drawer = () => {
           name: 'Ministry',
           expandable: false,
           onPress: () => {
-            navigation.navigate('Contact');
+            navigation.navigate('Ministry');
           },
         },
         {
@@ -802,7 +802,7 @@ const Drawer = () => {
           Id: '3',
           name: 'Contact US',
           onPress: () => {
-            // navigation.navigate('Contact');
+            navigation.navigate('Contact');
           },
         },
       ],

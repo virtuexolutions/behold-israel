@@ -58,6 +58,9 @@ const SplashScreen = () => {
               justifyContent:'center',
               alignItems:"center"
             }}>
+              <View style={styles.logo}>
+              <CustomImage source={require('../Assets/Images/logo.png')} resizeMode={"contain"} style={styles.image}/>
+              </View>
             <CustomText isBold style={{
               textAlign : 'center',
               fontSize : moderateScale(27,0.6),
@@ -96,6 +99,15 @@ const styles = ScaledSheet.create({
     width : windowWidth * 0.4,
     height :windowWidth * 0.3,
   },
+  logo:{
+    width: windowWidth * 0.6,
+    height: windowWidth * 0.6,
+    overflow:'hidden'
+  },
+  image:{
+    width: '100%',
+    height:'100%'
+  }
   // textContainer: {
   //   flexDirection: "row",
   //   alignSelf :'center',
@@ -106,7 +118,7 @@ const styles = ScaledSheet.create({
   //   alignItems : 'center',
   //   // backgroundColor : Color.white,
     
-
+,
   // },
   LogoText: {
     fontSize: moderateScale(35, 0.3),

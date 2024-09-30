@@ -76,6 +76,7 @@ import Podcasts from './Screens/Podcasts';
 import VideoTeachings from './Screens/VideoTeachings';
 import BlogScreen from './Screens/BlogScreen';
 import BlogDetails from './Screens/BlogDetails';
+import ContacUs from './Screens/ContacUs';
 
 const AppNavigator = () => {
   const walkThrough = useSelector(state => state.authReducer.userWalkThrough);
@@ -268,7 +269,8 @@ export const MyDrawer = () => {
       <DrawerNavigation.Screen name="animations" component={AnimationsScreen}/>
       <DrawerNavigation.Screen name="stories" component={Stories}/>
       <DrawerNavigation.Screen name="AboutBooks" component={AboutBooks} />
-      <DrawerNavigation.Screen name="Contact" component={Team} />
+      <DrawerNavigation.Screen name="Ministry" component={Team} />
+      <DrawerNavigation.Screen name="Contact" component={ContacUs} />
       <DrawerNavigation.Screen name="BlogDetails" component={BlogDetails} />
       {/* <DrawerNavigation.Screen name="BlogScreen" component={BlogScreen} /> */}
 
